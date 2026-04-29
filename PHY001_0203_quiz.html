@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Circular Motion – Quiz</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  width: 95%;
+  max-width: 850px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { color: #136f63; }
+
+.progress-text {
+  text-align: right;
+  color: #174ea6;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: block;
+  background: #e8ecf8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice:hover { background: #d3dbf8; }
+
+.choice.correct { background: #2b7de9; color: white; }
+.choice.incorrect { background: #e57373; color: white; }
+
+.explanation {
+  display: none;
+  background: #eef3ff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #136f63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Circular Motion – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+{q:"An object moves in a circle at constant speed. Why is it accelerating?",c:["Its speed changes","Its direction changes","Its mass changes","Its radius changes"],a:1,e:"Acceleration occurs because velocity changes direction."},
+
+{q:"In circular motion, velocity is always:",c:["Toward the center","Away from the center","Tangent to the circle","Zero"],a:2,e:"Velocity is always tangent to the circular path."},
+
+{q:"Centripetal acceleration points:",c:["Tangent to motion","Outward","Toward the center","Upward"],a:2,e:"Centripetal acceleration always points inward."},
+
+{q:"Which factor increases centripetal force the most?",c:["Increasing radius","Decreasing speed","Doubling speed","Reducing mass"],a:2,e:"Force depends on v², so doubling speed increases force 4 times."},
+
+{q:"A 3 kg object moves at 4 m/s in a circle of radius 2 m. Find centripetal force.",c:["12 N","24 N","48 N","96 N"],a:1,e:"F = (3)(16)/2 = 24 N."},
+
+{q:"If radius increases while speed stays constant, centripetal force:",c:["Increases","Decreases","Stays same","Becomes zero"],a:1,e:"F is inversely proportional to radius."},
+
+{q:"Which best describes centripetal force?",c:["Push outward","Pull inward","No force needed","Force along motion"],a:1,e:"Centripetal force pulls inward toward the center."},
+
+{q:"A stone tied to a string is whirled in a circle. If the string breaks, the stone moves:",c:["Toward center","In a circle","Tangentially","Backward"],a:2,e:"Without centripetal force, it continues in a straight line tangent."},
+
+{q:"A 2 kg object moves at 3 m/s in a circle of radius 3 m. Find acceleration.",c:["3 m/s²","6 m/s²","9 m/s²","18 m/s²"],a:0,e:"a = v²/r = 9/3 = 3 m/s²."},
+
+{q:"If mass doubles, centripetal force:",c:["Halves","Stays same","Doubles","Quadruples"],a:2,e:"Force is directly proportional to mass."},
+
+{q:"Which is true about circular motion?",c:["Speed must change","Velocity must change","Acceleration is zero","Force is outward"],a:1,e:"Velocity changes due to direction change."},
+
+{q:"A car turns a curve faster. What happens to required centripetal force?",c:["Decreases","Increases","Stays same","Becomes zero"],a:1,e:"Force increases with speed squared."},
+
+{q:"Why do passengers feel pushed outward in a turning car?",c:["Real outward force","Inertia","Gravity","Friction"],a:1,e:"Due to inertia resisting change in motion."},
+
+{q:"A 1 kg ball moves in a circle of radius 0.5 m at 2 m/s. Find force.",c:["4 N","8 N","2 N","1 N"],a:1,e:"F = (1)(4)/0.5 = 8 N."},
+
+{q:"If speed is tripled, centripetal force becomes:",c:["3 times","6 times","9 times","12 times"],a:2,e:"Force depends on v², so 3² = 9 times."}
+
+];
+
+let current=0,score=0,showingExplanation=false;
+
+const quizBox=document.getElementById("quizBox");
+const nextBtn=document.getElementById("nextBtn");
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+function showQuestion(){
+const q=quizData[current];
+progressText.textContent=`Question ${current+1} of ${quizData.length}`;
+progressBar.style.width=(current/quizData.length*100)+"%";
+
+quizBox.innerHTML=`<div class='question'>${q.q}</div>
+<div class='choices'></div>
+<div class='explanation' id='exp'></div>`;
+
+const choices=quizBox.querySelector(".choices");
+
+q.c.forEach((choice,i)=>{
+const btn=document.createElement("div");
+btn.className="choice";
+btn.innerHTML=choice;
+btn.onclick=()=>selectChoice(i);
+choices.appendChild(btn);
+});
+}
+
+function selectChoice(i){
+if(showingExplanation) return;
+
+const q=quizData[current];
+const buttons=document.querySelectorAll(".choice");
+const exp=document.getElementById("exp");
+
+const correct=i===q.a;
+if(correct) score++;
+
+buttons.forEach((btn,idx)=>{
+btn.style.pointerEvents="none";
+if(idx===q.a) btn.classList.add("correct");
+if(idx===i && idx!==q.a) btn.classList.add("incorrect");
+});
+
+exp.innerHTML=`<strong>${correct?"✅ Correct":"❌ Incorrect"}</strong><br>${q.e}`;
+exp.style.display="block";
+
+nextBtn.style.display="inline-block";
+showingExplanation=true;
+}
+
+nextBtn.onclick=()=>{
+current++;
+showingExplanation=false;
+nextBtn.style.display="none";
+
+if(current<quizData.length) showQuestion();
+else showResult();
+};
+
+function showResult(){
+const percent=Math.round(score/quizData.length*100);
+
+quizBox.innerHTML=`<div class='result'>Score: ${score}/${quizData.length} (${percent}%)</div>`;
+progressBar.style.width="100%";
+progressText.textContent="Quiz Completed";
+
+window.parent.postMessage({ type:"quizResult", score:percent, passed:percent>=80 }, "*");
+}
+
+showQuestion();
+</script>
+</body>
+</html>

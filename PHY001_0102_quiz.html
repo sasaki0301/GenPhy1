@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 1 Assessment: Physics and Measurement</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+
+h2 {
+  color: #136f63;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  border-radius: 8px;
+  height: 14px;
+  width: 100%;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  text-align: right;
+  font-size: 0.95em;
+  color: #174ea6;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.question {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.choice {
+  background: #e8ecf8;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.05em;
+  transition: all 0.2s ease;
+}
+
+.choice:hover {
+  background: #d3dbf8;
+  transform: translateY(-2px);
+}
+
+.choice.correct {
+  background: #2b7de9;
+  color: #fff;
+}
+
+.choice.incorrect {
+  background: #e57373;
+  color: #fff;
+}
+
+.explanation {
+  background: #eef3ff;
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+  color: #174ea6;
+  display: none;
+}
+
+.next-btn {
+  background: #136f63;
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-size: 1.05em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.next-btn:hover {
+  background: #0f5b52;
+}
+
+.result {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-top: 20px;
+}
+
+.stars {
+  font-size: 2.5em;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.quiz-nav {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quiz-btn {
+  background: #e8ecf8;
+  color: #174ea6;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-btn:hover {
+  background: #d3dbf8;
+  transform: translateY(-2px);
+}
+
+.quiz-btn.primary {
+  background: #136f63;
+  color: #fff;
+}
+
+.quiz-btn.primary:hover {
+  background: #0f5b52;
+}
+
+@media (max-width: 600px) {
+  .quiz-container { padding: 25px; }
+  .question { font-size: 1.1em; }
+  .stars { font-size: 2em; }
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+  <h2>Chapter 1 Assessment: Physics and Measurement</h2>
+  <div class="progress-text" id="progressText">Question 1 of 35</div>
+  <div class="progress-wrapper"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div id="quizBox"></div>
+  <button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+{q:"What is physics mainly concerned with?",c:["The study of living organisms only","The study of matter, energy, motion, forces, and interactions","The study of chemical reactions only","The study of Earth’s layers only"],a:1,e:"Physics studies matter, energy, motion, forces, and their interactions."},
+
+{q:"Why is measurement important in physics?",c:["It makes observations more exact and testable","It removes the need for units","It makes all answers whole numbers","It avoids the use of mathematics"],a:0,e:"Measurement allows observations to be described using numbers and units, making them clearer and testable."},
+
+{q:"Which pair correctly represents the two necessary parts of a measurement?",c:["Formula and answer","Number and unit","Unit and direction only","Object and observer"],a:1,e:"A measurement must include a numerical value and a unit."},
+
+{q:"Which of the following is the SI base unit for length?",c:["centimeter","meter","kilometer","inch"],a:1,e:"The SI base unit for length is the meter."},
+
+{q:"Which of the following is the SI base unit for mass?",c:["gram","pound","kilogram","newton"],a:2,e:"The SI base unit for mass is the kilogram."},
+
+{q:"Which of the following is the SI base unit for time?",c:["minute","hour","second","day"],a:2,e:"The SI base unit for time is the second."},
+
+{q:"Which of the following is an SI base quantity?",c:["Velocity","Force","Mass","Area"],a:2,e:"Mass is a base quantity. Velocity, force, and area are derived quantities."},
+
+{q:"Which of the following is a derived quantity?",c:["Length","Mass","Time","Acceleration"],a:3,e:"Acceleration is derived from velocity divided by time, so its unit is m/s²."},
+
+{q:"Which unit is equivalent to the unit of speed?",c:["m/s","m/s²","kg·m/s²","m²"],a:0,e:"Speed is distance divided by time, so its SI unit is m/s."},
+
+{q:"Which unit is equivalent to the unit of acceleration?",c:["m/s","m/s²","kg/m³","N·m"],a:1,e:"Acceleration is change in velocity per unit time, so its SI unit is m/s²."},
+
+{q:"Which unit is equivalent to one newton?",c:["kg·m/s","kg·m/s²","kg/s","m²/s²"],a:1,e:"Force is mass times acceleration, so 1 N = 1 kg·m/s²."},
+
+{q:"Which of the following is a scalar quantity?",c:["Force","Velocity","Displacement","Temperature"],a:3,e:"Temperature has magnitude only and no direction, so it is scalar."},
+
+{q:"Which of the following is a vector quantity?",c:["Mass","Time","Velocity","Speed"],a:2,e:"Velocity has both magnitude and direction, so it is a vector."},
+
+{q:"Which statement correctly distinguishes speed from velocity?",c:["Speed has direction; velocity does not","Velocity has direction; speed does not","Speed and velocity are always identical","Velocity is always smaller than speed"],a:1,e:"Speed is scalar, while velocity is vector because it includes direction."},
+
+{q:"Which measurement represents a vector quantity?",c:["25 kg","12 s","8 m/s north","30°C"],a:2,e:"8 m/s north includes both magnitude and direction, so it is a vector."},
+
+{q:"Convert 4.2 km to meters.",c:["42 m","420 m","4200 m","42,000 m"],a:2,e:"1 km = 1000 m, so 4.2 km = 4200 m."},
+
+{q:"Convert 750 cm to meters.",c:["0.75 m","7.5 m","75 m","7500 m"],a:1,e:"100 cm = 1 m, so 750 cm ÷ 100 = 7.5 m."},
+
+{q:"Convert 3 minutes to seconds.",c:["30 s","60 s","120 s","180 s"],a:3,e:"1 minute = 60 seconds, so 3 minutes = 180 seconds."},
+
+{q:"Convert 2.5 hours to seconds.",c:["150 s","900 s","9000 s","15,000 s"],a:2,e:"2.5 hours × 60 minutes/hour × 60 seconds/minute = 9000 seconds."},
+
+{q:"A runner travels 400 m in 50 s. What is the runner’s average speed?",c:["4 m/s","6 m/s","8 m/s","10 m/s"],a:2,e:"Average speed = distance ÷ time = 400 m ÷ 50 s = 8 m/s."},
+
+{q:"A car travels 18 km in 30 minutes. What is its average speed in m/s?",c:["5 m/s","10 m/s","15 m/s","20 m/s"],a:1,e:"18 km = 18,000 m and 30 min = 1800 s. Speed = 18,000 ÷ 1800 = 10 m/s."},
+
+{q:"What is dimensional analysis mainly used for?",c:["Identifying colors in graphs","Changing one unit into another","Removing significant figures","Measuring temperature directly"],a:1,e:"Dimensional analysis is a unit conversion method that uses conversion factors."},
+
+{q:"Which conversion setup correctly converts 6 km to meters?",c:["6 km × 1 km / 1000 m","6 km × 1000 m / 1 km","6 km ÷ 1000 km","6 km × 1 m / 1000 km"],a:1,e:"The km unit cancels in 6 km × 1000 m / 1 km, leaving meters."},
+
+{q:"What does accuracy mean?",c:["How close repeated measurements are to each other","How close a measurement is to the accepted value","How many decimal places are written","How large the measured value is"],a:1,e:"Accuracy refers to closeness to the accepted or true value."},
+
+{q:"What does precision mean?",c:["How close repeated measurements are to each other","How close a value is to zero","How close a measurement is to the accepted value only","How many units are used"],a:0,e:"Precision refers to consistency among repeated measurements."},
+
+{q:"A student measures a table as 1.51 m, 1.50 m, and 1.52 m. The accepted value is 1.90 m. Which description is best?",c:["Accurate and precise","Precise but not accurate","Accurate but not precise","Neither accurate nor precise"],a:1,e:"The values are close to each other, so they are precise, but far from 1.90 m, so they are not accurate."},
+
+{q:"A student measures a mass as 49.9 g, 50.0 g, and 50.1 g. The accepted value is 50.0 g. Which description is best?",c:["Accurate and precise","Precise but not accurate","Accurate but not precise","Neither accurate nor precise"],a:0,e:"The measurements are close to each other and close to the accepted value."},
+
+{q:"How many significant figures are in 45.2?",c:["1","2","3","4"],a:2,e:"All nonzero digits are significant, so 45.2 has 3 significant figures."},
+
+{q:"How many significant figures are in 0.0064?",c:["1","2","3","4"],a:1,e:"Leading zeros are not significant. Only 6 and 4 count."},
+
+{q:"How many significant figures are in 7.00?",c:["1","2","3","4"],a:2,e:"Zeros after a decimal point are significant, so 7.00 has 3 significant figures."},
+
+{q:"Which measurement has four significant figures?",c:["0.0035","12.00","800","0.07"],a:1,e:"12.00 has four significant figures because the trailing zeros after the decimal count."},
+
+{q:"Why should final calculated answers follow significant figure rules?",c:["To make all answers shorter","To avoid reporting more precision than the measurements allow","To remove units from the answer","To make the answer always a whole number"],a:1,e:"Significant figures communicate the precision of the data used in the calculation."},
+
+{q:"A student says that 20 m/s and 20 m/s east mean the same thing. What is wrong with this statement?",c:["The first is a vector and the second is scalar","The first is speed while the second is velocity","Both quantities have no magnitude","Both quantities have no units"],a:1,e:"20 m/s is speed, while 20 m/s east includes direction and is velocity."},
+
+{q:"Scenario-based: A group of students is testing a toy car. They record its travel distance as 2.0 m and its time as 0.50 s. Which conclusion is most scientifically complete?",c:["The toy car is fast","The toy car moves 2.0","The toy car has an average speed of 4.0 m/s","The toy car has a speed of 4.0"],a:2,e:"A complete scientific statement includes a calculated value and correct unit: speed = 2.0 m ÷ 0.50 s = 4.0 m/s."},
+
+{q:"Scenario-based: A laboratory balance is incorrectly calibrated. It gives repeated mass readings of 42.1 g, 42.2 g, and 42.1 g for an object whose actual mass is 45.0 g. What is the best interpretation?",c:["The balance is accurate and precise","The balance is precise but not accurate","The balance is accurate but not precise","The balance is neither precise nor accurate"],a:1,e:"The values are close to one another, showing precision, but they are far from the true value of 45.0 g, so they are not accurate."}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+
+  const choicesContainer = quizBox.querySelector(".choices");
+
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  selected = i;
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Assessment Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Chapter</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the assessment to unlock the next chapter.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

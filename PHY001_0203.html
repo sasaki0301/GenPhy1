@@ -97,6 +97,12 @@ h3 { color: #174ea6; }
   border: none;
   cursor: pointer;
 }
+
+  iframe {
+  width: 100%;
+  max-width: 100%;
+}
+  
 </style>
 </head>
 
@@ -129,7 +135,7 @@ Even if the speed is constant, the direction is constantly changing.
 </div>
 
 <div class="visual-box">
-<img src="YOUR_CIRCULAR_PATH_IMAGE_URL" class="lesson-img">
+<img src="https://i.imgur.com/IUj6TVo.png" class="lesson-img">
 <p class="caption">Object moving in a circular path</p>
 </div>
 
@@ -148,7 +154,7 @@ Velocity is always tangent to the circle.
 </div>
 
 <div class="visual-box">
-<img src="YOUR_TANGENTIAL_VELOCITY_IMAGE_URL" class="lesson-img">
+<img src="https://i.imgur.com/w5ndptF.png" class="lesson-img">
 <p class="caption">Velocity is tangent to the circular path</p>
 </div>
 
@@ -171,7 +177,7 @@ a = v² / r
 </div>
 
 <div class="visual-box">
-<img src="YOUR_CENTRIPETAL_ACCEL_IMAGE_URL" class="lesson-img">
+<img src="https://i.imgur.com/OAaXaM7.png" class="lesson-img">
 <p class="caption">Centripetal acceleration always points toward the center</p>
 </div>
 
@@ -198,11 +204,62 @@ F = mv² / r
 </div>
 
 <div class="visual-box">
-<img src="YOUR_CENTRIPETAL_FORCE_IMAGE_URL" class="lesson-img">
+<img src="https://i.imgur.com/2PBJU6b.png" class="lesson-img">
 <p class="caption">Centripetal force pulls the object toward the center</p>
 </div>
 
 </div>
+
+ <!-- SIMULATION -->
+<div class="section">
+<h2>Interactive Simulation: Circular Motion Vectors</h2>
+
+<p>
+Use the simulation below to observe how velocity and acceleration behave when an object moves in a circular path.
+Focus on the direction of the velocity vector and the acceleration vector.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+<ul>
+<li>Choose circular motion if available.</li>
+<li>Turn on velocity and acceleration vectors.</li>
+<li>Observe that velocity is tangent to the path.</li>
+<li>Observe that acceleration points toward the center.</li>
+<li>Try changing the speed and radius, then compare the vector lengths.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<iframe 
+  src="https://phet.colorado.edu/sims/html/ladybug-motion-2d/latest/ladybug-motion-2d_en.html"
+  width="100%" 
+  height="620"
+  scrolling="no"
+  allowfullscreen
+  style="border:0; border-radius:12px; max-width:100%;">
+</iframe>
+
+<p class="caption">
+If the simulation does not load inside the lesson, open it here:
+<a href="https://phet.colorado.edu/en/simulation/ladybug-motion-2d" target="_blank">
+Ladybug Motion 2D Simulation
+</a>
+</p>
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+When the ladybug moves in a circle at constant speed, does it still have acceleration? Explain using the vectors shown.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Yes. Even if speed is constant, the velocity direction changes continuously. This means the ladybug is accelerating. The acceleration vector points toward the center of the circular path.
+</div>
+</div>
+</div> 
 
 <!-- EXAMPLES -->
 <div class="section">

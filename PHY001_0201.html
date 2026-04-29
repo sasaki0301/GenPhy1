@@ -38,6 +38,15 @@ h3 { color: #174ea6; }
   margin: 16px 0;
 }
 
+.visual-box {
+  background: #ffffff;
+  border: 1px solid #d9e7e4;
+  padding: 14px;
+  border-radius: 12px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
 .activity {
   background: #fff;
   padding: 14px;
@@ -72,9 +81,24 @@ h3 { color: #174ea6; }
   cursor: pointer;
 }
 
+.quiz-button:hover {
+  background-color: #0f5b52;
+}
+
 .formula {
   font-size: 22px;
   font-weight: bold;
+  text-align: center;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.caption {
+  font-size: 0.9em;
+  color: #555;
   text-align: center;
 }
 </style>
@@ -84,127 +108,209 @@ h3 { color: #174ea6; }
 
 <h1>Kinematics: Motion Along a Straight Line</h1>
 
-<!-- OBJECTIVES -->
 <div class="section">
 <h2>Learning Objectives</h2>
 <ul>
-<li>Define motion, position, displacement, and distance.</li>
+<li>Define motion, position, distance, and displacement.</li>
 <li>Distinguish between speed and velocity.</li>
-<li>Calculate average velocity.</li>
-<li>Understand acceleration and its role in motion.</li>
+<li>Calculate average speed, average velocity, and acceleration.</li>
+<li>Interpret simple position-time and velocity-time graphs.</li>
 </ul>
 </div>
 
-<!-- INTRO -->
 <div class="section">
 <h2>1. What is Motion?</h2>
 
 <p>
 Motion occurs when an object changes its position relative to a reference point over time.
+The reference point acts as the starting location used to describe where the object is.
 </p>
 
 <div class="key-box">
-<strong>Key Idea:</strong> Motion = change in position over time.
+<strong>Key Idea:</strong> Motion means a change in position over time.
 </div>
 
-<p>
-Examples of motion include:
-</p>
+<div class="visual-box">
+<svg width="760" height="160" viewBox="0 0 760 160">
+  <line x1="70" y1="100" x2="690" y2="100" stroke="#333" stroke-width="3"/>
+  <polygon points="690,100 675,92 675,108" fill="#333"/>
 
-<ul>
-<li>A car moving along a road</li>
-<li>A ball falling from a height</li>
-<li>A person walking in a straight path</li>
-</ul>
+  <line x1="120" y1="85" x2="120" y2="115" stroke="#136f63" stroke-width="3"/>
+  <text x="88" y="135" fill="#136f63" font-size="18">Reference Point</text>
+  <text x="110" y="75" fill="#136f63" font-size="18">0 m</text>
 
+  <circle cx="250" cy="100" r="16" fill="#2b7de9"/>
+  <text x="225" y="65" fill="#174ea6" font-size="18">Position A</text>
+  <text x="235" y="135" font-size="18">5 m</text>
+
+  <circle cx="520" cy="100" r="16" fill="#e57373"/>
+  <text x="495" y="65" fill="#b13b3b" font-size="18">Position B</text>
+  <text x="505" y="135" font-size="18">15 m</text>
+
+  <path d="M270 70 Q385 25 500 70" stroke="#136f63" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#136f63" />
+    </marker>
+  </defs>
+  <text x="330" y="35" fill="#136f63" font-size="18">Motion</text>
+</svg>
+<p class="caption">An object moves when its position changes relative to a reference point.</p>
+</div>
 </div>
 
-<!-- POSITION -->
 <div class="section">
 <h2>2. Position, Distance, and Displacement</h2>
 
 <h3>Position</h3>
 <p>
-Position describes the location of an object relative to a reference point.
+Position tells where an object is located relative to a reference point.
 </p>
 
 <h3>Distance</h3>
 <p>
-Distance is the total path traveled by an object.
+Distance is the total path traveled by an object. It does not include direction, so it is a scalar quantity.
 </p>
 
 <h3>Displacement</h3>
 <p>
-Displacement is the straight-line change in position from the starting point to the ending point.
+Displacement is the change in position from the starting point to the ending point. It includes direction, so it is a vector quantity.
 </p>
 
 <div class="key-box">
-<strong>Distance vs Displacement:</strong>
+<strong>Distance vs. Displacement:</strong>
 <ul>
-<li>Distance = total path (scalar)</li>
-<li>Displacement = shortest path + direction (vector)</li>
+<li><strong>Distance</strong> = total path traveled</li>
+<li><strong>Displacement</strong> = final position − initial position</li>
 </ul>
+</div>
+
+<div class="visual-box">
+<svg width="760" height="180" viewBox="0 0 760 180">
+  <line x1="80" y1="100" x2="680" y2="100" stroke="#333" stroke-width="3"/>
+  <polygon points="680,100 665,92 665,108" fill="#333"/>
+
+  <line x1="180" y1="85" x2="180" y2="115" stroke="#333" stroke-width="2"/>
+  <line x1="520" y1="85" x2="520" y2="115" stroke="#333" stroke-width="2"/>
+
+  <text x="160" y="135" font-size="18">Start</text>
+  <text x="500" y="135" font-size="18">End</text>
+
+  <circle cx="180" cy="100" r="13" fill="#2b7de9"/>
+  <circle cx="520" cy="100" r="13" fill="#e57373"/>
+
+  <path d="M180 70 Q350 10 520 70" stroke="#f4a261" stroke-width="4" fill="none"/>
+  <text x="285" y="35" fill="#b56a16" font-size="18">Distance: total path</text>
+
+  <line x1="180" y1="150" x2="520" y2="150" stroke="#136f63" stroke-width="4" marker-end="url(#arrow2)"/>
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#136f63" />
+    </marker>
+  </defs>
+  <text x="280" y="172" fill="#136f63" font-size="18">Displacement: straight change in position</text>
+</svg>
+<p class="caption">Distance follows the path taken; displacement only compares start and end positions.</p>
 </div>
 
 <div class="example-box">
-<p><strong>Example:</strong></p>
-<p>
-A person walks 5 m east then 3 m west.
-</p>
+<p><strong>Example:</strong> A person walks 5 m east, then 3 m west.</p>
 <ul>
-<li>Distance = 8 m</li>
-<li>Displacement = 2 m east</li>
+<li>Distance = 5 m + 3 m = <strong>8 m</strong></li>
+<li>Displacement = 5 m east − 3 m west = <strong>2 m east</strong></li>
 </ul>
 </div>
-
 </div>
 
-<!-- SPEED AND VELOCITY -->
 <div class="section">
 <h2>3. Speed and Velocity</h2>
 
 <h3>Speed</h3>
 <p>
-Speed is how fast an object moves.
+Speed tells how fast an object moves.
 </p>
 
 <div class="formula">Speed = Distance ÷ Time</div>
 
 <h3>Velocity</h3>
 <p>
-Velocity is speed with direction.
+Velocity tells how fast an object moves and in what direction.
 </p>
 
 <div class="formula">Velocity = Displacement ÷ Time</div>
 
 <div class="key-box">
-<strong>Key Idea:</strong>
+<strong>Remember:</strong>
 <ul>
-<li>Speed is scalar</li>
-<li>Velocity is vector</li>
+<li>Speed is scalar.</li>
+<li>Velocity is vector.</li>
 </ul>
 </div>
 
 <div class="example-box">
-<p><strong>Example:</strong></p>
+<p><strong>Example:</strong> A car travels 100 m east in 10 s.</p>
 <p>
-A car travels 100 m east in 10 s.
-</p>
-
-<p>
-Speed = 100 ÷ 10 = 10 m/s  
-Velocity = 10 m/s east
+Speed = 100 m ÷ 10 s = <strong>10 m/s</strong>
+<br>
+Velocity = 100 m east ÷ 10 s = <strong>10 m/s east</strong>
 </p>
 </div>
-
 </div>
 
-<!-- AVERAGE VELOCITY -->
 <div class="section">
-<h2>4. Average Velocity</h2>
+<h2>4. Position-Time Graphs</h2>
 
 <p>
-Average velocity considers total displacement over total time.
+A position-time graph shows how an object’s position changes as time passes.
+The slope of a position-time graph represents velocity.
+</p>
+
+<div class="key-box">
+<strong>Graph Idea:</strong> A steeper position-time graph means greater velocity.
+</div>
+
+<div class="visual-box">
+<svg width="760" height="360" viewBox="0 0 760 360">
+  <line x1="90" y1="290" x2="680" y2="290" stroke="#333" stroke-width="3"/>
+  <line x1="90" y1="290" x2="90" y2="50" stroke="#333" stroke-width="3"/>
+
+  <text x="350" y="335" font-size="18">Time (s)</text>
+  <text x="10" y="160" font-size="18" transform="rotate(-90 20,160)">Position (m)</text>
+
+  <line x1="90" y1="290" x2="560" y2="90" stroke="#2b7de9" stroke-width="5"/>
+  <circle cx="90" cy="290" r="6" fill="#2b7de9"/>
+  <circle cx="560" cy="90" r="6" fill="#2b7de9"/>
+
+  <text x="130" y="260" font-size="18" fill="#174ea6">Object moving away at constant velocity</text>
+
+  <line x1="90" y1="250" x2="680" y2="250" stroke="#ddd"/>
+  <line x1="90" y1="210" x2="680" y2="210" stroke="#ddd"/>
+  <line x1="90" y1="170" x2="680" y2="170" stroke="#ddd"/>
+  <line x1="90" y1="130" x2="680" y2="130" stroke="#ddd"/>
+  <line x1="90" y1="90" x2="680" y2="90" stroke="#ddd"/>
+
+  <line x1="200" y1="290" x2="200" y2="50" stroke="#eee"/>
+  <line x1="310" y1="290" x2="310" y2="50" stroke="#eee"/>
+  <line x1="420" y1="290" x2="420" y2="50" stroke="#eee"/>
+  <line x1="530" y1="290" x2="530" y2="50" stroke="#eee"/>
+</svg>
+<p class="caption">A straight diagonal line means constant velocity.</p>
+</div>
+
+<div class="example-box">
+<p><strong>Interpretation:</strong></p>
+<p>
+If the line rises steadily, the object is moving away from the starting point at a constant velocity.
+If the line is horizontal, the object is not changing position, so it is at rest.
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>5. Average Velocity</h2>
+
+<p>
+Average velocity depends on total displacement, not total distance.
 </p>
 
 <div class="formula">Average Velocity = Total Displacement ÷ Total Time</div>
@@ -215,110 +321,166 @@ Average velocity considers total displacement over total time.
 A student walks 10 m east in 5 s, then walks back 10 m west in 5 s.
 </p>
 
+<ul>
+<li>Total distance = 20 m</li>
+<li>Total displacement = 0 m</li>
+<li>Total time = 10 s</li>
+</ul>
+
 <p>
-Displacement = 0 m  
-Time = 10 s  
+Average velocity = 0 m ÷ 10 s = <strong>0 m/s</strong>
 </p>
 
 <p>
-Average velocity = 0 ÷ 10 = 0 m/s
-</p>
-
-<p>
-Even though the student moved, the displacement is zero.
+The student moved, but returned to the starting point, so the displacement is zero.
 </p>
 </div>
-
 </div>
 
-<!-- ACCELERATION -->
 <div class="section">
-<h2>5. Acceleration</h2>
+<h2>6. Acceleration</h2>
 
 <p>
-Acceleration is the rate of change of velocity.
+Acceleration is the rate of change of velocity. An object accelerates when it speeds up, slows down, or changes direction.
 </p>
 
 <div class="formula">Acceleration = Change in Velocity ÷ Time</div>
 
-<div class="key-box">
-<strong>Important:</strong>
-Acceleration can mean:
-<ul>
-<li>Speeding up</li>
-<li>Slowing down</li>
-<li>Changing direction</li>
-</ul>
+<div class="formula">a = (v<sub>f</sub> − v<sub>i</sub>) ÷ t</div>
+
+<div class="visual-box">
+<svg width="760" height="360" viewBox="0 0 760 360">
+  <line x1="90" y1="290" x2="680" y2="290" stroke="#333" stroke-width="3"/>
+  <line x1="90" y1="290" x2="90" y2="50" stroke="#333" stroke-width="3"/>
+
+  <text x="350" y="335" font-size="18">Time (s)</text>
+  <text x="10" y="160" font-size="18" transform="rotate(-90 20,160)">Velocity (m/s)</text>
+
+  <line x1="90" y1="260" x2="590" y2="90" stroke="#136f63" stroke-width="5"/>
+  <circle cx="90" cy="260" r="6" fill="#136f63"/>
+  <circle cx="590" cy="90" r="6" fill="#136f63"/>
+
+  <text x="150" y="240" font-size="18" fill="#136f63">Velocity increasing</text>
+  <text x="150" y="265" font-size="18" fill="#136f63">Positive acceleration</text>
+
+  <line x1="90" y1="250" x2="680" y2="250" stroke="#ddd"/>
+  <line x1="90" y1="210" x2="680" y2="210" stroke="#ddd"/>
+  <line x1="90" y1="170" x2="680" y2="170" stroke="#ddd"/>
+  <line x1="90" y1="130" x2="680" y2="130" stroke="#ddd"/>
+  <line x1="90" y1="90" x2="680" y2="90" stroke="#ddd"/>
+
+  <line x1="200" y1="290" x2="200" y2="50" stroke="#eee"/>
+  <line x1="310" y1="290" x2="310" y2="50" stroke="#eee"/>
+  <line x1="420" y1="290" x2="420" y2="50" stroke="#eee"/>
+  <line x1="530" y1="290" x2="530" y2="50" stroke="#eee"/>
+</svg>
+<p class="caption">A rising velocity-time graph means the object is accelerating.</p>
 </div>
 
 <div class="example-box">
-<p><strong>Example:</strong></p>
-<p>
-A car increases its velocity from 5 m/s to 15 m/s in 5 seconds.
-</p>
+<p><strong>Example:</strong> A car increases its velocity from 5 m/s to 15 m/s in 5 s.</p>
 
 <p>
-Acceleration = (15 − 5) ÷ 5 = 2 m/s²
+a = (15 − 5) ÷ 5
+<br>
+a = 10 ÷ 5
+<br>
+a = <strong>2 m/s²</strong>
 </p>
 </div>
-
 </div>
 
-<!-- CONCEPT CHECK -->
+<div class="section">
+<h2>7. Graph Interpretation Summary</h2>
+
+<div class="key-box">
+<ul>
+<li><strong>Position-time graph:</strong> slope tells velocity.</li>
+<li><strong>Velocity-time graph:</strong> slope tells acceleration.</li>
+<li><strong>Horizontal position-time graph:</strong> object is at rest.</li>
+<li><strong>Horizontal velocity-time graph:</strong> object moves at constant velocity.</li>
+<li><strong>Rising velocity-time graph:</strong> object is speeding up.</li>
+</ul>
+</div>
+</div>
+
 <div class="section">
 <h2>Concept Check</h2>
 
 <div class="activity">
-<p>Is distance a scalar or vector?</p>
+<p><strong>1.</strong> Is distance a scalar or vector?</p>
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer">Distance is a scalar quantity.</div>
+<div class="answer">Distance is a scalar quantity because it has magnitude only.</div>
 </div>
 
 <div class="activity">
-<p>Why can average velocity be zero even if motion occurs?</p>
+<p><strong>2.</strong> Why can average velocity be zero even if an object moved?</p>
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer">Because displacement can be zero if the object returns to its starting point.</div>
+<div class="answer">Because average velocity depends on displacement. If the object returns to its starting point, displacement is zero.</div>
 </div>
 
+<div class="activity">
+<p><strong>3.</strong> What does the slope of a position-time graph represent?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">The slope of a position-time graph represents velocity.</div>
 </div>
 
-<!-- PRACTICE -->
+<div class="activity">
+<p><strong>4.</strong> What does the slope of a velocity-time graph represent?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">The slope of a velocity-time graph represents acceleration.</div>
+</div>
+</div>
+
 <div class="section">
 <h2>Practice Drills</h2>
 
 <div class="activity">
 <p>
-A runner travels 200 m in 20 s. Find the speed.
+<strong>Drill 1:</strong> A runner travels 200 m in 20 s. Find the speed.
 </p>
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
 <div class="answer">
-Speed = 200 ÷ 20 = <strong>10 m/s</strong>
+Speed = distance ÷ time<br>
+Speed = 200 m ÷ 20 s = <strong>10 m/s</strong>
 </div>
 </div>
 
 <div class="activity">
 <p>
-A car moves 60 m north in 6 s. Find the velocity.
+<strong>Drill 2:</strong> A car moves 60 m north in 6 s. Find the velocity.
 </p>
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
 <div class="answer">
-Velocity = 60 ÷ 6 = <strong>10 m/s north</strong>
+Velocity = displacement ÷ time<br>
+Velocity = 60 m north ÷ 6 s = <strong>10 m/s north</strong>
 </div>
 </div>
 
 <div class="activity">
 <p>
-A bicycle increases its velocity from 4 m/s to 12 m/s in 4 s. Find acceleration.
+<strong>Drill 3:</strong> A bicycle increases its velocity from 4 m/s to 12 m/s in 4 s. Find acceleration.
 </p>
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
 <div class="answer">
-Acceleration = (12 − 4) ÷ 4 = <strong>2 m/s²</strong>
+a = (v<sub>f</sub> − v<sub>i</sub>) ÷ t<br>
+a = (12 − 4) ÷ 4<br>
+a = <strong>2 m/s²</strong>
 </div>
 </div>
 
+<div class="activity">
+<p>
+<strong>Drill 4:</strong> A student walks 6 m east, then 2 m west. Find the distance and displacement.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Distance = 6 m + 2 m = <strong>8 m</strong><br>
+Displacement = 6 m east − 2 m west = <strong>4 m east</strong>
+</div>
+</div>
 </div>
 
-<!-- CHALLENGE -->
 <div class="section">
 <h2>Checkpoint Challenge</h2>
 
@@ -332,20 +494,46 @@ A car travels 50 m east in 5 s, then 50 m west in 5 s.
 <br>
 2. What is the displacement?
 <br>
-3. What is the average velocity?
+3. What is the average speed?
+<br>
+4. What is the average velocity?
 </p>
 
 <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
 <div class="answer">
-Distance = 100 m  
-Displacement = 0 m  
-Average velocity = 0 m/s
+1. Distance = 50 m + 50 m = <strong>100 m</strong><br>
+2. Displacement = <strong>0 m</strong><br>
+3. Average speed = 100 m ÷ 10 s = <strong>10 m/s</strong><br>
+4. Average velocity = 0 m ÷ 10 s = <strong>0 m/s</strong>
 </div>
 </div>
 
+<div class="activity">
+<p>
+<strong>Graph Challenge:</strong> A position-time graph is a straight line sloping upward from left to right. What does this tell you about the object’s motion?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+It means the object is moving away from the reference point at a constant velocity.
+</div>
+</div>
 </div>
 
-<!-- QUIZ BUTTON -->
+<div class="section">
+<h2>Lesson Summary</h2>
+<ul>
+<li>Motion is a change in position over time.</li>
+<li>Distance is the total path traveled.</li>
+<li>Displacement is the change from initial position to final position.</li>
+<li>Speed is distance divided by time.</li>
+<li>Velocity is displacement divided by time and includes direction.</li>
+<li>Acceleration is the rate of change of velocity.</li>
+<li>The slope of a position-time graph represents velocity.</li>
+<li>The slope of a velocity-time graph represents acceleration.</li>
+</ul>
+</div>
+
 <div style="text-align:center; margin-top:30px;">
 <button class="quiz-button" id="takeQuizBtn" data-quiz="GP1_02_01_Q">
 Take the Quiz →

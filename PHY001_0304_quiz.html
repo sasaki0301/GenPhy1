@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 3 Assessment: Forces, Work, and Energy</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Chapter 3 Assessment: Forces, Work, and Energy</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+/* Newton Laws */
+{q:"Which law explains inertia?",c:["First","Second","Third","Fourth"],a:0,e:"First Law describes inertia."},
+{q:"If net force is zero, motion is:",c:["Accelerating","Stopping","Constant velocity","Random"],a:2,e:"No acceleration means constant velocity."},
+{q:"A 10 kg object with 50 N force accelerates at:",c:["2","5","10","20"],a:1,e:"a=50/10=5 m/s²"},
+{q:"Action-reaction forces act on:",c:["Same object","Different objects","Same direction","Same magnitude only"],a:1,e:"They act on different objects."},
+
+/* Work */
+{q:"Work is zero when:",c:["Force large","Distance small","Force ⟂ motion","Time zero"],a:2,e:"Perpendicular force does zero work."},
+{q:"A 20 N force moves 5 m. Work?",c:["50","100","200","25"],a:1,e:"20×5=100 J"},
+{q:"A force opposite motion produces:",c:["Positive work","Negative work","Zero work","Maximum work"],a:1,e:"Opposite direction gives negative work."},
+
+/* Power */
+{q:"Power equals:",c:["Fd","W/t","ma","mv"],a:1,e:"Power is work over time."},
+{q:"200 J in 4 s gives power:",c:["25","50","100","200"],a:1,e:"200/4=50 W"},
+
+/* Energy */
+{q:"KE depends most on:",c:["Mass","Height","Velocity","Time"],a:2,e:"Velocity squared effect."},
+{q:"A 2 kg object at 5 m/s KE:",c:["10","25","50","100"],a:2,e:"½×2×25=25 J"},
+{q:"PE depends on:",c:["Speed","Height","Time","Force"],a:1,e:"PE depends on height."},
+
+/* Conservation */
+{q:"Without friction, total energy:",c:["Increases","Decreases","Constant","Zero"],a:2,e:"Energy conserved."},
+{q:"Top of motion has:",c:["Max KE","Max PE","Zero energy","Equal KE PE"],a:1,e:"Highest PE."},
+{q:"Bottom has:",c:["Max KE","Max PE","Zero energy","Equal energy"],a:0,e:"Highest KE."},
+
+/* Mixed */
+{q:"If height doubles, PE:",c:["½","Same","2×","4×"],a:2,e:"PE ∝ h"},
+{q:"If velocity doubles, KE:",c:["2×","3×","4×","½"],a:2,e:"KE ∝ v²"},
+{q:"Work changes:",c:["Mass","Velocity","Energy","Time"],a:2,e:"Work changes energy."},
+
+/* Multi-step */
+{q:"A 2 kg object drops from 10 m. Find velocity.",c:["10","14","20","28"],a:1,e:"v≈14 m/s"},
+{q:"Work of 50 J done in 5 s. Power?",c:["5","10","25","50"],a:1,e:"50/5=10 W"},
+{q:"Force 10 N at 60°, d=2 m. Work?",c:["10","20","5","0"],a:0,e:"10×2×0.5=10 J"},
+
+/* Pisay-style */
+{q:"A box slides and stops due to friction. Energy becomes:",c:["Lost","Heat","Zero","Force"],a:1,e:"Converted to heat"},
+{q:"A moving car suddenly stops. Passengers move forward due to:",c:["Force","Inertia","Friction","Energy"],a:1,e:"Inertia resists motion change"},
+
+/* More */
+{q:"A 4 kg object moving 3 m/s KE:",c:["6","12","18","24"],a:2,e:"½×4×9=18"},
+{q:"A 3 kg at height 2 m (g=10). PE:",c:["30","60","90","120"],a:1,e:"3×10×2=60"},
+{q:"Net force causes:",c:["Velocity","Acceleration","Energy","Power"],a:1,e:"Force causes acceleration"},
+{q:"Holding object stationary work:",c:["Positive","Negative","Zero","Maximum"],a:2,e:"No displacement"},
+{q:"Power increases when:",c:["Work less","Time more","Work faster","Mass increases"],a:2,e:"Work done faster"},
+{q:"If mass doubles, KE:",c:["½","Same","2×","4×"],a:2,e:"KE ∝ m"},
+{q:"If friction present:",c:["Energy lost","Energy destroyed","Converted form","No effect"],a:2,e:"Energy converted"},
+{q:"Force and displacement same direction:",c:["Negative","Zero","Positive","Random"],a:2,e:"Positive work"},
+{q:"Energy of motion:",c:["PE","KE","Work","Power"],a:1,e:"KE is motion energy"},
+{q:"Energy of position:",c:["KE","Work","PE","Power"],a:2,e:"PE depends on position"},
+{q:"F=ma relates:",c:["Energy","Power","Force and acceleration","Velocity"],a:2,e:"Newton’s 2nd law"},
+{q:"Unit of power:",c:["J","N","W","m"],a:2,e:"Watt"},
+{q:"Unit of work:",c:["J","W","N","kg"],a:0,e:"Joule"}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

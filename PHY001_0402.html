@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Collisions</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f3fbf8, #f6f9ff);
+    margin: 0;
+    padding: 35px 22px;
+    color: #222;
+    line-height: 1.7;
+    font-size: 18px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    color: #136f63;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 10px;
+  }
+
+  h2 {
+    color: #136f63;
+    font-size: 1.45rem;
+    line-height: 1.3;
+    margin: 1.2em 0 0.55em;
+  }
+
+  h3 {
+    color: #174ea6;
+    font-size: 1.08rem;
+    line-height: 1.35;
+    margin: 0.8em 0 0.45em;
+  }
+
+  p {
+    margin: 0.65em 0;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 0 28px;
+    padding: 0;
+  }
+
+  img,
+  picture,
+  svg,
+  video,
+  canvas,
+  iframe,
+  embed,
+  object {
+    max-width: 100%;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    height: auto;
+  }
+
+  .lesson-intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin: 24px auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    max-width: 950px;
+  }
+
+  .concept-box,
+  .quick-check,
+  .activity,
+  .key-terms {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 14px;
+  }
+
+  .concept-box {
+    background: #fff7e6;
+    border-left: 5px solid #ffb100;
+  }
+
+  .quick-check {
+    background: #eef3ff;
+    border-left: 5px solid #174ea6;
+  }
+
+  .activity {
+    background: #f9fbff;
+    border-left: 5px solid #136f63;
+  }
+
+  .key-terms {
+    background: #f8fcff;
+    border-left: 5px solid #2b7de9;
+    margin-top: 18px;
+  }
+
+  .answer {
+    display: none;
+    margin-top: 10px;
+    background: #eef3ff;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+
+  .toggle-btn,
+  .quiz-button {
+    background: #136f63;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 10px;
+  }
+
+  .toggle-btn:hover,
+  .quiz-button:hover {
+    background: #0f5b52;
+    transform: translateY(-1px);
+  }
+
+  .quiz-button {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 10px;
+    font-size: 17px;
+    margin-top: 22px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f3f7ff;
+    color: #174ea6;
+  }
+
+  .reaction-scheme,
+  .media-block,
+  .video-block,
+  .simulation-block,
+  .image-block {
+    background: #f7fbff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px dashed #d8e9ff;
+    max-width: 100%;
+  }
+
+  .reaction-scheme svg,
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .lesson-image,
+  figure img,
+  .image-block img {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 10px;
+    margin: 16px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  figure {
+    margin: 18px auto;
+    text-align: center;
+  }
+
+  figure img {
+    margin-bottom: 8px;
+  }
+
+  .caption,
+  figcaption {
+    font-size: 15px;
+    color: #444;
+    margin-top: 6px;
+  }
+
+  iframe,
+  video,
+  .media-frame {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 260px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 16px auto;
+    background: #fff;
+  }
+
+  .simulation-frame,
+  .simulation-block iframe,
+  iframe[src*="phet"],
+  iframe[src*="simulation"] {
+    max-width: 900px;
+    aspect-ratio: 4 / 3;
+    min-height: 420px;
+  }
+
+  .quiz-actions {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 720px) {
+    body {
+      font-size: 16px;
+      padding: 20px 14px;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+    }
+
+    .section {
+      padding: 18px 16px;
+      margin: 18px auto;
+      border-radius: 12px;
+    }
+
+    ul,
+    ol {
+      margin-left: 20px;
+    }
+
+    .reaction-scheme,
+    .media-block,
+    .video-block,
+    .simulation-block,
+    .image-block {
+      padding: 14px;
+      margin: 16px 0;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      min-width: 150px;
+    }
+
+    iframe,
+    video,
+    .media-frame {
+      min-height: 220px;
+    }
+
+    .simulation-frame,
+    .simulation-block iframe,
+    iframe[src*="phet"],
+    iframe[src*="simulation"] {
+      min-height: 360px;
+    }
+
+    .toggle-btn,
+    .quiz-button {
+      max-width: 100%;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 420px) {
+    body {
+      padding: 16px 10px;
+    }
+
+    .section {
+      padding: 16px 12px;
+    }
+
+    .concept-box,
+    .quick-check,
+    .activity,
+    .key-terms {
+      padding: 12px 14px;
+    }
+
+    iframe,
+    video,
+    .media-frame {
+      min-height: 200px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Collisions</h1>
+
+<!-- OBJECTIVES -->
+<div class="section">
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Understand conservation of momentum in collisions.</li>
+<li>Differentiate elastic and inelastic collisions.</li>
+<li>Solve one-dimensional collision problems.</li>
+<li>Analyze explosions and recoil situations.</li>
+<li>Interpret momentum changes during interactions.</li>
+</ul>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+<h2>1. What Happens During a Collision?</h2>
+
+<p>
+A collision occurs when two or more objects interact with each other over a short period of time.
+During collisions, forces act between objects and momentum is transferred.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> In an isolated system, total momentum before collision equals total momentum after collision.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_COLLISION_IMAGE_URL" class="lesson-img">
+<p class="caption">
+Momentum is transferred during collisions.
+</p>
+</div>
+</div>
+
+<!-- CONSERVATION -->
+<div class="section">
+<h2>2. Conservation of Momentum</h2>
+
+<p>
+The law of conservation of momentum states:
+</p>
+
+<div class="formula">
+Total Momentum Before = Total Momentum After
+</div>
+
+<div class="formula">
+m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'
+</div>
+
+<div class="key-box">
+<strong>Important:</strong> Momentum is conserved only in isolated systems where external forces are negligible.
+</div>
+
+<div class="example-box">
+<h3>Example 1: Basic Momentum Conservation</h3>
+
+<p>
+A 2 kg cart moving at 4 m/s collides with a stationary 3 kg cart.
+After collision, the two carts stick together.
+Find their final velocity.
+</p>
+
+<p>
+Initial momentum:
+<br>
+p = (2)(4) + (3)(0)
+<br>
+p = 8 kg·m/s
+</p>
+
+<p>
+Since they stick together:
+</p>
+
+<p>
+(2+3)v = 8
+<br>
+5v = 8
+<br>
+v = <strong>1.6 m/s</strong>
+</p>
+</div>
+</div>
+
+<!-- ELASTIC -->
+<div class="section">
+<h2>3. Elastic Collisions</h2>
+
+<p>
+In elastic collisions:
+</p>
+
+<ul>
+<li>Momentum is conserved.</li>
+<li>Kinetic energy is also conserved.</li>
+</ul>
+
+<div class="key-box">
+<strong>Examples:</strong> Collisions between billiard balls or ideal atomic particles.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_ELASTIC_COLLISION_IMAGE_URL" class="lesson-img">
+<p class="caption">
+Objects bounce apart after an elastic collision.
+</p>
+</div>
+
+<table>
+<tr>
+<th>Quantity</th>
+<th>Elastic Collision</th>
+</tr>
+
+<tr>
+<td>Momentum</td>
+<td>Conserved</td>
+</tr>
+
+<tr>
+<td>Kinetic Energy</td>
+<td>Conserved</td>
+</tr>
+</table>
+
+</div>
+
+<!-- INELASTIC -->
+<div class="section">
+<h2>4. Inelastic Collisions</h2>
+
+<p>
+In inelastic collisions:
+</p>
+
+<ul>
+<li>Momentum is conserved.</li>
+<li>Kinetic energy is NOT conserved.</li>
+</ul>
+
+<div class="key-box">
+<strong>Perfectly Inelastic Collision:</strong>
+Objects stick together after collision.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_INELASTIC_COLLISION_IMAGE_URL" class="lesson-img">
+<p class="caption">
+Objects stick together in a perfectly inelastic collision.
+</p>
+</div>
+
+<table>
+<tr>
+<th>Quantity</th>
+<th>Inelastic Collision</th>
+</tr>
+
+<tr>
+<td>Momentum</td>
+<td>Conserved</td>
+</tr>
+
+<tr>
+<td>Kinetic Energy</td>
+<td>Not Conserved</td>
+</tr>
+</table>
+
+</div>
+
+<!-- EXPLOSIONS -->
+<div class="section">
+<h2>5. Explosions and Recoil</h2>
+
+<p>
+In explosions, objects initially at rest move apart after interaction.
+Total momentum is still conserved.
+</p>
+
+<div class="key-box">
+<strong>Important:</strong> Objects move in opposite directions so total momentum remains zero if initial momentum was zero.
+</div>
+
+<div class="example-box">
+<h3>Example 2: Recoil</h3>
+
+<p>
+A 4 kg cannon fires a 1 kg cannonball at 12 m/s to the right.
+Find the recoil velocity of the cannon.
+</p>
+
+<p>
+Initial momentum:
+<br>
+0
+</p>
+
+<p>
+After firing:
+</p>
+
+<p>
+(1)(12) + (4)v = 0
+</p>
+
+<p>
+12 + 4v = 0
+<br>
+4v = -12
+<br>
+v = <strong>-3 m/s</strong>
+</p>
+
+<p>
+The negative sign means the cannon moves backward.
+</p>
+</div>
+</div>
+
+<!-- ENERGY -->
+<div class="section">
+<h2>6. Kinetic Energy in Collisions</h2>
+
+<p>
+Even though momentum is always conserved, kinetic energy may or may not be conserved.
+</p>
+
+<div class="key-box">
+<ul>
+<li>Elastic collision → KE conserved</li>
+<li>Inelastic collision → KE converted into sound, heat, deformation, etc.</li>
+</ul>
+</div>
+
+<div class="example-box">
+<p>
+A car crash often produces sound, heat, and deformation.
+That is why kinetic energy decreases during inelastic collisions.
+</p>
+</div>
+</div>
+
+<!-- SIMULATION -->
+<div class="section">
+<h2>Interactive Simulation: Collision Lab</h2>
+
+<p>
+Use this simulation to observe momentum conservation in different types of collisions.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+
+<ul>
+<li>Compare elastic and inelastic collisions.</li>
+<li>Observe total momentum before and after collision.</li>
+<li>Change mass and velocity values.</li>
+<li>Observe how kinetic energy changes.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<iframe
+src="https://phet.colorado.edu/sims/html/collision-lab/latest/collision-lab_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;max-width:100%;">
+</iframe>
+
+<p class="caption">
+If the simulation does not load, open it here:
+<a href="https://phet.colorado.edu/en/simulation/collision-lab" target="_blank">
+Collision Lab Simulation
+</a>
+</p>
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+Set two carts with equal masses moving toward each other at equal speed.
+What happens after an elastic collision?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The carts exchange velocities. Total momentum and kinetic energy remain conserved.
+</div>
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>
+A 5 kg object moving at 2 m/s collides and sticks to a 5 kg stationary object.
+Find final velocity.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Initial momentum:
+<br>
+p = (5)(2)=10
+<br><br>
+
+Final:
+<br>
+(10)v = 10
+<br>
+v = <strong>1 m/s</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+A 2 kg cart moving at 6 m/s collides with a stationary 1 kg cart.
+If they stick together, find final velocity.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Initial momentum:
+<br>
+p = (2)(6)=12
+<br><br>
+
+Final:
+<br>
+3v = 12
+<br>
+v = <strong>4 m/s</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+Why is a car crash considered an inelastic collision?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Because kinetic energy is transformed into sound, heat, and deformation.
+</div>
+</div>
+
+</div>
+
+<!-- CHALLENGE -->
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A 3 kg cart moving right at 5 m/s collides and sticks to a 2 kg cart moving left at 1 m/s.
+Find their final velocity.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Take right as positive.
+<br><br>
+
+Initial momentum:
+<br>
+p = (3)(5) + (2)(-1)
+<br>
+p = 15 - 2
+<br>
+p = 13
+<br><br>
+
+Final:
+<br>
+(3+2)v = 13
+<br>
+5v = 13
+<br>
+v = <strong>2.6 m/s right</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Pisay-Style Question:</strong>
+Two identical carts move toward each other with equal speeds.
+After collision, both stop completely.
+What type of collision likely occurred and why?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+This is likely a perfectly inelastic collision because the carts stick together or stop after collision.
+Their equal and opposite momenta cancel each other.
+</div>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+<h2>Lesson Summary</h2>
+
+<ul>
+<li>Momentum is conserved in isolated systems.</li>
+<li>Collisions transfer momentum between objects.</li>
+<li>Elastic collisions conserve both momentum and kinetic energy.</li>
+<li>Inelastic collisions conserve momentum but not kinetic energy.</li>
+<li>Perfectly inelastic collisions cause objects to stick together.</li>
+<li>Explosions and recoil also obey conservation of momentum.</li>
+</ul>
+</div>
+
+<!-- QUIZ BUTTON -->
+<div style="text-align:center;margin-top:30px;">
+<button class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_04_02_Q">
+Take the Quiz →
+</button>
+</div>
+
+<script>
+function toggleAnswer(btn){
+const ans=btn.nextElementSibling;
+ans.style.display=
+ans.style.display==="block"?"none":"block";
+}
+
+document.getElementById("takeQuizBtn")
+.addEventListener("click",(e)=>{
+
+const quizId=e.target.dataset.quiz;
+
+window.parent.postMessage({
+type:"openQuiz",
+quiz:quizId
+},"*");
+
+});
+</script>
+
+</body>
+</html>

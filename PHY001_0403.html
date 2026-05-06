@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Center of Mass and Collision Applications</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f3fbf8, #f6f9ff);
+    margin: 0;
+    padding: 35px 22px;
+    color: #222;
+    line-height: 1.7;
+    font-size: 18px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    color: #136f63;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 10px;
+  }
+
+  h2 {
+    color: #136f63;
+    font-size: 1.45rem;
+    line-height: 1.3;
+    margin: 1.2em 0 0.55em;
+  }
+
+  h3 {
+    color: #174ea6;
+    font-size: 1.08rem;
+    line-height: 1.35;
+    margin: 0.8em 0 0.45em;
+  }
+
+  p {
+    margin: 0.65em 0;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 0 28px;
+    padding: 0;
+  }
+
+  img,
+  picture,
+  svg,
+  video,
+  canvas,
+  iframe,
+  embed,
+  object {
+    max-width: 100%;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    height: auto;
+  }
+
+  .lesson-intro {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin: 24px auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    max-width: 950px;
+  }
+
+  .concept-box,
+  .quick-check,
+  .activity,
+  .key-terms {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 14px;
+  }
+
+  .concept-box {
+    background: #fff7e6;
+    border-left: 5px solid #ffb100;
+  }
+
+  .quick-check {
+    background: #eef3ff;
+    border-left: 5px solid #174ea6;
+  }
+
+  .activity {
+    background: #f9fbff;
+    border-left: 5px solid #136f63;
+  }
+
+  .key-terms {
+    background: #f8fcff;
+    border-left: 5px solid #2b7de9;
+    margin-top: 18px;
+  }
+
+  .answer {
+    display: none;
+    margin-top: 10px;
+    background: #eef3ff;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+
+  .toggle-btn,
+  .quiz-button {
+    background: #136f63;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 10px;
+  }
+
+  .toggle-btn:hover,
+  .quiz-button:hover {
+    background: #0f5b52;
+    transform: translateY(-1px);
+  }
+
+  .quiz-button {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 10px;
+    font-size: 17px;
+    margin-top: 22px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f3f7ff;
+    color: #174ea6;
+  }
+
+  .reaction-scheme,
+  .media-block,
+  .video-block,
+  .simulation-block,
+  .image-block {
+    background: #f7fbff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px dashed #d8e9ff;
+    max-width: 100%;
+  }
+
+  .reaction-scheme svg,
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .lesson-image,
+  figure img,
+  .image-block img {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 10px;
+    margin: 16px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  figure {
+    margin: 18px auto;
+    text-align: center;
+  }
+
+  figure img {
+    margin-bottom: 8px;
+  }
+
+  .caption,
+  figcaption {
+    font-size: 15px;
+    color: #444;
+    margin-top: 6px;
+  }
+
+  iframe,
+  video,
+  .media-frame {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 260px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 16px auto;
+    background: #fff;
+  }
+
+  .simulation-frame,
+  .simulation-block iframe,
+  iframe[src*="phet"],
+  iframe[src*="simulation"] {
+    max-width: 900px;
+    aspect-ratio: 4 / 3;
+    min-height: 420px;
+  }
+
+  .quiz-actions {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 720px) {
+    body {
+      font-size: 16px;
+      padding: 20px 14px;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+    }
+
+    .section {
+      padding: 18px 16px;
+      margin: 18px auto;
+      border-radius: 12px;
+    }
+
+    ul,
+    ol {
+      margin-left: 20px;
+    }
+
+    .reaction-scheme,
+    .media-block,
+    .video-block,
+    .simulation-block,
+    .image-block {
+      padding: 14px;
+      margin: 16px 0;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      min-width: 150px;
+    }
+
+    iframe,
+    video,
+    .media-frame {
+      min-height: 220px;
+    }
+
+    .simulation-frame,
+    .simulation-block iframe,
+    iframe[src*="phet"],
+    iframe[src*="simulation"] {
+      min-height: 360px;
+    }
+
+    .toggle-btn,
+    .quiz-button {
+      max-width: 100%;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 420px) {
+    body {
+      padding: 16px 10px;
+    }
+
+    .section {
+      padding: 16px 12px;
+    }
+
+    .concept-box,
+    .quick-check,
+    .activity,
+    .key-terms {
+      padding: 12px 14px;
+    }
+
+    iframe,
+    video,
+    .media-frame {
+      min-height: 200px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Center of Mass and Collision Applications</h1>
+
+<!-- OBJECTIVES -->
+<div class="section">
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Define center of mass.</li>
+<li>Determine the center of mass of simple systems.</li>
+<li>Apply momentum conservation to real collision problems.</li>
+<li>Understand recoil and explosion motion.</li>
+<li>Analyze real-world collision applications.</li>
+</ul>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+<h2>1. What is Center of Mass?</h2>
+
+<p>
+The center of mass is the point where the mass of a system appears to be concentrated.
+It is the balance point of an object or system.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong>
+The motion of a system can be analyzed as if all the mass were concentrated at the center of mass.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_CENTER_OF_MASS_IMAGE_URL" class="lesson-img">
+<p class="caption">
+The center of mass acts as the balance point of the system.
+</p>
+</div>
+
+<div class="example-box">
+<p>
+A ruler balances at its center because its mass is distributed evenly.
+</p>
+</div>
+</div>
+
+<!-- FORMULA -->
+<div class="section">
+<h2>2. Center of Mass Formula</h2>
+
+<p>
+For objects along a straight line:
+</p>
+
+<div class="formula">
+x<sub>cm</sub> = (m₁x₁ + m₂x₂) / (m₁ + m₂)
+</div>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>x<sub>cm</sub> = center of mass position</li>
+<li>m = mass</li>
+<li>x = position</li>
+</ul>
+
+<div class="example-box">
+<h3>Example 1</h3>
+
+<p>
+A 2 kg mass is located at x = 1 m and a 4 kg mass is located at x = 5 m.
+Find the center of mass.
+</p>
+
+<p>
+x<sub>cm</sub> =
+[(2)(1) + (4)(5)] / (2+4)
+</p>
+
+<p>
+x<sub>cm</sub> =
+(2 + 20) / 6
+</p>
+
+<p>
+x<sub>cm</sub> =
+<strong>3.67 m</strong>
+</p>
+</div>
+
+</div>
+
+<!-- COLLISION APPLICATIONS -->
+<div class="section">
+<h2>3. Collision Applications</h2>
+
+<p>
+Collision principles are used in:
+</p>
+
+<ul>
+<li>Vehicle safety design</li>
+<li>Sports analysis</li>
+<li>Rocket propulsion</li>
+<li>Ballistics</li>
+<li>Engineering systems</li>
+</ul>
+
+<div class="key-box">
+Momentum conservation allows prediction of motion after interactions.
+</div>
+
+</div>
+
+<!-- RECOIL -->
+<div class="section">
+<h2>4. Recoil Motion</h2>
+
+<p>
+Recoil occurs when one object moves forward and another moves backward due to momentum conservation.
+</p>
+
+<div class="formula">
+Total Momentum Before = Total Momentum After
+</div>
+
+<div class="visual-box">
+<img src="YOUR_RECOIL_IMAGE_URL" class="lesson-img">
+<p class="caption">
+Forward motion produces equal opposite recoil motion.
+</p>
+</div>
+
+<div class="example-box">
+<h3>Example 2</h3>
+
+<p>
+A 60 kg person standing on a frictionless surface throws a 3 kg object at 10 m/s to the right.
+Find the recoil velocity of the person.
+</p>
+
+<p>
+Initial momentum = 0
+</p>
+
+<p>
+(3)(10) + (60)v = 0
+</p>
+
+<p>
+30 + 60v = 0
+</p>
+
+<p>
+v = -0.5 m/s
+</p>
+
+<p>
+The person recoils at
+<strong>0.5 m/s to the left</strong>.
+</p>
+</div>
+
+</div>
+
+<!-- EXPLOSIONS -->
+<div class="section">
+<h2>5. Explosions</h2>
+
+<p>
+Explosions occur when an object breaks apart into multiple pieces.
+Momentum remains conserved during the explosion.
+</p>
+
+<div class="key-box">
+If the system initially has zero momentum, the vector sum of momenta after explosion must also equal zero.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_EXPLOSION_IMAGE_URL" class="lesson-img">
+<p class="caption">
+Explosion fragments move in different directions while conserving momentum.
+</p>
+</div>
+
+<div class="example-box">
+<h3>Example 3</h3>
+
+<p>
+A stationary object explodes into two fragments.
+One fragment has momentum 12 kg·m/s east.
+What is the momentum of the other fragment?
+</p>
+
+<p>
+The second fragment must have:
+</p>
+
+<p>
+<strong>12 kg·m/s west</strong>
+</p>
+
+<p>
+so total momentum remains zero.
+</p>
+</div>
+
+</div>
+
+<!-- MULTI OBJECT -->
+<div class="section">
+<h2>6. Multi-Object Systems</h2>
+
+<p>
+In systems involving several objects:
+</p>
+
+<ul>
+<li>Total momentum is conserved.</li>
+<li>Momentum is added vectorially.</li>
+<li>Direction must always be considered.</li>
+</ul>
+
+<div class="key-box">
+Always assign positive and negative directions consistently.
+</div>
+
+</div>
+
+<!-- SAFETY -->
+<div class="section">
+<h2>7. Real-World Applications</h2>
+
+<table>
+<tr>
+<th>Application</th>
+<th>Physics Principle</th>
+</tr>
+
+<tr>
+<td>Airbags</td>
+<td>Increase collision time to reduce force</td>
+</tr>
+
+<tr>
+<td>Rocket propulsion</td>
+<td>Recoil and momentum conservation</td>
+</tr>
+
+<tr>
+<td>Car crashes</td>
+<td>Momentum transfer and impulse</td>
+</tr>
+
+<tr>
+<td>Sports collisions</td>
+<td>Impact force and momentum change</td>
+</tr>
+</table>
+
+</div>
+
+<!-- SIMULATION -->
+<div class="section">
+<h2>Interactive Simulation: Collision Lab</h2>
+
+<p>
+Use this simulation to explore momentum conservation, recoil, and collision interactions.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+
+<ul>
+<li>Observe momentum before and after collision.</li>
+<li>Try different mass combinations.</li>
+<li>Compare elastic and inelastic collisions.</li>
+<li>Observe how heavier objects affect system motion.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+
+<iframe
+src="https://phet.colorado.edu/sims/html/collision-lab/latest/collision-lab_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;max-width:100%;">
+</iframe>
+
+<p class="caption">
+If simulation does not load, open it here:
+<a href="https://phet.colorado.edu/en/simulation/collision-lab" target="_blank">
+Collision Lab Simulation
+</a>
+</p>
+
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+Make one cart much heavier than the other.
+What happens to their motion after collision?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The heavier cart changes velocity less because its larger mass gives it greater inertia and momentum resistance.
+</div>
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>
+A 5 kg mass is located at x = 2 m and a 3 kg mass at x = 6 m.
+Find the center of mass.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+x<sub>cm</sub> =
+[(5)(2)+(3)(6)] / 8
+<br><br>
+
+= (10+18)/8
+<br><br>
+
+= <strong>3.5 m</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+A stationary object explodes into two equal fragments.
+One moves east at 8 m/s.
+Describe the motion of the other fragment.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The other fragment moves west with equal momentum.
+</div>
+</div>
+
+<div class="activity">
+<p>
+Why does a heavy truck change velocity less during collision than a small car?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Because the truck has greater mass and momentum.
+</div>
+</div>
+
+</div>
+
+<!-- CHALLENGE -->
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A 4 kg object moving right at 5 m/s collides with a 2 kg stationary object.
+After collision, the 4 kg object moves at 2 m/s right.
+Find the final velocity of the 2 kg object.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Initial momentum:
+<br>
+(4)(5)=20
+<br><br>
+
+Final momentum:
+<br>
+(4)(2)+(2)v
+<br>
+8+2v
+<br><br>
+
+20 = 8 + 2v
+<br>
+12 = 2v
+<br>
+v = <strong>6 m/s right</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Pisay-Style Question:</strong>
+Two skaters push each other apart on frictionless ice.
+The lighter skater moves faster.
+Explain why.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Momentum must remain conserved.
+The lighter skater needs a larger velocity to balance momentum with the heavier skater.
+</div>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+<h2>Lesson Summary</h2>
+
+<ul>
+<li>The center of mass is the balance point of a system.</li>
+<li>Momentum is conserved in isolated systems.</li>
+<li>Recoil and explosions obey momentum conservation.</li>
+<li>Mass strongly affects collision outcomes.</li>
+<li>Momentum concepts explain many real-world systems.</li>
+</ul>
+
+</div>
+
+<!-- QUIZ BUTTON -->
+<div style="text-align:center;margin-top:30px;">
+
+<button
+class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_04_03_Q">
+
+Take the Quiz →
+
+</button>
+
+</div>
+
+<script>
+function toggleAnswer(btn){
+
+const ans=btn.nextElementSibling;
+
+ans.style.display=
+ans.style.display==="block"?"none":"block";
+
+}
+
+document.getElementById("takeQuizBtn")
+.addEventListener("click",(e)=>{
+
+const quizId=e.target.dataset.quiz;
+
+window.parent.postMessage({
+type:"openQuiz",
+quiz:quizId
+},"*");
+
+});
+</script>
+
+</body>
+</html>

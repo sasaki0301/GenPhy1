@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Inertia and Rotational Kinetic Energy</title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{
+  background:#e8f7f5;
+}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Inertia and Rotational Kinetic Energy</h1>
+
+<div class="section">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Review inertia as resistance to changes in motion.</li>
+<li>Explain rotational inertia as resistance to changes in rotation.</li>
+<li>Compare linear and rotational quantities.</li>
+<li>Calculate rotational kinetic energy.</li>
+<li>Describe why mass distribution affects rotation.</li>
+<li>Apply rotational ideas to real-life examples such as wheels, disks, doors, and spinning skaters.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>1. From Linear Motion to Rotational Motion</h2>
+
+<p>
+In previous chapters, we studied objects moving in straight lines and curved paths. Now we extend motion to objects that rotate.
+A wheel, fan blade, door, bicycle tire, and spinning skater all involve rotational motion.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Linear motion describes movement from place to place, while rotational motion describes spinning around an axis.
+</div>
+
+<table>
+<tr>
+<th>Linear Motion</th>
+<th>Rotational Motion</th>
+</tr>
+<tr>
+<td>Mass resists changes in linear motion</td>
+<td>Rotational inertia resists changes in rotation</td>
+</tr>
+<tr>
+<td>Velocity measures how fast position changes</td>
+<td>Angular velocity measures how fast angle changes</td>
+</tr>
+<tr>
+<td>Kinetic energy = ½mv²</td>
+<td>Rotational kinetic energy = ½Iω²</td>
+</tr>
+</table>
+</div>
+
+<div class="section">
+<h2>2. What is Inertia?</h2>
+
+<p>
+Inertia is the tendency of an object to resist changes in its motion.
+A heavy object is harder to start moving, stop, or change direction because it has more inertia.
+</p>
+
+<div class="key-box">
+<strong>Review:</strong> Greater mass means greater inertia.
+</div>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+It is easier to push an empty cart than a cart full of books because the full cart has greater mass and therefore greater inertia.
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>3. What is Rotational Inertia?</h2>
+
+<p>
+Rotational inertia is the resistance of an object to changes in its rotational motion.
+It depends not only on mass, but also on how far the mass is distributed from the axis of rotation.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Rotational inertia increases when more mass is farther from the axis of rotation.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_ROTATIONAL_INERTIA_IMAGE_URL" class="lesson-img" alt="Comparison of mass near and far from axis of rotation">
+<p class="caption">Mass farther from the axis is harder to rotate.</p>
+</div>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+A long rod is harder to rotate when held at one end than when held near its center because more of its mass is farther from the rotation axis.
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>4. Moment of Inertia</h2>
+
+<p>
+The moment of inertia is the mathematical measure of rotational inertia. It is represented by the symbol <strong>I</strong>.
+</p>
+
+<div class="formula">
+I = mr²
+</div>
+
+<p>
+This simple formula applies to a point mass rotating at a distance <strong>r</strong> from an axis.
+</p>
+
+<ul>
+<li><strong>I</strong> = moment of inertia, measured in kg·m²</li>
+<li><strong>m</strong> = mass, measured in kg</li>
+<li><strong>r</strong> = distance from axis, measured in m</li>
+</ul>
+
+<div class="key-box">
+<strong>Important:</strong> Because radius is squared, moving mass farther from the axis greatly increases rotational inertia.
+</div>
+
+<div class="example-box">
+<h3>Example 1: Moment of Inertia of a Point Mass</h3>
+<p>
+A 2 kg object rotates 3 m from an axis. Find its moment of inertia.
+</p>
+
+<p>
+I = mr²
+<br>
+I = (2)(3²)
+<br>
+I = (2)(9)
+<br>
+I = <strong>18 kg·m²</strong>
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>5. Mass Distribution Matters</h2>
+
+<p>
+Two objects can have the same mass but different rotational inertia depending on how the mass is arranged.
+</p>
+
+<table>
+<tr>
+<th>Object</th>
+<th>Mass Distribution</th>
+<th>Rotational Inertia</th>
+</tr>
+<tr>
+<td>Solid disk</td>
+<td>Mass spread throughout disk</td>
+<td>Lower than a ring of same mass and radius</td>
+</tr>
+<tr>
+<td>Ring or hoop</td>
+<td>Mass concentrated near outer edge</td>
+<td>Higher than a solid disk of same mass and radius</td>
+</tr>
+<tr>
+<td>Spinning skater with arms out</td>
+<td>Mass farther from axis</td>
+<td>Greater rotational inertia</td>
+</tr>
+<tr>
+<td>Spinning skater with arms in</td>
+<td>Mass closer to axis</td>
+<td>Lower rotational inertia</td>
+</tr>
+</table>
+
+<div class="visual-box">
+<img src="YOUR_DISK_VS_RING_IMAGE_URL" class="lesson-img" alt="Solid disk and ring comparison">
+<p class="caption">A ring has greater rotational inertia than a solid disk of the same mass and radius because more mass is farther from the axis.</p>
+</div>
+</div>
+
+<div class="section">
+<h2>6. Angular Velocity</h2>
+
+<p>
+Angular velocity describes how fast an object rotates. It is represented by the symbol <strong>ω</strong>.
+</p>
+
+<div class="formula">
+ω = angular velocity
+</div>
+
+<p>
+The common SI unit of angular velocity is <strong>rad/s</strong>, or radians per second.
+</p>
+
+<div class="key-box">
+<strong>Simple Meaning:</strong> Greater angular velocity means faster spinning.
+</div>
+</div>
+
+<div class="section">
+<h2>7. Rotational Kinetic Energy</h2>
+
+<p>
+An object that spins has rotational kinetic energy.
+This is similar to linear kinetic energy, but instead of mass and velocity, it uses moment of inertia and angular velocity.
+</p>
+
+<div class="formula">
+KE<sub>rot</sub> = ½Iω²
+</div>
+
+<ul>
+<li><strong>KE<sub>rot</sub></strong> = rotational kinetic energy, measured in joules</li>
+<li><strong>I</strong> = moment of inertia, measured in kg·m²</li>
+<li><strong>ω</strong> = angular velocity, measured in rad/s</li>
+</ul>
+
+<div class="example-box">
+<h3>Example 2: Calculating Rotational Kinetic Energy</h3>
+<p>
+A rotating object has moment of inertia 4 kg·m² and angular velocity 3 rad/s. Find its rotational kinetic energy.
+</p>
+
+<p>
+KE<sub>rot</sub> = ½Iω²
+<br>
+KE<sub>rot</sub> = ½(4)(3²)
+<br>
+KE<sub>rot</sub> = 2(9)
+<br>
+KE<sub>rot</sub> = <strong>18 J</strong>
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>8. Rolling Motion</h2>
+
+<p>
+A rolling object has two types of kinetic energy:
+</p>
+
+<ul>
+<li>Linear kinetic energy because its center of mass moves forward</li>
+<li>Rotational kinetic energy because it spins</li>
+</ul>
+
+<div class="formula">
+Total KE = ½mv² + ½Iω²
+</div>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Rolling motion combines translation and rotation.
+</div>
+
+<div class="visual-box">
+<img src="YOUR_ROLLING_MOTION_IMAGE_URL" class="lesson-img" alt="Rolling wheel showing translational and rotational motion">
+<p class="caption">A rolling wheel moves forward while also rotating.</p>
+</div>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+A rolling ball has energy from moving forward and energy from spinning. This is why rolling objects can behave differently from sliding objects.
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>9. Real-Life Applications</h2>
+
+<table>
+<tr>
+<th>Application</th>
+<th>Rotational Concept</th>
+</tr>
+<tr>
+<td>Figure skater pulling arms inward</td>
+<td>Decreases rotational inertia and spins faster</td>
+</tr>
+<tr>
+<td>Heavy flywheel</td>
+<td>Stores rotational kinetic energy</td>
+</tr>
+<tr>
+<td>Bicycle wheel</td>
+<td>Has both rotational and translational kinetic energy</td>
+</tr>
+<tr>
+<td>Door opening</td>
+<td>Easier to rotate when pushed far from the hinge</td>
+</tr>
+<tr>
+<td>Gymnast tucking during a flip</td>
+<td>Reduces rotational inertia and increases spin rate</td>
+</tr>
+</table>
+</div>
+
+<div class="section">
+<h2>Interactive Simulation: Torque and Rotation</h2>
+
+<p>
+Use this simulation to explore how force, distance from the axis, rotational inertia, and angular acceleration are related.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+<ul>
+<li>Apply force at different distances from the axis.</li>
+<li>Observe how rotation changes when force is applied farther from the center.</li>
+<li>Change the mass distribution if available.</li>
+<li>Connect the idea of rotational inertia to how difficult it is to rotate an object.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<iframe
+src="https://phet.colorado.edu/sims/html/torque/latest/torque_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;max-width:100%;">
+</iframe>
+
+<p class="caption">
+If the simulation does not load, open it here:
+<a href="https://phet.colorado.edu/en/simulation/torque" target="_blank">
+Torque Simulation
+</a>
+</p>
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+Apply the same force close to the axis and far from the axis. Which produces greater rotation?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Applying the force farther from the axis produces greater rotational effect because the lever arm is longer.
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Concept Check</h2>
+
+<div class="activity">
+<p><strong>1.</strong> Why is a ring harder to rotate than a solid disk of the same mass and radius?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Because more of the ring’s mass is farther from the axis, giving it greater rotational inertia.
+</div>
+</div>
+
+<div class="activity">
+<p><strong>2.</strong> What happens to rotational inertia when mass moves farther from the axis?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Rotational inertia increases.
+</div>
+</div>
+
+<div class="activity">
+<p><strong>3.</strong> Why does a spinning skater rotate faster when pulling their arms inward?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Pulling the arms inward decreases rotational inertia, allowing the skater to spin faster.
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>
+<strong>Drill 1:</strong> A 3 kg point mass rotates 2 m from an axis. Find its moment of inertia.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+I = mr²<br>
+I = (3)(2²)<br>
+I = (3)(4)<br>
+I = <strong>12 kg·m²</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 2:</strong> An object has I = 6 kg·m² and angular velocity 2 rad/s. Find rotational kinetic energy.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+KE<sub>rot</sub> = ½Iω²<br>
+KE<sub>rot</sub> = ½(6)(2²)<br>
+KE<sub>rot</sub> = 3(4)<br>
+KE<sub>rot</sub> = <strong>12 J</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 3:</strong> If angular velocity doubles, what happens to rotational kinetic energy?
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Rotational kinetic energy becomes four times larger because KE<sub>rot</sub> depends on ω².
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A 2 kg point mass rotates 4 m from an axis at 3 rad/s.
+Find:
+<br>
+1. Moment of inertia
+<br>
+2. Rotational kinetic energy
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+1. Moment of inertia:<br>
+I = mr² = (2)(4²) = (2)(16) = <strong>32 kg·m²</strong>
+<br><br>
+
+2. Rotational kinetic energy:<br>
+KE<sub>rot</sub> = ½Iω²<br>
+KE<sub>rot</sub> = ½(32)(3²)<br>
+KE<sub>rot</sub> = 16(9)<br>
+KE<sub>rot</sub> = <strong>144 J</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Pisay-Style Question:</strong>
+Two wheels have the same mass and radius. Wheel A has most of its mass near the center, while Wheel B has most of its mass near the rim.
+Which wheel is harder to start rotating, and why?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Wheel B is harder to start rotating because more of its mass is farther from the axis, giving it greater rotational inertia.
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Lesson Summary</h2>
+
+<ul>
+<li>Inertia is resistance to changes in motion.</li>
+<li>Rotational inertia is resistance to changes in rotational motion.</li>
+<li>Moment of inertia depends on mass and distance from the axis.</li>
+<li>Mass farther from the axis greatly increases rotational inertia.</li>
+<li>Rotational kinetic energy is calculated using KE<sub>rot</sub> = ½Iω².</li>
+<li>Rolling objects have both translational and rotational kinetic energy.</li>
+<li>Skaters and gymnasts spin faster by reducing rotational inertia.</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+<button class="quiz-button" id="takeQuizBtn" data-quiz="GP1_05_01_Q">
+Take the Quiz →
+</button>
+</div>
+
+<script>
+function toggleAnswer(btn){
+  const ans=btn.nextElementSibling;
+  ans.style.display=ans.style.display==="block"?"none":"block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId=e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+
+</body>
+</html>

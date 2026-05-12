@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kepler’s Laws and Planetary Motion – Quiz</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Kepler’s Laws and Planetary Motion – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn"
+class="next-btn"
+style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"According to Kepler’s First Law, planets move in:",
+c:[
+"Perfect circles",
+"Straight lines",
+"Elliptical orbits",
+"Spiral paths"
+],
+a:2,
+e:"Kepler’s First Law states that planets move in elliptical orbits."
+},
+
+{
+q:"In an elliptical orbit, the Sun is located:",
+c:[
+"At the center",
+"At one focus",
+"Outside the ellipse",
+"At the edge"
+],
+a:1,
+e:"The Sun is located at one focus of the ellipse."
+},
+
+{
+q:"A planet moves fastest when it is:",
+c:[
+"Farthest from the Sun",
+"Closest to the Sun",
+"Exactly halfway through orbit",
+"Outside the orbit"
+],
+a:1,
+e:"Planets move fastest near perihelion."
+},
+
+{
+q:"Kepler’s Second Law states that a line connecting the Sun and planet sweeps out:",
+c:[
+"Equal distances in equal times",
+"Equal speeds in equal times",
+"Equal areas in equal times",
+"Equal forces in equal times"
+],
+a:2,
+e:"This is the Law of Equal Areas."
+},
+
+{
+q:"A planet moves slowest when it is:",
+c:[
+"Closest to the Sun",
+"At perihelion",
+"At aphelion",
+"Near Earth"
+],
+a:2,
+e:"Planets move slowest when farthest from the Sun."
+},
+
+{
+q:"Which statement best explains why planets move faster near the Sun?",
+c:[
+"Gravity is weaker there",
+"Gravity is stronger there",
+"Mass becomes larger",
+"There is no inertia"
+],
+a:1,
+e:"Gravitational attraction increases when planets are closer to the Sun."
+},
+
+{
+q:"Kepler’s Third Law relates orbital period to:",
+c:[
+"Planetary mass",
+"Temperature",
+"Orbital radius",
+"Planet color"
+],
+a:2,
+e:"Kepler’s Third Law connects orbital period and orbital distance."
+},
+
+{
+q:"A planet farther from the Sun generally has:",
+c:[
+"A shorter orbital period",
+"A longer orbital period",
+"A faster orbital speed",
+"A smaller orbit"
+],
+a:1,
+e:"More distant planets take longer to orbit the Sun."
+},
+
+{
+q:"Perihelion refers to the point where a planet is:",
+c:[
+"Closest to the Sun",
+"Farthest from the Sun",
+"Moving slowest",
+"Moving backward"
+],
+a:0,
+e:"Perihelion is the closest orbital point to the Sun."
+},
+
+{
+q:"Aphelion refers to the point where a planet is:",
+c:[
+"Closest to the Sun",
+"Moving fastest",
+"Farthest from the Sun",
+"Outside orbit"
+],
+a:2,
+e:"Aphelion is the farthest orbital point from the Sun."
+},
+
+{
+q:"Which force keeps planets in orbit around the Sun?",
+c:[
+"Magnetic force",
+"Friction",
+"Gravity",
+"Nuclear force"
+],
+a:2,
+e:"Gravity acts as the centripetal force for planetary motion."
+},
+
+{
+q:"Which planet likely has the shortest year?",
+c:[
+"A planet closest to the Sun",
+"A planet farthest from the Sun",
+"A planet with largest mass",
+"A planet with no moons"
+],
+a:0,
+e:"Closer planets orbit faster and complete shorter years."
+},
+
+{
+q:"If Earth suddenly moved farther from the Sun, its orbital period would:",
+c:[
+"Decrease",
+"Increase",
+"Remain unchanged",
+"Become zero"
+],
+a:1,
+e:"Greater orbital distance means longer orbital period."
+},
+
+{
+q:"A comet spends most of its time:",
+c:[
+"Near the Sun",
+"Far from the Sun",
+"At constant speed",
+"Outside the solar system"
+],
+a:1,
+e:"Comets move slowly when far from the Sun, so they spend more time there."
+},
+
+{
+q:"Pisay-Style: Two planets orbit the same star. Planet X is much closer to the star than Planet Y. Which statement is most likely true?",
+c:[
+"Planet X moves slower than Planet Y",
+"Planet X has a longer orbital period",
+"Planet X experiences stronger gravity and moves faster",
+"Planet X has weaker gravitational attraction"
+],
+a:2,
+e:"Closer planets experience stronger gravity and move faster in orbit."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 5 Assessment: Rotational Motion and Gravitation</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 5 Assessment: Rotational Motion and Gravitation</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+const quizData = [
+
+{
+q:"Rotational inertia describes an object's resistance to:",
+c:["Linear motion","Change in rotation","Change in temperature","Change in mass"],
+a:1,
+e:"Rotational inertia is resistance to changes in rotational motion."
+},
+
+{
+q:"Which object usually has greater rotational inertia if mass and radius are the same?",
+c:["Solid disk","Ring","Point near axis","Small sphere"],
+a:1,
+e:"A ring has more mass farther from the axis, increasing rotational inertia."
+},
+
+{
+q:"A 3 kg point mass rotates 4 m from an axis. Find its moment of inertia.",
+c:["12 kg·m²","24 kg·m²","36 kg·m²","48 kg·m²"],
+a:3,
+e:"I = mr² = (3)(4²)=48 kg·m²."
+},
+
+{
+q:"If the distance from the axis doubles, moment of inertia for a point mass becomes:",
+c:["2 times larger","3 times larger","4 times larger","8 times larger"],
+a:2,
+e:"I = mr², so doubling r makes I four times larger."
+},
+
+{
+q:"Torque is best described as:",
+c:["Energy of spinning","Turning effect of force","Resistance to gravity","Speed of rotation"],
+a:1,
+e:"Torque is the turning effect produced by a force."
+},
+
+{
+q:"Maximum torque occurs when the applied force is:",
+c:["Parallel to the lever arm","Perpendicular to the lever arm","Directed toward the pivot","Zero"],
+a:1,
+e:"A perpendicular force gives sin90° = 1, producing maximum torque."
+},
+
+{
+q:"A 40 N force is applied perpendicular to a lever 0.30 m from the pivot. Find torque.",
+c:["8 N·m","10 N·m","12 N·m","16 N·m"],
+a:2,
+e:"τ = rF = (0.30)(40)=12 N·m."
+},
+
+{
+q:"A force applied directly toward the pivot produces:",
+c:["Maximum torque","Zero torque","Double torque","Negative mass"],
+a:1,
+e:"Force directed toward the pivot has no turning effect."
+},
+
+{
+q:"Why is a door easier to open when pushed near the handle?",
+c:["The door has less mass there","The force is closer to the hinge","The lever arm is longer","Gravity becomes weaker"],
+a:2,
+e:"A longer lever arm produces greater torque."
+},
+
+{
+q:"Rotational kinetic energy is calculated using:",
+c:["KE = ½mv²","KErot = ½Iω²","F = ma","W = mg"],
+a:1,
+e:"Rotational kinetic energy depends on moment of inertia and angular velocity."
+},
+
+{
+q:"An object has I = 10 kg·m² and ω = 3 rad/s. Find rotational kinetic energy.",
+c:["15 J","30 J","45 J","90 J"],
+a:2,
+e:"KErot = ½(10)(3²)=5(9)=45 J."
+},
+
+{
+q:"If angular velocity doubles, rotational kinetic energy becomes:",
+c:["2 times larger","4 times larger","Half as large","Unchanged"],
+a:1,
+e:"Rotational kinetic energy depends on ω²."
+},
+
+{
+q:"A rolling wheel has:",
+c:["Only translational kinetic energy","Only rotational kinetic energy","Both translational and rotational kinetic energy","No kinetic energy"],
+a:2,
+e:"Rolling motion includes forward motion and spinning."
+},
+
+{
+q:"Gravity acts between:",
+c:["Planets only","Stars only","All objects with mass","Objects with charge only"],
+a:2,
+e:"Gravity is an attractive force between all masses."
+},
+
+{
+q:"Newton’s Law of Universal Gravitation states that gravitational force depends on:",
+c:["Masses and distance","Temperature and mass","Velocity and time","Color and size"],
+a:0,
+e:"Gravity depends on the product of masses and inverse square of distance."
+},
+
+{
+q:"If one mass doubles and distance stays the same, gravitational force:",
+c:["Halves","Doubles","Quadruples","Becomes zero"],
+a:1,
+e:"Gravitational force is directly proportional to each mass."
+},
+
+{
+q:"If both masses double and distance remains unchanged, gravitational force:",
+c:["Doubles","Quadruples","Halves","Stays the same"],
+a:1,
+e:"Doubling both masses gives 2 × 2 = 4 times the force."
+},
+
+{
+q:"If distance between two masses doubles, gravitational force becomes:",
+c:["1/2 as large","1/4 as large","2 times larger","4 times larger"],
+a:1,
+e:"Gravity follows inverse square law, so doubling distance gives one-fourth force."
+},
+
+{
+q:"If distance between two masses is halved, gravitational force becomes:",
+c:["2 times larger","4 times larger","1/2 as large","1/4 as large"],
+a:1,
+e:"Halving distance makes force four times larger."
+},
+
+{
+q:"Weight is:",
+c:["Mass of an object","Gravitational force on an object","Object volume","Resistance to rotation"],
+a:1,
+e:"Weight is the force due to gravity."
+},
+
+{
+q:"A 65 kg person stands on Earth where g = 9.8 m/s². Find weight.",
+c:["637 N","650 N","588 N","98 N"],
+a:0,
+e:"W = mg = (65)(9.8)=637 N."
+},
+
+{
+q:"If a person goes to a planet with weaker gravity, their:",
+c:["Mass decreases","Weight decreases","Mass becomes zero","Inertia disappears"],
+a:1,
+e:"Weight depends on gravitational field strength, but mass remains constant."
+},
+
+{
+q:"Gravity keeps planets in orbit because it provides:",
+c:["Frictional force","Centripetal force","Normal force","Torque only"],
+a:1,
+e:"Gravity acts as the centripetal force for planetary motion."
+},
+
+{
+q:"Kepler’s First Law states that planets move in:",
+c:["Perfect circles","Elliptical orbits","Straight lines","Random paths"],
+a:1,
+e:"Planets move in elliptical orbits with the Sun at one focus."
+},
+
+{
+q:"In an elliptical orbit, the Sun is located:",
+c:["At the center","At one focus","Outside the orbit","At aphelion only"],
+a:1,
+e:"The Sun is at one focus of the ellipse."
+},
+
+{
+q:"Kepler’s Second Law says planets sweep out:",
+c:["Equal distances in equal times","Equal areas in equal times","Equal speeds in equal times","Equal masses in equal times"],
+a:1,
+e:"This is the Law of Equal Areas."
+},
+
+{
+q:"A planet moves fastest at:",
+c:["Aphelion","Perihelion","The farthest point","Outside the orbit"],
+a:1,
+e:"Planets move fastest when closest to the Sun."
+},
+
+{
+q:"A planet moves slowest at:",
+c:["Perihelion","Aphelion","The center","The focus"],
+a:1,
+e:"Planets move slowest when farthest from the Sun."
+},
+
+{
+q:"Kepler’s Third Law relates orbital period to:",
+c:["Planet color","Planet mass only","Average orbital distance","Atmospheric pressure"],
+a:2,
+e:"Kepler’s Third Law relates T² and r³."
+},
+
+{
+q:"A planet farther from the Sun generally has:",
+c:["Shorter orbital period","Longer orbital period","Zero orbital speed","No gravity"],
+a:1,
+e:"Farther planets take longer to orbit."
+},
+
+{
+q:"Pisay-Style: Two wheels have the same mass and radius. Wheel A has mass near the center, while Wheel B has mass near the rim. Which wheel needs more effort to spin?",
+c:["Wheel A","Wheel B","Both require equal effort","Neither"],
+a:1,
+e:"Wheel B has more mass farther from the axis, giving it greater rotational inertia."
+},
+
+{
+q:"Pisay-Style: A student pushes a door with the same force at two points: near the hinge and near the handle. Which produces greater angular acceleration?",
+c:["Near hinge","Near handle","Both equal","Neither produces torque"],
+a:1,
+e:"Near the handle gives greater lever arm, greater torque, and greater angular acceleration."
+},
+
+{
+q:"Pisay-Style: A satellite is in orbit around Earth. Which statement best explains its motion?",
+c:["There is no gravity acting on it","It continuously falls around Earth while moving forward","It is pushed by air resistance","It is outside Earth's gravitational field"],
+a:1,
+e:"A satellite is in continuous free fall while moving forward fast enough to miss Earth."
+},
+
+{
+q:"Pisay-Style: A comet is far from the Sun for most of its orbit. Why?",
+c:["It stops moving far away","It moves more slowly far from the Sun","Gravity disappears far away","Its mass decreases"],
+a:1,
+e:"Comets move slowly when far from the Sun, so they spend more time there."
+},
+
+{
+q:"Which statement best summarizes Chapter 5?",
+c:["Only planets rotate","Torque, rotational inertia, gravity, and Kepler’s Laws explain spinning and orbital motion","Gravity affects only large objects","Kepler’s Laws replace Newton’s gravity"],
+a:1,
+e:"Chapter 5 connects rotational motion, torque, gravitation, and planetary motion."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

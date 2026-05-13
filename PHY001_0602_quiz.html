@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Properties of Sound and Mechanical Waves – Quiz</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Properties of Sound and Mechanical Waves – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn"
+class="next-btn"
+style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"A wave is best defined as:",
+c:[
+"Transfer of matter from one place to another",
+"A disturbance that transfers energy",
+"Motion of particles only",
+"A form of permanent displacement"
+],
+a:1,
+e:"Waves transfer energy without permanently transferring matter."
+},
+
+{
+q:"Mechanical waves require:",
+c:[
+"A vacuum",
+"Electric charge",
+"A medium",
+"Magnetic fields"
+],
+a:2,
+e:"Mechanical waves need a medium such as solids, liquids, or gases."
+},
+
+{
+q:"Which wave type has particle motion perpendicular to wave motion?",
+c:[
+"Longitudinal wave",
+"Transverse wave",
+"Sound wave",
+"Compression wave"
+],
+a:1,
+e:"Transverse waves oscillate perpendicular to the direction of travel."
+},
+
+{
+q:"Which wave type contains compressions and rarefactions?",
+c:[
+"Transverse wave",
+"Electromagnetic wave",
+"Longitudinal wave",
+"Circular wave"
+],
+a:2,
+e:"Longitudinal waves contain compressions and rarefactions."
+},
+
+{
+q:"The highest point of a transverse wave is called:",
+c:[
+"Trough",
+"Compression",
+"Crest",
+"Node"
+],
+a:2,
+e:"The crest is the highest point of a transverse wave."
+},
+
+{
+q:"The distance between two consecutive crests is called:",
+c:[
+"Amplitude",
+"Frequency",
+"Wavelength",
+"Period"
+],
+a:2,
+e:"Wavelength is the distance between identical points in consecutive cycles."
+},
+
+{
+q:"Which quantity measures the number of waves passing per second?",
+c:[
+"Amplitude",
+"Frequency",
+"Wavelength",
+"Wave speed"
+],
+a:1,
+e:"Frequency measures cycles per second."
+},
+
+{
+q:"A wave has frequency 4 Hz and wavelength 3 m. Find its speed.",
+c:[
+"7 m/s",
+"12 m/s",
+"1.33 m/s",
+"24 m/s"
+],
+a:1,
+e:"v = fλ = (4)(3)=12 m/s."
+},
+
+{
+q:"A wave travels at 20 m/s with wavelength 5 m. Find frequency.",
+c:[
+"2 Hz",
+"4 Hz",
+"10 Hz",
+"25 Hz"
+],
+a:1,
+e:"f = v/λ = 20/5 = 4 Hz."
+},
+
+{
+q:"Sound waves are classified as:",
+c:[
+"Transverse electromagnetic waves",
+"Longitudinal mechanical waves",
+"Surface waves",
+"Vacuum waves"
+],
+a:1,
+e:"Sound is a longitudinal mechanical wave."
+},
+
+{
+q:"Pitch mainly depends on:",
+c:[
+"Amplitude",
+"Frequency",
+"Wavelength only",
+"Wave speed only"
+],
+a:1,
+e:"Higher frequency produces higher pitch."
+},
+
+{
+q:"Loudness mainly depends on:",
+c:[
+"Frequency",
+"Wave speed",
+"Amplitude",
+"Wavelength"
+],
+a:2,
+e:"Greater amplitude produces louder sound."
+},
+
+{
+q:"Resonance occurs when:",
+c:[
+"Waves disappear",
+"An object vibrates at its natural frequency",
+"Frequency becomes zero",
+"Two waves stop moving"
+],
+a:1,
+e:"Resonance happens when vibrations match the natural frequency."
+},
+
+{
+q:"Standing waves contain:",
+c:[
+"Crests and compressions only",
+"Nodes and antinodes",
+"Only troughs",
+"Only rarefactions"
+],
+a:1,
+e:"Standing waves form nodes and antinodes."
+},
+
+{
+q:"Pisay-Style: Two sound waves travel through air. Wave A has larger amplitude, while Wave B has higher frequency. Which statement is correct?",
+c:[
+"Wave A has higher pitch and louder sound",
+"Wave B has higher pitch while Wave A is louder",
+"Wave B is louder and lower in pitch",
+"Both waves have the same loudness and pitch"
+],
+a:1,
+e:"Amplitude affects loudness while frequency affects pitch."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

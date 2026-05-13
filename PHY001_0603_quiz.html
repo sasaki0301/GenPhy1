@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Doppler Effect – Quiz</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Doppler Effect – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn"
+class="next-btn"
+style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"The Doppler Effect refers to:",
+c:[
+"Loss of wave energy",
+"Change in observed frequency due to motion",
+"Reflection of sound",
+"Interference between waves"
+],
+a:1,
+e:"The Doppler Effect is the apparent change in frequency caused by relative motion."
+},
+
+{
+q:"When a sound source approaches an observer, the observed pitch becomes:",
+c:[
+"Lower",
+"Higher",
+"Zero",
+"Unchanged"
+],
+a:1,
+e:"Approaching sources compress wavefronts, increasing observed frequency."
+},
+
+{
+q:"When a sound source moves away from an observer, the observed frequency:",
+c:[
+"Increases",
+"Becomes zero",
+"Decreases",
+"Becomes infinite"
+],
+a:2,
+e:"Wavefronts spread apart behind a receding source."
+},
+
+{
+q:"Which situation best demonstrates the Doppler Effect?",
+c:[
+"A bouncing ball",
+"An echo from a wall",
+"A passing ambulance siren",
+"A vibrating guitar string"
+],
+a:2,
+e:"A passing siren is a classic example of Doppler Effect."
+},
+
+{
+q:"The Doppler Effect occurs because:",
+c:[
+"Wave speed changes drastically",
+"The medium disappears",
+"The spacing between wavefronts changes",
+"Amplitude becomes zero"
+],
+a:2,
+e:"Relative motion changes the spacing of wavefronts."
+},
+
+{
+q:"For an approaching sound source, wavelength in front of the source becomes:",
+c:[
+"Longer",
+"Shorter",
+"Zero",
+"Constant"
+],
+a:1,
+e:"Wavefronts compress in front of the moving source."
+},
+
+{
+q:"Which property of sound is directly related to frequency?",
+c:[
+"Loudness",
+"Pitch",
+"Amplitude",
+"Intensity"
+],
+a:1,
+e:"Frequency determines pitch."
+},
+
+{
+q:"Which property mainly determines loudness?",
+c:[
+"Frequency",
+"Wavelength",
+"Amplitude",
+"Period"
+],
+a:2,
+e:"Greater amplitude produces louder sound."
+},
+
+{
+q:"A train whistle sounds lower after passing an observer because:",
+c:[
+"The train stops vibrating",
+"The observer moves faster",
+"The source moves away, increasing wavelength",
+"The speed of sound becomes zero"
+],
+a:2,
+e:"Moving away stretches wavefronts and lowers observed frequency."
+},
+
+{
+q:"Which astronomical effect occurs when a star moves away from Earth?",
+c:[
+"Blueshift",
+"Redshift",
+"Resonance",
+"Interference"
+],
+a:1,
+e:"Receding stars produce redshift."
+},
+
+{
+q:"Blueshift indicates that a star or galaxy is:",
+c:[
+"Stationary",
+"Moving away",
+"Moving toward the observer",
+"Exploding"
+],
+a:2,
+e:"Approaching light sources produce blueshift."
+},
+
+{
+q:"A moving police car approaches an observer with its siren on. Which quantity increases for the observer?",
+c:[
+"Observed wavelength",
+"Observed frequency",
+"Wave speed in air",
+"Mass of sound waves"
+],
+a:1,
+e:"Observed frequency increases when the source approaches."
+},
+
+{
+q:"The actual speed of sound in air during Doppler motion:",
+c:[
+"Becomes zero",
+"Changes completely",
+"Remains approximately constant",
+"Doubles automatically"
+],
+a:2,
+e:"The medium determines wave speed, not the motion of the source."
+},
+
+{
+q:"An observer hears a sound become higher in pitch and then suddenly lower. This most likely means:",
+c:[
+"The source disappeared",
+"The source passed the observer",
+"The observer stopped moving",
+"The medium changed"
+],
+a:1,
+e:"Pitch changes abruptly when a moving source passes the observer."
+},
+
+{
+q:"Pisay-Style: Two identical motorcycles move at equal speed. Motorcycle A approaches Observer X while Motorcycle B moves away from Observer Y. Which statement is correct?",
+c:[
+"Observer Y hears the higher pitch",
+"Both observers hear identical pitch",
+"Observer X hears the higher pitch due to compressed wavefronts",
+"Pitch depends only on engine power"
+],
+a:2,
+e:"Approaching sources compress wavefronts, producing higher observed frequency."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

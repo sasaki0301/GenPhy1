@@ -1,0 +1,12 @@
+{
+  "courseId": "phy001",
+  "subjectId": "PHY001",
+  "title": "General Physics 1",
+  "repository": "sasaki0301/GenPhy1",
+  "version": "0.1.0",
+  "access": "free",
+  "contentRoot": "content/courses/phy001",
+  "lessonPathPattern": "chapters/{chapter}/lessons/{lesson}.html",
+  "quizPathPattern": "chapters/{chapter}/quizzes/{lesson}.quiz.html",
+  "rootHtmlPreserved": true
+}

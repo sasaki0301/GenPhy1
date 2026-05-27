@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 4 Assessment: Momentum, Impulse, and Collisions</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 4 Assessment: Momentum, Impulse, and Collisions</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn"
+class="next-btn"
+style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"A 7 kg object moving at 3 m/s has momentum:",
+c:["10 kg·m/s","14 kg·m/s","21 kg·m/s","28 kg·m/s"],
+a:2,
+e:"p = mv = (7)(3)=21 kg·m/s."
+},
+
+{
+q:"Momentum increases when:",
+c:["Mass decreases","Velocity decreases","Mass or velocity increases","Time increases"],
+a:2,
+e:"Momentum depends on both mass and velocity."
+},
+
+{
+q:"Which quantity is always conserved in isolated collisions?",
+c:["Kinetic energy","Power","Momentum","Force"],
+a:2,
+e:"Momentum is always conserved in isolated systems."
+},
+
+{
+q:"Impulse is equal to:",
+c:["Force","Velocity","Change in momentum","Acceleration"],
+a:2,
+e:"Impulse-momentum theorem states J = Δp."
+},
+
+{
+q:"A 25 N force acts for 0.40 s. Find impulse.",
+c:["5 N·s","10 N·s","15 N·s","20 N·s"],
+a:1,
+e:"J = FΔt = (25)(0.40)=10 N·s."
+},
+
+{
+q:"The area under a force-time graph represents:",
+c:["Velocity","Acceleration","Momentum","Impulse"],
+a:3,
+e:"Impulse equals the area under a force-time graph."
+},
+
+{
+q:"A triangular force-time graph has base 0.5 s and height 16 N. Impulse is:",
+c:["2 N·s","4 N·s","6 N·s","8 N·s"],
+a:1,
+e:"Area = ½bh = ½(0.5)(16)=4 N·s."
+},
+
+{
+q:"A 2 kg cart moving right at 5 m/s collides with a stationary 3 kg cart and sticks. Final velocity is:",
+c:["1 m/s","2 m/s","3 m/s","4 m/s"],
+a:1,
+e:"Initial momentum = 10. Total mass = 5. v = 10/5 = 2 m/s."
+},
+
+{
+q:"An elastic collision conserves:",
+c:["Momentum only","Kinetic energy only","Both momentum and kinetic energy","Neither"],
+a:2,
+e:"Elastic collisions conserve both."
+},
+
+{
+q:"A perfectly inelastic collision occurs when objects:",
+c:["Bounce apart","Move at same speed before collision","Stick together","Explode"],
+a:2,
+e:"Objects stick together after collision."
+},
+
+{
+q:"A 4 kg object moving at 6 m/s has kinetic energy:",
+c:["24 J","48 J","72 J","96 J"],
+a:2,
+e:"KE = ½mv² = ½(4)(36)=72 J."
+},
+
+{
+q:"A 1 kg ball moving east at 12 m/s rebounds west at 8 m/s. Change in momentum is:",
+c:["-20 kg·m/s","20 kg·m/s","4 kg·m/s","-4 kg·m/s"],
+a:0,
+e:"Δp = (-8)-12 = -20 kg·m/s."
+},
+
+{
+q:"Why do airbags reduce injuries?",
+c:["They reduce momentum","They increase stopping time","They remove force","They reduce mass"],
+a:1,
+e:"Increasing stopping time reduces force."
+},
+
+{
+q:"A rocket moves upward because:",
+c:["Air pushes it upward","Gravity decreases","Gas is expelled downward","Momentum disappears"],
+a:2,
+e:"Rocket propulsion is recoil motion."
+},
+
+{
+q:"Center of mass is:",
+c:["The heaviest point","The balance point","The highest point","The fastest point"],
+a:1,
+e:"Center of mass is the balance point of the system."
+},
+
+{
+q:"A 5 kg object at x=1 m and a 5 kg object at x=9 m have center of mass at:",
+c:["3 m","4 m","5 m","6 m"],
+a:2,
+e:"Equal masses place center of mass halfway."
+},
+
+{
+q:"Two skaters push apart. The lighter skater moves faster because:",
+c:["It has more force","It has less momentum","Momentum must balance","Gravity is weaker"],
+a:2,
+e:"Momentum conservation requires equal and opposite momentum."
+},
+
+{
+q:"A collision that produces heat and sound is usually:",
+c:["Elastic","Inelastic","Ideal","Momentum-free"],
+a:1,
+e:"KE converts to other forms."
+},
+
+{
+q:"A 3 kg cart moving right at 4 m/s collides with a 1 kg cart moving left at 2 m/s. Total momentum before collision is:",
+c:["8 kg·m/s","10 kg·m/s","12 kg·m/s","14 kg·m/s"],
+a:1,
+e:"(3)(4)+(1)(-2)=12-2=10 kg·m/s."
+},
+
+{
+q:"If external forces are absent, center of mass motion is:",
+c:["Random","Accelerating","Constant velocity","Zero"],
+a:2,
+e:"No external force means constant center-of-mass velocity."
+},
+
+{
+q:"A 6 kg object moving at 2 m/s collides and sticks with a 2 kg object at rest. Final speed is:",
+c:["1 m/s","1.5 m/s","2 m/s","3 m/s"],
+a:1,
+e:"Initial momentum = 12. Total mass=8. v=12/8=1.5 m/s."
+},
+
+{
+q:"Which statement about momentum is TRUE?",
+c:["Momentum has no direction","Momentum is scalar","Momentum is vector","Momentum is always positive"],
+a:2,
+e:"Momentum depends on velocity direction."
+},
+
+{
+q:"A cannon recoils backward when firing because:",
+c:["Energy is destroyed","Momentum is conserved","Force disappears","Mass changes"],
+a:1,
+e:"Backward recoil balances forward momentum."
+},
+
+{
+q:"A 0.25 kg ball changes velocity from 4 m/s to 20 m/s. Change in momentum is:",
+c:["2 kg·m/s","3 kg·m/s","4 kg·m/s","5 kg·m/s"],
+a:2,
+e:"Δp = 0.25(20-4)=4 kg·m/s."
+},
+
+{
+q:"A force-time graph forms a rectangle with width 3 s and height 9 N. Impulse is:",
+c:["18 N·s","21 N·s","27 N·s","36 N·s"],
+a:2,
+e:"Area = (3)(9)=27 N·s."
+},
+
+{
+q:"A 2 kg object moving east at 5 m/s collides with a 2 kg object moving west at 5 m/s and they stick together. Final velocity is:",
+c:["5 m/s east","5 m/s west","2.5 m/s east","0 m/s"],
+a:3,
+e:"Equal and opposite momenta cancel."
+},
+
+{
+q:"Explosion fragments move apart because:",
+c:["Momentum increases","External force acts","Momentum redistributes","Energy disappears"],
+a:2,
+e:"Explosion redistributes momentum while conserving total momentum."
+},
+
+{
+q:"A 10 kg truck and a 2 kg bicycle experience equal impulses. Which changes velocity more?",
+c:["Truck","Bicycle","Both same","Cannot determine"],
+a:1,
+e:"Smaller mass undergoes larger acceleration and velocity change."
+},
+
+{
+q:"A 4 kg object initially at rest receives 12 N·s impulse. Final velocity is:",
+c:["1 m/s","2 m/s","3 m/s","4 m/s"],
+a:2,
+e:"J = Δp = mv → 12 = 4v → v=3 m/s."
+},
+
+{
+q:"A heavier object usually experiences smaller velocity change because:",
+c:["It has smaller force","It has greater inertia","Momentum disappears","Impulse decreases"],
+a:1,
+e:"Greater mass resists velocity change."
+},
+
+{
+q:"A 1 kg object moving right at 7 m/s collides elastically with another identical object at rest. After collision, the first object stops. Second object moves at:",
+c:["0 m/s","3.5 m/s","7 m/s","14 m/s"],
+a:2,
+e:"Identical masses exchange velocities in elastic collision."
+},
+
+{
+q:"The SI unit of momentum is:",
+c:["N","J","kg·m/s","W"],
+a:2,
+e:"Momentum unit is kg·m/s."
+},
+
+{
+q:"The SI unit of impulse is equivalent to:",
+c:["kg·m/s","J","m/s","N/m"],
+a:0,
+e:"Impulse and momentum share equivalent units."
+},
+
+{
+q:"A system initially at rest explodes into three fragments. Total momentum afterward is:",
+c:["Positive","Negative","Zero","Maximum"],
+a:2,
+e:"Initial momentum was zero, so final total momentum remains zero."
+},
+
+{
+q:"Pisay-Style: A fragile package and a steel block have equal momentum before hitting a wall. Which requires longer stopping time to reduce impact damage most effectively?",
+c:["Steel block","Fragile package","Both same","Neither"],
+a:1,
+e:"Increasing stopping time reduces force, protecting fragile objects."
+},
+
+{
+q:"Pisay-Style: Two carts of different masses collide and separate. Which quantity must remain the same before and after collision in an isolated system?",
+c:["Velocity","Kinetic energy","Momentum","Force"],
+a:2,
+e:"Momentum conservation always applies in isolated systems."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

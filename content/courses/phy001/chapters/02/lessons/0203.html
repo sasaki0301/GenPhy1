@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Circular Motion</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #fafafa;
+  color: #222;
+  padding: 24px;
+  line-height: 1.8;
+  font-size: 20px;
+}
+
+h1 { color: #136f63; }
+h2 { color: #136f63; margin-top: 1.4em; }
+h3 { color: #174ea6; }
+
+.section { margin-bottom: 30px; }
+
+.key-box {
+  background: #e8f7f5;
+  border-left: 6px solid #136f63;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.example-box {
+  background: #fff;
+  border-left: 5px solid #2b7de9;
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.visual-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+}
+
+.lesson-img {
+  width: 100%;
+  max-width: 720px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.caption {
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.activity {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.toggle-btn {
+  background: #136f63;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.answer {
+  display: none;
+  margin-top: 10px;
+  background: #eef3ff;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.formula {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.quiz-button {
+  background: #136f63;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+  iframe {
+  width: 100%;
+  max-width: 100%;
+}
+  
+</style>
+</head>
+
+<body>
+
+<h1>Circular Motion</h1>
+
+<!-- OBJECTIVES -->
+<div class="section">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Understand uniform circular motion.</li>
+<li>Describe centripetal acceleration and force.</li>
+<li>Apply equations for circular motion.</li>
+<li>Identify real-life applications of circular motion.</li>
+</ul>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+<h2>1. What is Circular Motion?</h2>
+
+<p>
+Circular motion occurs when an object moves along a circular path.
+Even if the speed is constant, the direction is constantly changing.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> A change in direction means the object is accelerating—even if speed is constant.
+</div>
+
+<div class="visual-box">
+<img src="https://i.imgur.com/IUj6TVo.png" class="lesson-img">
+<p class="caption">Object moving in a circular path</p>
+</div>
+
+</div>
+
+<!-- VELOCITY -->
+<div class="section">
+<h2>2. Velocity in Circular Motion</h2>
+
+<p>
+Velocity is always tangent to the circle.
+</p>
+
+<div class="key-box">
+<strong>Important:</strong> Velocity direction changes continuously.
+</div>
+
+<div class="visual-box">
+<img src="https://i.imgur.com/w5ndptF.png" class="lesson-img">
+<p class="caption">Velocity is tangent to the circular path</p>
+</div>
+
+</div>
+
+<!-- CENTRIPETAL -->
+<div class="section">
+<h2>3. Centripetal Acceleration</h2>
+
+<p>
+Centripetal acceleration is always directed toward the center of the circle.
+</p>
+
+<div class="formula">
+a = v² / r
+</div>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Acceleration points inward (toward center).
+</div>
+
+<div class="visual-box">
+<img src="https://i.imgur.com/OAaXaM7.png" class="lesson-img">
+<p class="caption">Centripetal acceleration always points toward the center</p>
+</div>
+
+</div>
+
+<!-- FORCE -->
+<div class="section">
+<h2>4. Centripetal Force</h2>
+
+<p>
+Centripetal force keeps the object moving in a circular path.
+</p>
+
+<div class="formula">
+F = mv² / r
+</div>
+
+<div class="key-box">
+<ul>
+<li>Greater mass → greater force</li>
+<li>Greater speed → much greater force</li>
+<li>Larger radius → smaller force</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<img src="https://i.imgur.com/2PBJU6b.png" class="lesson-img">
+<p class="caption">Centripetal force pulls the object toward the center</p>
+</div>
+
+</div>
+
+ <!-- SIMULATION -->
+<div class="section">
+<h2>Interactive Simulation: Circular Motion Vectors</h2>
+
+<p>
+Use the simulation below to observe how velocity and acceleration behave when an object moves in a circular path.
+Focus on the direction of the velocity vector and the acceleration vector.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+<ul>
+<li>Choose circular motion if available.</li>
+<li>Turn on velocity and acceleration vectors.</li>
+<li>Observe that velocity is tangent to the path.</li>
+<li>Observe that acceleration points toward the center.</li>
+<li>Try changing the speed and radius, then compare the vector lengths.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<iframe 
+  src="https://phet.colorado.edu/sims/html/ladybug-motion-2d/latest/ladybug-motion-2d_en.html"
+  width="100%" 
+  height="620"
+  scrolling="no"
+  allowfullscreen
+  style="border:0; border-radius:12px; max-width:100%;">
+</iframe>
+
+<p class="caption">
+If the simulation does not load inside the lesson, open it here:
+<a href="https://phet.colorado.edu/sims/cheerpj/ladybug-motion-2d/latest/ladybug-motion-2d.html?simulation=ladybug-motion-2d" target="_blank">
+Ladybug Motion 2D Simulation
+</a>
+</p>
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+When the ladybug moves in a circle at constant speed, does it still have acceleration? Explain using the vectors shown.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Yes. Even if speed is constant, the velocity direction changes continuously. This means the ladybug is accelerating. The acceleration vector points toward the center of the circular path.
+</div>
+</div>
+</div> 
+
+<!-- EXAMPLES -->
+<div class="section">
+<h2>5. Real-Life Examples</h2>
+
+<ul>
+<li>A car turning on a curve</li>
+<li>A satellite orbiting Earth</li>
+<li>A ball tied to a string and swung in a circle</li>
+<li>Planets orbiting the Sun</li>
+</ul>
+
+</div>
+
+<!-- EXAMPLE PROBLEM -->
+<div class="section">
+<h2>6. Example Problem</h2>
+
+<div class="example-box">
+<p><strong>Problem:</strong></p>
+<p>
+A 2 kg object moves in a circle of radius 4 m at 6 m/s.
+Find the centripetal force.
+</p>
+
+<p>
+F = mv² / r  
+<br>
+F = (2)(6²) / 4  
+<br>
+F = (2)(36) / 4  
+<br>
+F = 72 / 4  
+<br>
+F = <strong>18 N</strong>
+</p>
+</div>
+
+</div>
+
+<!-- CONCEPT CHECK -->
+<div class="section">
+<h2>Concept Check</h2>
+
+<div class="activity">
+<p>Why is an object accelerating in circular motion even at constant speed?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Because its direction is constantly changing.
+</div>
+</div>
+
+<div class="activity">
+<p>Where does centripetal force always point?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Toward the center of the circle.
+</div>
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>A 1 kg object moves at 5 m/s in a circle of radius 2 m. Find force.</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+F = (1)(25)/2 = <strong>12.5 N</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>A car doubles its speed. What happens to centripetal force?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Force becomes 4 times larger (because of v²).
+</div>
+</div>
+
+</div>
+
+<!-- CHALLENGE -->
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A 1000 kg car moves in a circular path of radius 50 m at 10 m/s.
+Find the centripetal force.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+F = (1000)(100)/50 = <strong>2000 N</strong>
+</div>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+<h2>Lesson Summary</h2>
+<ul>
+<li>Circular motion involves constant change in direction.</li>
+<li>Velocity is tangent to the path.</li>
+<li>Acceleration is directed inward.</li>
+<li>Centripetal force keeps objects moving in a circle.</li>
+<li>Force depends on mass, speed, and radius.</li>
+</ul>
+</div>
+
+<div style="text-align:center;">
+<button class="quiz-button" id="takeQuizBtn" data-quiz="GP1_02_03_Q">
+Take the Quiz →
+</button>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click", (e) => {
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({ type: "openQuiz", quiz: quizId }, "*");
+});
+</script>
+
+</body>
+</html>

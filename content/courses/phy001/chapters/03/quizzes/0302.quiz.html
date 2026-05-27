@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Work Done and Power – Quiz</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  width: 95%;
+  max-width: 850px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { color: #136f63; }
+
+.progress-text {
+  text-align: right;
+  color: #174ea6;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: block;
+  background: #e8ecf8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice:hover { background: #d3dbf8; }
+
+.choice.correct { background: #2b7de9; color: white; }
+.choice.incorrect { background: #e57373; color: white; }
+
+.explanation {
+  display: none;
+  background: #eef3ff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #136f63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Work Done and Power – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+{q:"When is work done on an object?",c:["When force is applied only","When displacement occurs only","When force causes displacement in its direction","When object is at rest"],a:2,e:"Work requires both force and displacement in the same direction."},
+
+{q:"A person pushes a wall but it does not move. Work done is:",c:["Positive","Negative","Zero","Maximum"],a:2,e:"No displacement means zero work."},
+
+{q:"A force is applied perpendicular to motion. Work is:",c:["Maximum","Positive","Negative","Zero"],a:3,e:"cos 90° = 0, so work is zero."},
+
+{q:"A 15 N force moves an object 4 m. Find work.",c:["30 J","45 J","60 J","75 J"],a:2,e:"W = 15 × 4 = 60 J."},
+
+{q:"A force of 10 N is applied at 60° over 5 m. Find work.",c:["25 J","50 J","100 J","0 J"],a:0,e:"W = Fd cosθ = 10×5×0.5 = 25 J."},
+
+{q:"Which situation produces negative work?",c:["Pushing a cart forward","Lifting a box upward","Friction slowing a sliding object","Holding a book still"],a:2,e:"Friction opposes motion, so work is negative."},
+
+{q:"A force of 20 N pulls an object 3 m opposite the force direction. Work is:",c:["60 J","-60 J","0 J","120 J"],a:1,e:"Opposite direction gives negative work."},
+
+{q:"Which situation results in zero work?",c:["Car moving forward","Object held stationary","Friction slowing motion","Lifting an object"],a:1,e:"No displacement means zero work."},
+
+{q:"A machine does 500 J of work in 25 s. Find power.",c:["10 W","15 W","20 W","25 W"],a:2,e:"P = 500 ÷ 25 = 20 W."},
+
+{q:"Power measures:",c:["Total energy","Force applied","Rate of doing work","Distance moved"],a:2,e:"Power is work per unit time."},
+
+{q:"Which increases power?",c:["More time","Less work","More work in less time","Less force"],a:2,e:"Power increases when work is done faster."},
+
+{q:"A worker lifts a box slowly vs quickly. Work is:",c:["Greater when fast","Greater when slow","Same work but different power","Zero work"],a:2,e:"Work depends on force and displacement, not time."},
+
+{q:"A 30 N force moves an object 2 m at 180°. Work is:",c:["60 J","-60 J","0 J","120 J"],a:1,e:"cos180° = -1, so work = -60 J."},
+
+{q:"A 40 N force acts at 90° while object moves 5 m. Work is:",c:["200 J","40 J","0 J","-200 J"],a:2,e:"Perpendicular force does zero work."},
+
+{q:"Which best describes power?",c:["Force × distance","Energy stored","Work per unit time","Mass × acceleration"],a:2,e:"Power is the rate of doing work."}
+
+];
+
+let current=0,score=0,showingExplanation=false;
+
+const quizBox=document.getElementById("quizBox");
+const nextBtn=document.getElementById("nextBtn");
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+function showQuestion(){
+const q=quizData[current];
+progressText.textContent=`Question ${current+1} of ${quizData.length}`;
+progressBar.style.width=(current/quizData.length*100)+"%";
+
+quizBox.innerHTML=`<div class='question'>${q.q}</div>
+<div class='choices'></div>
+<div class='explanation' id='exp'></div>`;
+
+const choices=quizBox.querySelector(".choices");
+
+q.c.forEach((choice,i)=>{
+const btn=document.createElement("div");
+btn.className="choice";
+btn.innerHTML=choice;
+btn.onclick=()=>selectChoice(i);
+choices.appendChild(btn);
+});
+}
+
+function selectChoice(i){
+if(showingExplanation) return;
+
+const q=quizData[current];
+const buttons=document.querySelectorAll(".choice");
+const exp=document.getElementById("exp");
+
+const correct=i===q.a;
+if(correct) score++;
+
+buttons.forEach((btn,idx)=>{
+btn.style.pointerEvents="none";
+if(idx===q.a) btn.classList.add("correct");
+if(idx===i && idx!==q.a) btn.classList.add("incorrect");
+});
+
+exp.innerHTML=`<strong>${correct?"✅ Correct":"❌ Incorrect"}</strong><br>${q.e}`;
+exp.style.display="block";
+
+nextBtn.style.display="inline-block";
+showingExplanation=true;
+}
+
+nextBtn.onclick=()=>{
+current++;
+showingExplanation=false;
+nextBtn.style.display="none";
+
+if(current<quizData.length) showQuestion();
+else showResult();
+};
+
+function showResult(){
+const percent=Math.round(score/quizData.length*100);
+
+quizBox.innerHTML=`<div class='result'>Score: ${score}/${quizData.length} (${percent}%)</div>`;
+progressBar.style.width="100%";
+progressText.textContent="Quiz Completed";
+
+window.parent.postMessage({ type:"quizResult", score:percent, passed:percent>=80 }, "*");
+}
+
+showQuestion();
+</script>
+</body>
+</html>

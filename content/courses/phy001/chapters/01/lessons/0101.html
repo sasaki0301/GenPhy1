@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Physics and Measurement</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #fafafa;
+  color: #222;
+  padding: 24px;
+  line-height: 1.8;
+  font-size: 20px;
+}
+
+h1 { color: #136f63; }
+h2 { color: #136f63; margin-top: 1.4em; }
+h3 { color: #174ea6; }
+
+.section { margin-bottom: 30px; }
+
+.key-box {
+  background: #e8f7f5;
+  border-left: 6px solid #136f63;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.example-box {
+  background: #fff;
+  border-left: 5px solid #2b7de9;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.warning-box {
+  background: #fff7e6;
+  border-left: 5px solid #f4a261;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.activity {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin: 14px 0;
+}
+
+.toggle-btn {
+  background: #136f63;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.answer {
+  display: none;
+  margin-top: 10px;
+  background: #eef3ff;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.quiz-button {
+  background-color: #136f63;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quiz-button:hover {
+  background-color: #0f5b52;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: #fff;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: #e8f7f5;
+  color: #136f63;
+}
+
+.formula {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Physics and Measurement</h1>
+
+<!-- OBJECTIVES -->
+<div class="section">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Explain what physics is and why measurement is important.</li>
+<li>Identify common physical quantities and their SI units.</li>
+<li>Distinguish between scalar and vector quantities.</li>
+<li>Convert units using dimensional analysis.</li>
+<li>Recognize the importance of accuracy, precision, and significant figures.</li>
+</ul>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="section">
+<h2>1. What is Physics?</h2>
+
+<p>
+Physics is the branch of science that studies matter, energy, motion, forces, and the interactions between them.
+It helps us describe and explain how objects move, why things fall, how machines work, how sound travels, and even how planets move in space.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Physics uses measurements, mathematics, and logical reasoning to describe how the natural world behaves.
+</div>
+
+<p>
+For example, when a ball rolls down a ramp, physics can help us answer questions such as:
+</p>
+
+<ul>
+<li>How fast is the ball moving?</li>
+<li>What force caused it to accelerate?</li>
+<li>How much energy does it have?</li>
+<li>How far will it travel after a given time?</li>
+</ul>
+
+</div>
+
+<!-- MEASUREMENT -->
+<div class="section">
+<h2>2. Why Measurement Matters in Physics</h2>
+
+<p>
+Physics is not only about observing what happens. It is also about describing what happens using numbers.
+A statement like “the car is fast” is vague. But saying “the car is moving at 25 m/s” gives a measurable and useful description.
+</p>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+Instead of saying:
+<br>
+“The table is long.”
+</p>
+
+<p>
+A better scientific statement is:
+<br>
+“The table has a length of <strong>1.50 meters</strong>.”
+</p>
+</div>
+
+<div class="key-box">
+<strong>A measurement must include two parts:</strong>
+<ul>
+<li>A numerical value</li>
+<li>A unit</li>
+</ul>
+</div>
+
+<p>
+For example, in the measurement <strong>12 meters</strong>, the number is <strong>12</strong> and the unit is <strong>meters</strong>.
+</p>
+</div>
+
+<!-- SI UNITS -->
+<div class="section">
+<h2>3. SI Units in Physics</h2>
+
+<p>
+Scientists use the International System of Units, or SI, so that measurements are consistent everywhere.
+The SI system allows scientists, engineers, and students to communicate measurements clearly.
+</p>
+
+<table>
+<tr>
+<th>Physical Quantity</th>
+<th>SI Unit</th>
+<th>Symbol</th>
+</tr>
+<tr>
+<td>Length</td>
+<td>meter</td>
+<td>m</td>
+</tr>
+<tr>
+<td>Mass</td>
+<td>kilogram</td>
+<td>kg</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>second</td>
+<td>s</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>kelvin</td>
+<td>K</td>
+</tr>
+<tr>
+<td>Electric Current</td>
+<td>ampere</td>
+<td>A</td>
+</tr>
+<tr>
+<td>Amount of Substance</td>
+<td>mole</td>
+<td>mol</td>
+</tr>
+<tr>
+<td>Luminous Intensity</td>
+<td>candela</td>
+<td>cd</td>
+</tr>
+</table>
+
+<div class="warning-box">
+<strong>Important:</strong> In most General Physics 1 problems, the most frequently used base quantities are length, mass, and time.
+</div>
+</div>
+
+<!-- DERIVED QUANTITIES -->
+<div class="section">
+<h2>4. Derived Quantities</h2>
+
+<p>
+Some physical quantities are formed by combining base quantities. These are called derived quantities.
+</p>
+
+<table>
+<tr>
+<th>Derived Quantity</th>
+<th>Formula or Meaning</th>
+<th>SI Unit</th>
+</tr>
+<tr>
+<td>Area</td>
+<td>length × width</td>
+<td>m²</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>length × width × height</td>
+<td>m³</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>distance ÷ time</td>
+<td>m/s</td>
+</tr>
+<tr>
+<td>Acceleration</td>
+<td>change in velocity ÷ time</td>
+<td>m/s²</td>
+</tr>
+<tr>
+<td>Force</td>
+<td>mass × acceleration</td>
+<td>newton, N</td>
+</tr>
+</table>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Derived units come from combining SI base units.
+</div>
+</div>
+
+<!-- SCALAR AND VECTOR -->
+<div class="section">
+<h2>5. Scalar and Vector Quantities</h2>
+
+<p>
+In physics, some quantities only need a size or amount. Others need both size and direction.
+</p>
+
+<h3>Scalar Quantities</h3>
+<p>
+A scalar quantity has magnitude only. Magnitude means size or amount.
+</p>
+
+<ul>
+<li>Mass = 5 kg</li>
+<li>Time = 10 s</li>
+<li>Temperature = 30°C</li>
+<li>Speed = 20 m/s</li>
+</ul>
+
+<h3>Vector Quantities</h3>
+<p>
+A vector quantity has both magnitude and direction.
+</p>
+
+<ul>
+<li>Displacement = 15 m east</li>
+<li>Velocity = 20 m/s north</li>
+<li>Force = 50 N downward</li>
+<li>Acceleration = 9.8 m/s² downward</li>
+</ul>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+Speed and velocity are related, but they are not exactly the same.
+</p>
+
+<ul>
+<li><strong>Speed:</strong> 10 m/s</li>
+<li><strong>Velocity:</strong> 10 m/s east</li>
+</ul>
+
+<p>
+Velocity includes direction, so it is a vector.
+</p>
+</div>
+</div>
+
+<!-- UNIT CONVERSION -->
+<div class="section">
+<h2>6. Unit Conversion Using Dimensional Analysis</h2>
+
+<p>
+Dimensional analysis is a method of converting one unit to another by multiplying by conversion factors.
+A conversion factor is a fraction equal to 1.
+</p>
+
+<div class="key-box">
+<strong>Common Conversion Factors:</strong>
+<ul>
+<li>1 km = 1000 m</li>
+<li>1 m = 100 cm</li>
+<li>1 hour = 60 minutes</li>
+<li>1 minute = 60 seconds</li>
+<li>1 kg = 1000 g</li>
+</ul>
+</div>
+
+<div class="example-box">
+<h3>Step-by-Step Example 1: Convert kilometers to meters</h3>
+
+<p><strong>Problem:</strong> Convert 3.5 km to meters.</p>
+
+<p><strong>Step 1:</strong> Use the conversion factor:</p>
+<p class="formula">1 km = 1000 m</p>
+
+<p><strong>Step 2:</strong> Multiply:</p>
+<p class="formula">3.5 km × 1000 m / 1 km</p>
+
+<p><strong>Step 3:</strong> Cancel km:</p>
+<p class="formula">3.5 × 1000 = 3500 m</p>
+
+<p><strong>Final Answer:</strong> <strong>3500 m</strong></p>
+</div>
+
+<div class="example-box">
+<h3>Step-by-Step Example 2: Convert hours to seconds</h3>
+
+<p><strong>Problem:</strong> Convert 2 hours to seconds.</p>
+
+<p><strong>Step 1:</strong> Use conversion factors:</p>
+<ul>
+<li>1 hour = 60 minutes</li>
+<li>1 minute = 60 seconds</li>
+</ul>
+
+<p><strong>Step 2:</strong> Multiply:</p>
+<p class="formula">2 h × 60 min / 1 h × 60 s / 1 min</p>
+
+<p><strong>Step 3:</strong> Cancel units:</p>
+<p class="formula">2 × 60 × 60 = 7200 s</p>
+
+<p><strong>Final Answer:</strong> <strong>7200 s</strong></p>
+</div>
+
+</div>
+
+<!-- ACCURACY AND PRECISION -->
+<div class="section">
+<h2>7. Accuracy and Precision</h2>
+
+<p>
+Measurements are never perfect. That is why scientists describe how close or consistent measurements are.
+</p>
+
+<h3>Accuracy</h3>
+<p>
+Accuracy refers to how close a measurement is to the accepted or true value.
+</p>
+
+<h3>Precision</h3>
+<p>
+Precision refers to how close repeated measurements are to one another.
+</p>
+
+<div class="example-box">
+<p><strong>Example:</strong></p>
+<p>
+Suppose the true mass of an object is 50.0 g.
+</p>
+
+<ul>
+<li>Measurements of 49.9 g, 50.0 g, and 50.1 g are accurate and precise.</li>
+<li>Measurements of 45.0 g, 45.1 g, and 45.2 g are precise but not accurate.</li>
+<li>Measurements of 48 g, 52 g, and 55 g are not very precise.</li>
+</ul>
+</div>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Accuracy is about correctness. Precision is about consistency.
+</div>
+</div>
+
+<!-- SIGNIFICANT FIGURES -->
+<div class="section">
+<h2>8. Significant Figures</h2>
+
+<p>
+Significant figures show the meaningful digits in a measurement. They reflect the precision of the measuring tool.
+</p>
+
+<div class="key-box">
+<strong>Simple Rule:</strong> The more precise the measuring instrument, the more significant figures the measurement usually has.
+</div>
+
+<table>
+<tr>
+<th>Measurement</th>
+<th>Number of Significant Figures</th>
+<th>Explanation</th>
+</tr>
+<tr>
+<td>25.4 m</td>
+<td>3</td>
+<td>All nonzero digits count.</td>
+</tr>
+<tr>
+<td>0.0062 kg</td>
+<td>2</td>
+<td>Leading zeros do not count.</td>
+</tr>
+<tr>
+<td>3.00 s</td>
+<td>3</td>
+<td>Trailing zeros after a decimal count.</td>
+</tr>
+<tr>
+<td>1500 m</td>
+<td>Ambiguous</td>
+<td>Without a decimal, trailing zeros may or may not be significant.</td>
+</tr>
+</table>
+
+<div class="warning-box">
+<strong>Reminder:</strong> In calculations, your final answer should usually match the precision of the given data.
+</div>
+</div>
+
+<!-- CONCEPT CHECK -->
+<div class="section">
+<h2>Concept Check</h2>
+
+<div class="activity">
+<p><strong>1.</strong> Why is measurement important in physics?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Measurement allows us to describe physical quantities using numbers and units. This makes observations more exact, testable, and useful.
+</div>
+</div>
+
+<div class="activity">
+<p><strong>2.</strong> Is mass a scalar or vector quantity?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Mass is a scalar quantity because it has magnitude only and does not need direction.
+</div>
+</div>
+
+<div class="activity">
+<p><strong>3.</strong> What is the difference between speed and velocity?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Speed has magnitude only, while velocity has both magnitude and direction.
+</div>
+</div>
+
+</div>
+
+<!-- PRACTICE DRILLS -->
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>
+<strong>Drill 1:</strong> Convert 7.2 km to meters.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+1 km = 1000 m<br>
+7.2 km × 1000 = <strong>7200 m</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 2:</strong> Convert 450 cm to meters.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+100 cm = 1 m<br>
+450 cm ÷ 100 = <strong>4.50 m</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 3:</strong> Convert 3 minutes to seconds.
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+1 minute = 60 seconds<br>
+3 × 60 = <strong>180 s</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 4:</strong> Identify whether each quantity is scalar or vector:
+<br>
+a. 12 kg
+<br>
+b. 5 m/s north
+<br>
+c. 30°C
+<br>
+d. 20 N downward
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+a. Scalar<br>
+b. Vector<br>
+c. Scalar<br>
+d. Vector
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Drill 5:</strong> How many significant figures are in each measurement?
+<br>
+a. 14.5 m
+<br>
+b. 0.0038 kg
+<br>
+c. 6.00 s
+</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+a. 3 significant figures<br>
+b. 2 significant figures<br>
+c. 3 significant figures
+</div>
+</div>
+
+</div>
+
+<!-- CHALLENGE -->
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A student measures the length of a table three times and records the following values:
+</p>
+
+<ul>
+<li>1.52 m</li>
+<li>1.51 m</li>
+<li>1.53 m</li>
+</ul>
+
+<p>
+The accepted length of the table is 1.80 m.
+</p>
+
+<p>
+Answer the following:
+<br>
+1. Are the measurements precise?
+<br>
+2. Are the measurements accurate?
+<br>
+3. Explain your reasoning.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+1. Yes, the measurements are precise because they are close to one another.
+<br><br>
+2. No, the measurements are not accurate because they are far from the accepted value of 1.80 m.
+<br><br>
+3. The values are consistent, but they are not close to the true value.
+</div>
+</div>
+
+<div class="activity">
+<p>
+<strong>Challenge Problem:</strong>
+A cyclist travels 18 km in 30 minutes. Convert the distance to meters and the time to seconds.
+Then find the cyclist’s average speed in m/s.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+Convert distance:
+<br>
+18 km × 1000 = 18,000 m
+<br><br>
+Convert time:
+<br>
+30 min × 60 = 1800 s
+<br><br>
+Average speed:
+<br>
+speed = distance ÷ time
+<br>
+speed = 18,000 m ÷ 1800 s
+<br>
+speed = <strong>10 m/s</strong>
+</div>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+<h2>Lesson Summary</h2>
+
+<ul>
+<li>Physics studies matter, energy, motion, forces, and interactions.</li>
+<li>Measurements must include a number and a unit.</li>
+<li>The SI system provides standard units used in science.</li>
+<li>Scalars have magnitude only, while vectors have magnitude and direction.</li>
+<li>Dimensional analysis helps convert units correctly.</li>
+<li>Accuracy means closeness to the true value, while precision means consistency.</li>
+<li>Significant figures show the meaningful digits in a measurement.</li>
+</ul>
+</div>
+
+<!-- QUIZ BUTTON -->
+<div style="text-align:center; margin-top:30px;">
+<button class="quiz-button" id="takeQuizBtn" data-quiz="GP1_01_01_Q">
+Take the Quiz →
+</button>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click", (e) => {
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({ type: "openQuiz", quiz: quizId }, "*");
+});
+</script>
+
+</body>
+</html>

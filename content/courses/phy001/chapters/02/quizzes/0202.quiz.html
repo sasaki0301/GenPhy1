@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motion in 2–3 Dimensions – Quiz</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  width: 95%;
+  max-width: 850px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { color: #136f63; }
+
+.progress-text {
+  text-align: right;
+  color: #174ea6;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: block;
+  background: #e8ecf8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice:hover { background: #d3dbf8; }
+
+.choice.correct { background: #2b7de9; color: white; }
+.choice.incorrect { background: #e57373; color: white; }
+
+.explanation {
+  display: none;
+  background: #eef3ff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #136f63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Motion in 2–3 Dimensions – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+{q:"Motion in two dimensions can be analyzed by:",c:["Ignoring direction","Combining all motion into one value","Separating into horizontal and vertical components","Using only speed"],a:2,e:"Motion is analyzed by resolving vectors into components."},
+
+{q:"Which component remains constant in projectile motion (ignoring air resistance)?",c:["Vertical velocity","Horizontal velocity","Acceleration","Gravity"],a:1,e:"Horizontal velocity remains constant since no horizontal force acts."},
+
+{q:"Which component is affected by gravity?",c:["Horizontal","Vertical","Both equally","None"],a:1,e:"Gravity acts downward, affecting vertical motion."},
+
+{q:"A projectile is launched at 0°. What motion occurs?",c:["Only vertical","Only horizontal","Both equally","No motion"],a:1,e:"At 0°, motion is purely horizontal."},
+
+{q:"What is the vertical velocity at the highest point of a projectile?",c:["Maximum","Zero","Equal to horizontal velocity","Undefined"],a:1,e:"At the highest point, vertical velocity becomes zero."},
+
+{q:"A ball is thrown at 10 m/s at 30°. What is vx?",c:["5 m/s","8.66 m/s","10 m/s","3 m/s"],a:1,e:"vx = v cos30° = 10 × 0.866 = 8.66 m/s."},
+
+{q:"A ball is thrown at 10 m/s at 30°. What is vy?",c:["10 m/s","5 m/s","8.66 m/s","3 m/s"],a:1,e:"vy = v sin30° = 10 × 0.5 = 5 m/s."},
+
+{q:"Which equation finds total velocity from components?",c:["v = vx + vy","v = vx − vy","v = √(vx² + vy²)","v = vx × vy"],a:2,e:"Velocity magnitude is found using the Pythagorean theorem."},
+
+{q:"A projectile has vx = 6 m/s and vy = 8 m/s. Find total velocity.",c:["10 m/s","14 m/s","48 m/s","2 m/s"],a:0,e:"v = √(36 + 64) = √100 = 10 m/s."},
+
+{q:"Which best describes projectile motion?",c:["Straight line motion","Circular motion","Parabolic motion","Random motion"],a:2,e:"Projectile motion follows a parabolic path."},
+
+{q:"Why are horizontal and vertical motions independent?",c:["They happen at different times","They have different units","They are affected by different forces","They use different formulas"],a:2,e:"Horizontal has no force; vertical is affected by gravity."},
+
+{q:"A ball is thrown horizontally. What is its initial vertical velocity?",c:["Equal to horizontal velocity","Zero","Maximum","Undefined"],a:1,e:"Thrown horizontally means initial vertical velocity is zero."},
+
+{q:"If launch speed increases, what happens to range?",c:["Decreases","Remains same","Increases","Becomes zero"],a:2,e:"Higher initial speed increases horizontal range."},
+
+{q:"Which angle gives maximum range (ideal conditions)?",c:["30°","45°","60°","90°"],a:1,e:"45° gives maximum range without air resistance."},
+
+{q:"A projectile travels farther when:",c:["Angle is 0°","Angle is 90°","Angle is near 45°","Speed is zero"],a:2,e:"Maximum range occurs near 45°."}
+
+];
+
+let current=0,score=0,showingExplanation=false;
+
+const quizBox=document.getElementById("quizBox");
+const nextBtn=document.getElementById("nextBtn");
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+function showQuestion(){
+const q=quizData[current];
+progressText.textContent=`Question ${current+1} of ${quizData.length}`;
+progressBar.style.width=(current/quizData.length*100)+"%";
+
+quizBox.innerHTML=`<div class='question'>${q.q}</div>
+<div class='choices'></div>
+<div class='explanation' id='exp'></div>`;
+
+const choices=quizBox.querySelector(".choices");
+
+q.c.forEach((choice,i)=>{
+const btn=document.createElement("div");
+btn.className="choice";
+btn.innerHTML=choice;
+btn.onclick=()=>selectChoice(i);
+choices.appendChild(btn);
+});
+}
+
+function selectChoice(i){
+if(showingExplanation) return;
+
+const q=quizData[current];
+const buttons=document.querySelectorAll(".choice");
+const exp=document.getElementById("exp");
+
+const correct=i===q.a;
+if(correct) score++;
+
+buttons.forEach((btn,idx)=>{
+btn.style.pointerEvents="none";
+if(idx===q.a) btn.classList.add("correct");
+if(idx===i && idx!==q.a) btn.classList.add("incorrect");
+});
+
+exp.innerHTML=`<strong>${correct?"✅ Correct":"❌ Incorrect"}</strong><br>${q.e}`;
+exp.style.display="block";
+
+nextBtn.style.display="inline-block";
+showingExplanation=true;
+}
+
+nextBtn.onclick=()=>{
+current++;
+showingExplanation=false;
+nextBtn.style.display="none";
+
+if(current<quizData.length) showQuestion();
+else showResult();
+};
+
+function showResult(){
+const percent=Math.round(score/quizData.length*100);
+
+quizBox.innerHTML=`<div class='result'>Score: ${score}/${quizData.length} (${percent}%)</div>`;
+progressBar.style.width="100%";
+progressText.textContent="Quiz Completed";
+
+window.parent.postMessage({ type:"quizResult", score:percent, passed:percent>=80 }, "*");
+}
+
+showQuestion();
+</script>
+</body>
+</html>

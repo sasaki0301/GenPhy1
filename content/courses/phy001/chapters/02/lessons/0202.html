@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Kinematics: Motion in 2–3 Dimensions</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #fafafa;
+  color: #222;
+  padding: 24px;
+  line-height: 1.8;
+  font-size: 20px;
+}
+
+h1 { color: #136f63; }
+h2 { color: #136f63; margin-top: 1.4em; }
+h3 { color: #174ea6; }
+
+.section { margin-bottom: 30px; }
+
+.key-box {
+  background: #e8f7f5;
+  border-left: 6px solid #136f63;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.example-box {
+  background: #fff;
+  border-left: 5px solid #2b7de9;
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.visual-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+}
+
+.activity {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.toggle-btn {
+  background: #136f63;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.answer {
+  display: none;
+  margin-top: 10px;
+  background: #eef3ff;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.formula {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.quiz-button {
+  background: #136f63;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+ iframe {
+  width: 100%;
+  max-width: 100%;
+}
+
+.lesson-img {
+  width: 100%;
+  max-width: 720px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+  
+</style>
+</head>
+
+<body>
+
+<h1>Motion in 2–3 Dimensions</h1>
+
+<div class="section">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Understand motion in multiple dimensions.</li>
+<li>Resolve vectors into components.</li>
+<li>Analyze projectile motion.</li>
+<li>Describe horizontal and vertical motion independently.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>1. Motion in More Than One Dimension</h2>
+
+<p>
+In real life, objects rarely move in a straight line. Instead, they move in two or three dimensions.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> Motion in multiple dimensions can be analyzed by breaking it into independent components.
+</div>
+
+</div>
+
+<div class="section">
+<h2>2. Vector Components</h2>
+
+<p>
+Any vector can be split into horizontal (x) and vertical (y) components.
+</p>
+
+<div class="formula">
+vₓ = v cosθ  
+<br>
+vᵧ = v sinθ
+</div>
+
+<div class="visual-box">
+  <img 
+    src="https://i.imgur.com/h0nDCSZ.png" 
+    alt="Vector components showing horizontal and vertical components"
+    class="lesson-img"
+  >
+  <p class="caption">A vector can be broken into horizontal and vertical components.</p>
+</div>
+
+<div class="example-box">
+<p><strong>Example:</strong> A ball is thrown at 10 m/s at 30°.</p>
+<p>
+vₓ = 10 cos30° ≈ 8.66 m/s  
+<br>
+vᵧ = 10 sin30° = 5 m/s
+</p>
+</div>
+
+</div>
+
+<div class="section">
+<h2>3. Projectile Motion</h2>
+
+<p>
+Projectile motion occurs when an object moves under gravity alone after being launched.
+</p>
+
+<div class="key-box">
+<ul>
+<li>Horizontal motion: constant velocity</li>
+<li>Vertical motion: constant acceleration (gravity)</li>
+</ul>
+</div>
+
+<div class="visual-box">
+  <img 
+    src="https://i.imgur.com/QA1CmVZ.png" 
+    alt="Projectile motion path showing curved trajectory"
+    class="lesson-img"
+  >
+  <p class="caption">Projectile motion follows a curved path <b>(TRAJECTORY)</b>because horizontal and vertical motions occur at the same time.</p>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Interactive Simulation: Projectile Motion</h2>
+
+<p>
+Use the simulation below to explore how launch angle, initial speed, and gravity affect projectile motion.
+Try changing the angle and speed, then observe how the path, height, and range change.
+</p>
+
+<div class="key-box">
+<strong>Simulation Guide:</strong>
+<ul>
+<li>Increase the launch speed and observe what happens to the range.</li>
+<li>Change the launch angle and compare the shape of the path.</li>
+<li>Turn on vectors if available to observe velocity components.</li>
+<li>Try launching the projectile with and without air resistance.</li>
+</ul>
+</div>
+
+<div class="visual-box">
+<iframe 
+  src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html"
+  width="100%" 
+  height="620"
+  scrolling="no"
+  allowfullscreen
+  style="border:0; border-radius:12px; max-width:100%;">
+</iframe>
+
+<p class="caption">
+If the simulation does not load inside the lesson, open it here:
+<a href="https://phet.colorado.edu/en/simulations/projectile-motion" target="_blank">
+Projectile Motion Simulation
+</a>
+</p>
+</div>
+
+<div class="activity">
+<p>
+<strong>Simulation Task:</strong>
+Set the launch speed to the same value, then compare a low angle, medium angle, and high angle launch.
+Which setting gives the greatest horizontal range?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+For ideal projectile motion without air resistance, the maximum range usually occurs near <strong>45°</strong>.
+Lower angles travel flatter paths, while higher angles reach greater height but may not travel as far horizontally.
+</div>
+</div>
+</div>
+  
+<div class="section">
+<h2>4. Independence of Motion</h2>
+
+<p>
+Horizontal and vertical motions do not affect each other.
+</p>
+
+<div class="key-box">
+<strong>Key Idea:</strong> You can analyze x-motion and y-motion separately.
+</div>
+
+<div class="example-box">
+<p>
+A ball is thrown horizontally.
+</p>
+
+<ul>
+<li>Horizontal velocity stays constant.</li>
+<li>Vertical velocity increases due to gravity.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="section">
+<h2>5. Key Equations</h2>
+
+<div class="formula">
+Horizontal: x = vₓ t  
+<br><br>
+Vertical: y = vᵧ t − ½gt²  
+<br><br>
+vᵧ = vᵧ₀ − gt
+</div>
+
+</div>
+
+<div class="section">
+<h2>Concept Check</h2>
+
+<div class="activity">
+<p>Why is horizontal velocity constant in projectile motion?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">Because no horizontal force acts (ignoring air resistance).</div>
+</div>
+
+<div class="activity">
+<p>What causes vertical acceleration?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">Gravity causes vertical acceleration.</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Practice Drills</h2>
+
+<div class="activity">
+<p>A projectile has vₓ = 5 m/s and vᵧ = 10 m/s. Find total velocity.</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+v = √(5² + 10²) = √125 ≈ <strong>11.18 m/s</strong>
+</div>
+</div>
+
+<div class="activity">
+<p>A ball is thrown horizontally at 8 m/s. What happens to vertical motion?</p>
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+It accelerates downward due to gravity.
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+<p>
+A ball is thrown at 20 m/s at 30°. Find:
+<br>
+1. Horizontal velocity
+<br>
+2. Vertical velocity
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+<div class="answer">
+vx = 20 cos30° ≈ <strong>17.32 m/s</strong><br>
+vy = 20 sin30° = <strong>10 m/s</strong>
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Lesson Summary</h2>
+<ul>
+<li>Motion in 2D involves both x and y components.</li>
+<li>Vectors can be resolved into components.</li>
+<li>Projectile motion follows a curved path.</li>
+<li>Horizontal motion is constant; vertical motion is accelerated.</li>
+</ul>
+</div>
+
+<div style="text-align:center;">
+<button class="quiz-button" id="takeQuizBtn" data-quiz="GP1_02_02_Q">
+Take the Quiz →
+</button>
+</div>
+
+<script>
+function toggleAnswer(btn) {
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click", (e) => {
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({ type: "openQuiz", quiz: quizId }, "*");
+});
+</script>
+
+</body>
+</html>

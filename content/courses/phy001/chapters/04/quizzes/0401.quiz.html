@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Momentum and Impulse – Quiz</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+<h2>Momentum and Impulse – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"Momentum depends on:",
+c:["Mass only","Velocity only","Mass and velocity","Force and time"],
+a:2,
+e:"Momentum is calculated using p = mv."
+},
+
+{
+q:"Which object has greater momentum?",
+c:["A light object moving slowly","A heavy object moving slowly","A heavy object moving quickly","Both always equal"],
+a:2,
+e:"Greater mass and greater velocity both increase momentum."
+},
+
+{
+q:"A 4 kg cart moves east at 6 m/s. Find momentum.",
+c:["10 kg·m/s","24 kg·m/s","30 kg·m/s","40 kg·m/s"],
+a:1,
+e:"p = mv = (4)(6) = 24 kg·m/s east."
+},
+
+{
+q:"Momentum is a:",
+c:["Scalar quantity","Vector quantity","Unitless quantity","Constant quantity"],
+a:1,
+e:"Momentum has both magnitude and direction."
+},
+
+{
+q:"If velocity doubles while mass stays constant, momentum:",
+c:["Halves","Stays same","Doubles","Quadruples"],
+a:2,
+e:"Momentum is directly proportional to velocity."
+},
+
+{
+q:"Impulse depends on:",
+c:["Force only","Time only","Force and time","Mass and velocity only"],
+a:2,
+e:"Impulse is calculated using J = FΔt."
+},
+
+{
+q:"A 50 N force acts for 0.30 s. Find impulse.",
+c:["5 N·s","10 N·s","15 N·s","20 N·s"],
+a:2,
+e:"J = (50)(0.30) = 15 N·s."
+},
+
+{
+q:"Impulse is equal to:",
+c:["Force","Velocity","Change in momentum","Mass"],
+a:2,
+e:"Impulse-momentum theorem states J = Δp."
+},
+
+{
+q:"A 3 kg object changes velocity from 2 m/s to 7 m/s. Find change in momentum.",
+c:["9 kg·m/s","12 kg·m/s","15 kg·m/s","21 kg·m/s"],
+a:2,
+e:"Δp = m(vf - vi) = 3(7-2) = 15 kg·m/s."
+},
+
+{
+q:"A moving object is brought to rest. Its momentum:",
+c:["Increases","Becomes negative","Becomes zero","Remains constant"],
+a:2,
+e:"Stopping means final momentum is zero."
+},
+
+{
+q:"Area under a force-time graph represents:",
+c:["Velocity","Force","Acceleration","Impulse"],
+a:3,
+e:"Impulse equals the area under the graph."
+},
+
+{
+q:"A rectangular force-time graph has height 8 N and width 5 s. Find impulse.",
+c:["13 N·s","20 N·s","40 N·s","80 N·s"],
+a:2,
+e:"Impulse = area = (8)(5) = 40 N·s."
+},
+
+{
+q:"A triangular force-time graph has base 2 s and height 12 N. Find impulse.",
+c:["6 N·s","12 N·s","18 N·s","24 N·s"],
+a:1,
+e:"Impulse = ½(base)(height) = ½(2)(12) = 12 N·s."
+},
+
+{
+q:"Why do airbags reduce injuries during collisions?",
+c:["They reduce momentum","They increase force","They increase stopping time","They remove energy"],
+a:2,
+e:"Increasing stopping time reduces average force."
+},
+
+{
+q:"A 0.5 kg ball moving at 8 m/s changes direction and moves at 4 m/s opposite direction. Find change in momentum.",
+c:["2 kg·m/s","4 kg·m/s","6 kg·m/s","-6 kg·m/s"],
+a:3,
+e:"Take opposite direction as negative: Δp = (0.5)(-4) - (0.5)(8) = -2 - 4 = -6 kg·m/s."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 2 Assessment: Kinematics</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  width: 95%;
+  max-width: 900px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { color: #136f63; }
+
+.progress-text {
+  text-align: right;
+  color: #174ea6;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: block;
+  background: #e8ecf8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice:hover { background: #d3dbf8; }
+
+.choice.correct { background: #2b7de9; color: white; }
+.choice.incorrect { background: #e57373; color: white; }
+
+.explanation {
+  display: none;
+  background: #eef3ff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #136f63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Chapter 2 Assessment: Kinematics</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+/* 1D Motion */
+{q:"Which is a vector quantity?",c:["Distance","Speed","Displacement","Time"],a:2,e:"Displacement has magnitude and direction."},
+{q:"A person walks 10 m east then 6 m west. What is displacement?",c:["4 m east","16 m","4 m west","0 m"],a:0,e:"10 − 6 = 4 m east."},
+{q:"A car travels 120 m in 8 s. What is speed?",c:["10 m/s","12 m/s","15 m/s","20 m/s"],a:2,e:"120 ÷ 8 = 15 m/s."},
+{q:"Average velocity depends on:",c:["Distance only","Time only","Displacement","Speed"],a:2,e:"Average velocity uses displacement."},
+
+/* Acceleration */
+{q:"A velocity changes from 5 m/s to 25 m/s in 4 s. Find acceleration.",c:["5","10","15","20"],a:1,e:"(25−5)/4 = 5 m/s²."},
+{q:"Acceleration occurs when:",c:["Speed changes","Direction changes","Both A and B","None"],a:2,e:"Any change in velocity causes acceleration."},
+
+/* Graphs */
+{q:"Slope of position-time graph represents:",c:["Acceleration","Velocity","Distance","Speed"],a:1,e:"Slope gives velocity."},
+{q:"Horizontal velocity-time graph means:",c:["Acceleration","Constant velocity","Zero velocity","Changing speed"],a:1,e:"No change means constant velocity."},
+
+/* Vectors */
+{q:"A vector of 10 m/s at 60°. What is vx?",c:["5","8.66","10","6"],a:0,e:"vx = 10 cos60 = 5 m/s."},
+{q:"A vector of 10 m/s at 60°. What is vy?",c:["5","8.66","10","6"],a:1,e:"vy = 10 sin60 ≈ 8.66 m/s."},
+
+/* Projectile */
+{q:"Horizontal velocity in projectile motion is:",c:["Increasing","Decreasing","Constant","Zero"],a:2,e:"No horizontal force acts."},
+{q:"Vertical acceleration equals:",c:["0","g","v","r"],a:1,e:"Gravity acts vertically."},
+{q:"At highest point, vertical velocity is:",c:["Maximum","Zero","Negative","Equal to vx"],a:1,e:"Vertical velocity becomes zero."},
+{q:"Which angle gives max range?",c:["30°","45°","60°","90°"],a:1,e:"Ideal max range at 45°."},
+
+/* Circular */
+{q:"Velocity direction in circular motion is:",c:["Radial","Tangential","Upward","Constant"],a:1,e:"Velocity is tangent."},
+{q:"Acceleration direction is:",c:["Outward","Tangent","Center","Zero"],a:2,e:"Centripetal acceleration is inward."},
+{q:"If speed doubles, centripetal force becomes:",c:["2x","3x","4x","8x"],a:2,e:"Force ∝ v²."},
+{q:"A 2 kg object moves at 4 m/s, r=2 m. Find force.",c:["8","16","32","64"],a:1,e:"F=(2)(16)/2=16 N."},
+
+/* Mixed */
+{q:"A projectile travels 50 m horizontally in 5 s. vx?",c:["5","10","15","20"],a:1,e:"50 ÷ 5 = 10 m/s."},
+{q:"A car accelerates from 0 to 20 m/s in 5 s. a?",c:["2","3","4","5"],a:2,e:"20/5=4 m/s²."},
+{q:"Resultant velocity from vx=6, vy=8?",c:["10","12","14","16"],a:0,e:"√(36+64)=10."},
+
+/* Pisay-style 1 */
+{q:"A ball is thrown upward and lands at same height. Which is true?",c:["vx=0","vy same magnitude start/end","acceleration=0","speed constant"],a:1,e:"Vertical velocity same magnitude, opposite direction."},
+
+/* Pisay-style 2 */
+{q:"Two projectiles launched at same speed: 30° and 60°. Which travels farther?",c:["30°","60°","Same","Depends on mass"],a:2,e:"Complementary angles give same range."},
+
+/* Additional challenging */
+{q:"If radius halves, centripetal force:",c:["Halves","Doubles","4x","1/4"],a:1,e:"F ∝ 1/r."},
+{q:"Which causes outward feeling in circular motion?",c:["Centripetal force","Inertia","Gravity","Velocity"],a:1,e:"Inertia resists inward pull."},
+{q:"A projectile’s horizontal range depends on:",c:["vx and time","vy only","gravity only","mass"],a:0,e:"Range = vx × time."},
+{q:"If time doubles, displacement in constant velocity motion:",c:["Halves","Same","Doubles","Quadruples"],a:2,e:"x ∝ t."},
+{q:"Slope of v-t graph gives:",c:["Velocity","Distance","Acceleration","Time"],a:2,e:"Slope gives acceleration."},
+
+/* Final */
+{q:"Which is always true?",c:["Velocity constant in circular motion","Acceleration zero","Direction constantly changes","Speed must change"],a:2,e:"Direction always changes."},
+{q:"A 3 kg object, v=6 m/s, r=3 m. Find force.",c:["18","24","36","12"],a:2,e:"F=(3)(36)/3=36 N."},
+{q:"Projectile motion path is:",c:["Straight","Circular","Parabolic","Random"],a:2,e:"Projectile path is parabolic."},
+{q:"If vx increases, range:",c:["Decreases","Same","Increases","Zero"],a:2,e:"Greater vx increases range."},
+{q:"Acceleration in projectile motion is always:",c:["Horizontal","Vertical downward","Zero","Changing"],a:1,e:"Gravity acts downward."}
+
+];
+
+let current=0,score=0,showingExplanation=false;
+
+const quizBox=document.getElementById("quizBox");
+const nextBtn=document.getElementById("nextBtn");
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+function showQuestion(){
+const q=quizData[current];
+progressText.textContent=`Question ${current+1} of ${quizData.length}`;
+progressBar.style.width=(current/quizData.length*100)+"%";
+
+quizBox.innerHTML=`<div class='question'>${q.q}</div>
+<div class='choices'></div>
+<div class='explanation' id='exp'></div>`;
+
+const choices=quizBox.querySelector(".choices");
+
+q.c.forEach((choice,i)=>{
+const btn=document.createElement("div");
+btn.className="choice";
+btn.innerHTML=choice;
+btn.onclick=()=>selectChoice(i);
+choices.appendChild(btn);
+});
+}
+
+function selectChoice(i){
+if(showingExplanation) return;
+
+const q=quizData[current];
+const buttons=document.querySelectorAll(".choice");
+const exp=document.getElementById("exp");
+
+const correct=i===q.a;
+if(correct) score++;
+
+buttons.forEach((btn,idx)=>{
+btn.style.pointerEvents="none";
+if(idx===q.a) btn.classList.add("correct");
+if(idx===i && idx!==q.a) btn.classList.add("incorrect");
+});
+
+exp.innerHTML=`<strong>${correct?"✅ Correct":"❌ Incorrect"}</strong><br>${q.e}`;
+exp.style.display="block";
+
+nextBtn.style.display="inline-block";
+showingExplanation=true;
+}
+
+nextBtn.onclick=()=>{
+current++;
+showingExplanation=false;
+nextBtn.style.display="none";
+
+if(current<quizData.length) showQuestion();
+else showResult();
+};
+
+function showResult(){
+const percent=Math.round(score/quizData.length*100);
+
+quizBox.innerHTML=`<div class='result'>Score: ${score}/${quizData.length} (${percent}%)</div>`;
+progressBar.style.width="100%";
+progressText.textContent="Assessment Completed";
+
+window.parent.postMessage({ type:"quizResult", score:percent, passed:percent>=80 }, "*");
+}
+
+showQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Newton’s Law of Universal Gravitation – Quiz</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Newton’s Law of Universal Gravitation – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn"
+class="next-btn"
+style="display:none;">
+Next
+</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"Gravity exists between:",
+c:[
+"Planets only",
+"Objects with electric charge only",
+"All objects with mass",
+"Large stars only"
+],
+a:2,
+e:"Gravity acts between all objects that have mass."
+},
+
+{
+q:"According to Newton’s Law of Universal Gravitation, gravitational force increases when:",
+c:[
+"Distance increases",
+"Mass decreases",
+"Mass increases",
+"Radius doubles"
+],
+a:2,
+e:"Larger masses produce stronger gravitational attraction."
+},
+
+{
+q:"If the distance between two objects doubles, gravitational force becomes:",
+c:[
+"2 times larger",
+"4 times larger",
+"1/2 as large",
+"1/4 as large"
+],
+a:3,
+e:"Gravity follows an inverse square law: F ∝ 1/r²."
+},
+
+{
+q:"Which equation represents Newton’s Law of Universal Gravitation?",
+c:[
+"F = ma",
+"F = G(m₁m₂/r²)",
+"W = mg",
+"KE = ½mv²"
+],
+a:1,
+e:"This is the universal gravitation formula."
+},
+
+{
+q:"If both masses in a gravitational system double while distance remains the same, the gravitational force becomes:",
+c:[
+"2 times larger",
+"4 times larger",
+"8 times larger",
+"Unchanged"
+],
+a:1,
+e:"Doubling both masses gives 2 × 2 = 4 times larger force."
+},
+
+{
+q:"A satellite remains in orbit because:",
+c:[
+"There is no gravity in space",
+"It constantly moves upward",
+"Gravity provides centripetal force",
+"Air resistance balances gravity"
+],
+a:2,
+e:"Gravity keeps satellites moving in curved orbital paths."
+},
+
+{
+q:"Weight is best defined as:",
+c:[
+"Mass multiplied by volume",
+"Gravitational force acting on an object",
+"Inertia of an object",
+"Resistance to acceleration"
+],
+a:1,
+e:"Weight is the force due to gravity."
+},
+
+{
+q:"Find the weight of a 50 kg object on Earth. Use g = 9.8 m/s².",
+c:[
+"490 N",
+"500 N",
+"98 N",
+"245 N"
+],
+a:0,
+e:"W = mg = (50)(9.8)=490 N."
+},
+
+{
+q:"A person travels to a planet with weaker gravity. Which changes?",
+c:[
+"Mass only",
+"Weight only",
+"Both mass and weight",
+"Neither"
+],
+a:1,
+e:"Mass stays constant, but weight depends on gravity."
+},
+
+{
+q:"If distance between two masses becomes three times larger, gravitational force becomes:",
+c:[
+"3 times smaller",
+"6 times smaller",
+"9 times smaller",
+"27 times smaller"
+],
+a:2,
+e:"Tripling distance makes gravity 1/9 as strong."
+},
+
+{
+q:"Which object experiences the strongest gravitational attraction?",
+c:[
+"Small masses far apart",
+"Large masses close together",
+"Small masses close together",
+"Large masses far apart"
+],
+a:1,
+e:"Gravity is strongest with large masses and small distances."
+},
+
+{
+q:"Astronauts in orbit appear weightless because:",
+c:[
+"Gravity disappears in space",
+"They are outside Earth’s gravity",
+"They are in continuous free fall",
+"The spacecraft blocks gravity"
+],
+a:2,
+e:"They are continuously falling together around Earth."
+},
+
+{
+q:"If one mass doubles and distance doubles, gravitational force becomes:",
+c:[
+"Twice as large",
+"Half as large",
+"One-fourth as large",
+"Unchanged"
+],
+a:1,
+e:"Doubling mass multiplies force by 2, doubling distance divides by 4. Net effect = 1/2."
+},
+
+{
+q:"Gravity acts as what kind of force in planetary motion?",
+c:[
+"Frictional force",
+"Applied force",
+"Centripetal force",
+"Magnetic force"
+],
+a:2,
+e:"Gravity provides the centripetal force for orbits."
+},
+
+{
+q:"A 70 kg astronaut is on a moon where g = 2 m/s². What is the astronaut’s weight there?",
+c:[
+"70 N",
+"140 N",
+"686 N",
+"35 N"
+],
+a:1,
+e:"W = mg = (70)(2)=140 N."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

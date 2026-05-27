@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kinematics: Motion Along a Straight Line – Quiz</title>
+
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  width: 95%;
+  max-width: 850px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { color: #136f63; }
+
+.progress-text {
+  text-align: right;
+  color: #174ea6;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-wrapper {
+  background: #e9f5ef;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #136f63, #2b7de9);
+  width: 0%;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #174ea6;
+  margin-bottom: 20px;
+}
+
+.choice {
+  display: block;
+  background: #e8ecf8;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.choice:hover { background: #d3dbf8; }
+
+.choice.correct { background: #2b7de9; color: white; }
+.choice.incorrect { background: #e57373; color: white; }
+
+.explanation {
+  display: none;
+  background: #eef3ff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #136f63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+<h2>Motion Along a Straight Line – Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper"><div id="progressBar" class="progress-bar"></div></div>
+
+<div id="quizBox"></div>
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+</div>
+
+<script>
+const quizData = [
+
+{q:"What is motion?",c:["Change in velocity only","Change in position over time","Change in mass","Change in direction only"],a:1,e:"Motion is defined as a change in position over time."},
+
+{q:"Which quantity includes direction?",c:["Speed","Distance","Velocity","Time"],a:2,e:"Velocity includes both magnitude and direction."},
+
+{q:"Which is a scalar quantity?",c:["Velocity","Displacement","Distance","Acceleration"],a:2,e:"Distance has magnitude only, so it is scalar."},
+
+{q:"A person walks 4 m east and 4 m west. What is displacement?",c:["0 m","4 m east","8 m","4 m west"],a:0,e:"The person returns to the starting point, so displacement is zero."},
+
+{q:"A car travels 100 m in 10 s. What is speed?",c:["5 m/s","10 m/s","20 m/s","1000 m/s"],a:1,e:"Speed = distance ÷ time = 100 ÷ 10 = 10 m/s."},
+
+{q:"Which is the correct formula for velocity?",c:["distance ÷ time","displacement ÷ time","time ÷ displacement","velocity × time"],a:1,e:"Velocity uses displacement, not distance."},
+
+{q:"A runner travels 200 m in 20 s. What is speed?",c:["5 m/s","10 m/s","15 m/s","20 m/s"],a:1,e:"200 ÷ 20 = 10 m/s."},
+
+{q:"If displacement is zero, average velocity is:",c:["Maximum","Undefined","Zero","Negative"],a:2,e:"Average velocity depends on displacement. If displacement is zero, velocity is zero."},
+
+{q:"What does the slope of a position-time graph represent?",c:["Acceleration","Speed only","Velocity","Distance"],a:2,e:"Slope of position-time graph gives velocity."},
+
+{q:"A horizontal position-time graph means:",c:["Object is accelerating","Object is moving fast","Object is at rest","Object is slowing down"],a:2,e:"No change in position means the object is at rest."},
+
+{q:"What does the slope of a velocity-time graph represent?",c:["Speed","Distance","Acceleration","Time"],a:2,e:"Slope of velocity-time graph gives acceleration."},
+
+{q:"A car increases velocity from 5 m/s to 15 m/s in 5 s. What is acceleration?",c:["1 m/s²","2 m/s²","3 m/s²","4 m/s²"],a:1,e:"(15 − 5) ÷ 5 = 2 m/s²."},
+
+{q:"Which situation describes acceleration?",c:["Moving at constant speed","Changing speed or direction","Staying at rest","Moving without time"],a:1,e:"Acceleration occurs when velocity changes."},
+
+{q:"A straight diagonal line in a position-time graph means:",c:["No motion","Constant velocity","Acceleration","Zero velocity"],a:1,e:"A constant slope means constant velocity."},
+
+{q:"A cyclist travels 60 m north in 6 s. What is velocity?",c:["10 m/s","10 m/s north","60 m/s","6 m/s north"],a:1,e:"Velocity = displacement ÷ time with direction."}
+
+];
+
+let current=0,score=0,showingExplanation=false;
+
+const quizBox=document.getElementById("quizBox");
+const nextBtn=document.getElementById("nextBtn");
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+function showQuestion(){
+const q=quizData[current];
+progressText.textContent=`Question ${current+1} of ${quizData.length}`;
+progressBar.style.width=(current/quizData.length*100)+"%";
+
+quizBox.innerHTML=`<div class='question'>${q.q}</div>
+<div class='choices'></div>
+<div class='explanation' id='exp'></div>`;
+
+const choices=quizBox.querySelector(".choices");
+
+q.c.forEach((choice,i)=>{
+const btn=document.createElement("div");
+btn.className="choice";
+btn.innerHTML=choice;
+btn.onclick=()=>selectChoice(i);
+choices.appendChild(btn);
+});
+}
+
+function selectChoice(i){
+if(showingExplanation) return;
+
+const q=quizData[current];
+const buttons=document.querySelectorAll(".choice");
+const exp=document.getElementById("exp");
+
+const correct=i===q.a;
+if(correct) score++;
+
+buttons.forEach((btn,idx)=>{
+btn.style.pointerEvents="none";
+if(idx===q.a) btn.classList.add("correct");
+if(idx===i && idx!==q.a) btn.classList.add("incorrect");
+});
+
+exp.innerHTML=`<strong>${correct?"✅ Correct":"❌ Incorrect"}</strong><br>${q.e}`;
+exp.style.display="block";
+
+nextBtn.style.display="inline-block";
+showingExplanation=true;
+}
+
+nextBtn.onclick=()=>{
+current++;
+showingExplanation=false;
+nextBtn.style.display="none";
+
+if(current<quizData.length) showQuestion();
+else showResult();
+};
+
+function showResult(){
+const percent=Math.round(score/quizData.length*100);
+
+quizBox.innerHTML=`<div class='result'>Score: ${score}/${quizData.length} (${percent}%)</div>`;
+progressBar.style.width="100%";
+progressText.textContent="Quiz Completed";
+
+window.parent.postMessage({ type:"quizResult", score:percent, passed:percent>=80 }, "*");
+}
+
+showQuestion();
+</script>
+</body>
+</html>

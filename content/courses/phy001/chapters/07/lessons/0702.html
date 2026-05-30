@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Archimedes' Principle and Bernoulli's Principle</title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{background:#e8f7f5;}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+<body>
+<h1>Archimedes' Principle and Bernoulli's Principle</h1>
+
+<div class="section">
+
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Explain buoyancy and buoyant force.</li>
+<li>State and apply Archimedes' Principle.</li>
+<li>Determine why objects float, sink, or remain suspended.</li>
+<li>Calculate buoyant force using fluid displacement.</li>
+<li>Explain Bernoulli's Principle.</li>
+<li>Relate fluid speed to pressure changes.</li>
+<li>Apply Bernoulli's Principle to real-world situations such as airplane wings and fluid flow.</li>
+</ul>
+
+</div>
+
+<!-- INTRODUCTION -->
+
+<div class="section">
+
+<h2>1. Why Do Ships Float?</h2>
+
+<p>
+A steel nail sinks immediately when placed in water, yet enormous steel ships can float across oceans.
+</p>
+
+<p>
+How is this possible?
+</p>
+
+<p>
+The answer involves a force called <strong>buoyant force</strong>.
+</p>
+
+<div class="key-box">
+Buoyant force is the upward force exerted by a fluid on an object immersed in it.
+</div>
+
+</div>
+
+<!-- BUOYANCY -->
+
+<div class="section">
+
+<h2>2. Understanding Buoyancy</h2>
+
+<p>
+When an object is placed in a fluid, pressure acts on all sides.
+</p>
+
+<p>
+Because pressure increases with depth, the bottom of the object experiences greater pressure than the top.
+</p>
+
+<p>
+This pressure difference produces an upward force called the buoyant force.
+</p>
+
+<div class="visual-box">
+
+<img src="YOUR_BUOYANCY_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Pressure differences create an upward buoyant force.
+</p>
+
+</div>
+
+</div>
+
+<!-- ARCHIMEDES -->
+
+<div class="section">
+
+<h2>3. Archimedes' Principle</h2>
+
+<p>
+Greek mathematician and scientist <strong>Archimedes</strong> discovered an important relationship between buoyancy and displaced fluid.
+</p>
+
+<div class="key-box">
+The buoyant force acting on an object is equal to the weight of the fluid displaced by the object.
+</div>
+
+</div>
+
+<!-- EQUATION -->
+
+<div class="section">
+
+<h2>4. Archimedes' Principle Equation</h2>
+
+<div class="formula">
+F<sub>b</sub> = ρVg
+</div>
+
+Where:
+
+<ul>
+
+<li><strong>F<sub>b</sub></strong> = Buoyant Force (N)</li>
+
+<li><strong>ρ</strong> = Density of Fluid (kg/m³)</li>
+
+<li><strong>V</strong> = Volume of Fluid Displaced (m³)</li>
+
+<li><strong>g</strong> = Acceleration due to Gravity (9.8 m/s²)</li>
+
+</ul>
+
+<div class="key-box">
+The more fluid displaced, the greater the buoyant force.
+</div>
+
+</div>
+
+<!-- FLOATING -->
+
+<div class="section">
+
+<h2>5. Floating, Sinking, and Suspension</h2>
+
+<table>
+
+<tr>
+<th>Condition</th>
+<th>Result</th>
+</tr>
+
+<tr>
+<td>Buoyant Force > Weight</td>
+<td>Object Rises</td>
+</tr>
+
+<tr>
+<td>Buoyant Force = Weight</td>
+<td>Object Floats / Suspended</td>
+</tr>
+
+<tr>
+<td>Buoyant Force < Weight</td>
+<td>Object Sinks</td>
+</tr>
+
+</table>
+
+<div class="key-box">
+Whether an object floats or sinks depends on the balance between buoyant force and weight.
+</div>
+
+</div>
+
+<!-- DENSITY -->
+
+<div class="section">
+
+<h2>6. Density and Floating</h2>
+
+<p>
+Density plays an important role in buoyancy.
+</p>
+
+<table>
+
+<tr>
+<th>Density Comparison</th>
+<th>Behavior</th>
+</tr>
+
+<tr>
+<td>Object less dense than fluid</td>
+<td>Floats</td>
+</tr>
+
+<tr>
+<td>Object equal density to fluid</td>
+<td>Suspended</td>
+</tr>
+
+<tr>
+<td>Object more dense than fluid</td>
+<td>Sinks</td>
+</tr>
+
+</table>
+
+<div class="example-box">
+
+<h3>Examples</h3>
+
+<ul>
+
+<li>Wood floats in water.</li>
+
+<li>Ice floats on water.</li>
+
+<li>Steel nails sink.</li>
+
+<li>Ships float because their average density is less than water.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- EXAMPLE -->
+
+<div class="section">
+
+<h2>7. Sample Problem: Buoyant Force</h2>
+
+<div class="example-box">
+
+<h3>Example 1</h3>
+
+<p>
+A submerged object displaces 0.02 m³ of water.
+</p>
+
+<p>
+Find the buoyant force.
+</p>
+
+<p>
+Given:
+</p>
+
+<p>
+ρ = 1000 kg/m³
+</p>
+
+<p>
+g = 9.8 m/s²
+</p>
+
+<p>
+F<sub>b</sub> = ρVg
+</p>
+
+<p>
+F<sub>b</sub> = (1000)(0.02)(9.8)
+</p>
+
+<p>
+F<sub>b</sub> = 196 N
+</p>
+
+<div class="key-box">
+Answer: 196 N
+</div>
+
+</div>
+
+</div>
+
+<!-- BERNOULLI -->
+
+<div class="section">
+
+<h2>8. Bernoulli's Principle</h2>
+
+<p>
+Swiss scientist <strong>Daniel Bernoulli</strong> studied how fluids move.
+</p>
+
+<p>
+He discovered a relationship between fluid speed and pressure.
+</p>
+
+<div class="key-box">
+As fluid speed increases, fluid pressure decreases.
+</div>
+
+</div>
+
+<!-- EXPLANATION -->
+
+<div class="section">
+
+<h2>9. Understanding Bernoulli's Principle</h2>
+
+<p>
+Imagine water flowing through a pipe.
+</p>
+
+<p>
+If the pipe narrows, the water must move faster through the narrow section.
+</p>
+
+<p>
+As the speed increases, the pressure decreases.
+</p>
+
+<div class="visual-box">
+
+<img src="YOUR_BERNOULLI_PIPE_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Faster fluid flow corresponds to lower pressure.
+</p>
+
+</div>
+
+</div>
+
+<!-- AIRPLANE -->
+
+<div class="section">
+
+<h2>10. Bernoulli's Principle and Airplane Wings</h2>
+
+<p>
+Airplane wings are designed so that air moves faster over the top surface than underneath.
+</p>
+
+<p>
+According to Bernoulli's Principle:
+</p>
+
+<ul>
+
+<li>Faster air above the wing → Lower pressure</li>
+
+<li>Slower air below the wing → Higher pressure</li>
+
+</ul>
+
+<p>
+The pressure difference creates lift.
+</p>
+
+<div class="visual-box">
+
+<img src="YOUR_AIRPLANE_WING_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Pressure differences create lift on airplane wings.
+</p>
+
+</div>
+
+</div>
+
+<!-- REAL WORLD -->
+
+<div class="section">
+
+<h2>11. Applications of Bernoulli's Principle</h2>
+
+<ul>
+
+<li>Airplane wings</li>
+
+<li>Perfume atomizers</li>
+
+<li>Carburetors</li>
+
+<li>Venturi meters</li>
+
+<li>Roofs lifted during strong winds</li>
+
+<li>Fast-moving fluids in pipes</li>
+
+</ul>
+
+</div>
+
+<!-- SIMULATION -->
+
+<div class="section">
+
+<h2>Interactive Simulation: Buoyancy</h2>
+
+<p>
+Use this simulation to investigate buoyancy, fluid displacement, floating, and sinking.
+</p>
+
+<div class="visual-box">
+
+<iframe
+src="https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;">
+</iframe>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Simulation Task:</strong>
+Change the density of the object and observe what happens.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Objects with density less than the fluid float, while denser objects sink.
+</div>
+
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+
+<div class="section">
+
+<h2>Practice Drills</h2>
+
+<div class="activity">
+
+<p>
+<strong>Drill 1:</strong>
+An object displaces 0.01 m³ of water.
+Find the buoyant force.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+F<sub>b</sub> = (1000)(0.01)(9.8)
+
+<br><br>
+
+F<sub>b</sub> = 98 N
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 2:</strong>
+Will an object float if its density is lower than the density of water?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Yes. Objects less dense than water float.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 3:</strong>
+According to Bernoulli's Principle, what happens to pressure when fluid speed increases?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Pressure decreases.
+</div>
+
+</div>
+
+</div>
+
+<!-- CHALLENGE -->
+
+<div class="section">
+
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+
+<p>
+Why can a massive steel ship float while a small steel nail sinks?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+A ship's hollow structure gives it a lower average density than water, allowing sufficient buoyant force to support its weight.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Pisay-Style Question:</strong>
+
+A submerged object weighs 250 N. The buoyant force acting on it is 300 N.
+
+Predict what will happen when released.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The object will rise because the buoyant force is greater than its weight.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Pisay-Style Question:</strong>
+
+Strong winds pass rapidly over a building's roof. Explain why the roof may be lifted upward.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Fast-moving air above the roof creates lower pressure. Higher pressure below the roof pushes upward, producing lift.
+</div>
+
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="section">
+
+<h2>Lesson Summary</h2>
+
+<ul>
+
+<li>Buoyant force is the upward force exerted by a fluid.</li>
+
+<li>Archimedes' Principle states that buoyant force equals the weight of displaced fluid.</li>
+
+<li>Floating and sinking depend on density and force balance.</li>
+
+<li>Objects less dense than the fluid float.</li>
+
+<li>Bernoulli's Principle states that faster-moving fluids have lower pressure.</li>
+
+<li>Pressure differences explain airplane lift and many fluid-flow applications.</li>
+
+<li>Archimedes' and Bernoulli's Principles are fundamental concepts in fluid mechanics.</li>
+
+</ul>
+
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+
+<button
+class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_07_02_Q">
+
+Take the Quiz →
+
+</button>
+
+</div>
+  
+  <script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+</body>
+</html>

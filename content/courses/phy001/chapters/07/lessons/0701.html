@@ -1,1 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
+<title></title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{background:#e8f7f5;}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+
+<body>
+  <h1>Pressure and Pascal's Principle</h1>
+
+<div class="section">
+
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Define pressure and explain its significance.</li>
+<li>Calculate pressure using force and area.</li>
+<li>Explain how pressure behaves in fluids.</li>
+<li>Calculate fluid pressure at various depths.</li>
+<li>Apply Pascal's Principle to hydraulic systems.</li>
+<li>Analyze real-world applications involving pressure and hydraulics.</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>1. Introduction: Why Can a Needle Pierce More Easily?</h2>
+
+<p>
+Suppose you push a sewing needle and the flat side of a coin against a piece of cardboard using the same force.
+The needle easily penetrates the cardboard while the coin does not.
+</p>
+
+<p>
+The reason is not the amount of force applied, but how concentrated that force is.
+This concept is called <strong>pressure</strong>.
+</p>
+
+<div class="key-box">
+Pressure measures how concentrated a force is over a given area.
+</div>
+
+<div class="visual-box">
+
+<img src="YOUR_PRESSURE_COMPARISON_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+The same force creates different pressures when applied over different areas.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>2. What is Pressure?</h2>
+
+<p>
+Pressure is defined as force acting per unit area.
+</p>
+
+<div class="formula">
+P = F/A
+</div>
+
+Where:
+
+<ul>
+<li><strong>P</strong> = Pressure (Pa)</li>
+<li><strong>F</strong> = Force (N)</li>
+<li><strong>A</strong> = Area (m²)</li>
+</ul>
+
+<div class="key-box">
+Pressure increases when force increases or when area decreases.
+</div>
+
+<h3>SI Unit of Pressure</h3>
+
+<div class="formula">
+1 Pa = 1 N/m²
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>3. Understanding Pressure</h2>
+
+<table>
+
+<tr>
+<th>Situation</th>
+<th>Pressure</th>
+</tr>
+
+<tr>
+<td>Large Force, Small Area</td>
+<td>High Pressure</td>
+</tr>
+
+<tr>
+<td>Small Force, Large Area</td>
+<td>Low Pressure</td>
+</tr>
+
+</table>
+
+<p>
+This explains why:
+</p>
+
+<ul>
+<li>Knives have sharp edges.</li>
+<li>Needles have pointed tips.</li>
+<li>Snowshoes are wide.</li>
+<li>Tank tracks are wider than ordinary tires.</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>4. Sample Problem: Calculating Pressure</h2>
+
+<div class="example-box">
+
+<h3>Example 1</h3>
+
+<p>
+A force of 240 N acts on an area of 0.08 m².
+Find the pressure.
+</p>
+
+<p>
+P = F/A
+</p>
+
+<p>
+P = 240/0.08
+</p>
+
+<p>
+P = 3000 Pa
+</p>
+
+<div class="key-box">
+Answer: 3000 Pa
+</div>
+
+</div>
+
+<div class="example-box">
+
+<h3>Example 2</h3>
+
+<p>
+A pressure of 8000 Pa acts on an area of 0.05 m².
+Find the force.
+</p>
+
+<p>
+F = PA
+</p>
+
+<p>
+F = (8000)(0.05)
+</p>
+
+<p>
+F = 400 N
+</p>
+
+<div class="key-box">
+Answer: 400 N
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>5. Pressure in Fluids</h2>
+
+<p>
+A fluid is any substance that can flow.
+</p>
+
+Examples:
+
+<ul>
+<li>Water</li>
+<li>Air</li>
+<li>Oil</li>
+<li>Gasoline</li>
+<li>Blood</li>
+</ul>
+
+<p>
+Unlike solids, fluids exert pressure in all directions.
+</p>
+
+<div class="key-box">
+Fluid pressure increases with depth.
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>6. Fluid Pressure Equation</h2>
+
+<div class="formula">
+P = ρgh
+</div>
+
+Where:
+
+<ul>
+<li><strong>ρ</strong> = Density (kg/m³)</li>
+<li><strong>g</strong> = 9.8 m/s²</li>
+<li><strong>h</strong> = Depth (m)</li>
+</ul>
+
+<div class="visual-box">
+
+<img src="YOUR_FLUID_DEPTH_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Pressure increases as depth increases.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>7. Why Does Pressure Increase with Depth?</h2>
+
+<p>
+As depth increases, more fluid exists above a given point.
+The weight of this fluid creates additional pressure.
+</p>
+
+<p>
+This is why divers feel increasing pressure as they descend deeper underwater.
+</p>
+
+<p>
+It is also why dam walls are built thicker at the bottom than at the top.
+</p>
+
+<div class="visual-box">
+
+<img src="YOUR_DAM_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+The lower portion of a dam experiences much greater pressure.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>8. Sample Problem: Fluid Pressure</h2>
+
+<div class="example-box">
+
+<h3>Example 3</h3>
+
+<p>
+A diver is 5 m below the water surface.
+Calculate the pressure due to water.
+</p>
+
+<p>
+ρ = 1000 kg/m³
+</p>
+
+<p>
+P = ρgh
+</p>
+
+<p>
+P = (1000)(9.8)(5)
+</p>
+
+<p>
+P = 49,000 Pa
+</p>
+
+<div class="key-box">
+Answer: 49,000 Pa
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>9. Pascal's Principle</h2>
+
+<p>
+French scientist <strong>Blaise Pascal</strong> discovered that pressure applied to a confined fluid is transmitted equally throughout the fluid.
+</p>
+
+<div class="key-box">
+Pressure applied to a confined fluid is transmitted equally in all directions.
+</div>
+
+<p>
+This principle allows small forces to produce much larger forces in hydraulic systems.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>10. Hydraulic Systems</h2>
+
+<p>
+Hydraulic systems use Pascal's Principle to multiply force.
+</p>
+
+Examples include:
+
+<ul>
+<li>Hydraulic lifts</li>
+<li>Hydraulic brakes</li>
+<li>Bulldozers</li>
+<li>Excavators</li>
+<li>Dentist chairs</li>
+</ul>
+
+<div class="formula">
+F₁/A₁ = F₂/A₂
+</div>
+
+<div class="visual-box">
+
+<img src="YOUR_HYDRAULIC_LIFT_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Hydraulic lifts multiply force using Pascal's Principle.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>11. Sample Problem: Hydraulic Lift</h2>
+
+<div class="example-box">
+
+<h3>Example 4</h3>
+
+<p>
+Input piston:
+</p>
+
+<ul>
+<li>Force = 150 N</li>
+<li>Area = 0.02 m²</li>
+</ul>
+
+<p>
+Output piston:
+</p>
+
+<ul>
+<li>Area = 0.40 m²</li>
+</ul>
+
+<p>
+Find the output force.
+</p>
+
+<p>
+150/0.02 = F₂/0.40
+</p>
+
+<p>
+F₂ = 3000 N
+</p>
+
+<div class="key-box">
+Answer: 3000 N
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Interactive Simulation: Fluid Pressure and Flow</h2>
+
+<p>
+Use the simulation below to investigate pressure at different depths and observe how fluids behave.
+</p>
+
+<div class="visual-box">
+
+<iframe
+src="https://phet.colorado.edu/sims/html/fluid-pressure-and-flow/latest/fluid-pressure-and-flow_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;">
+</iframe>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Simulation Task:</strong>
+Move the pressure gauge deeper into the water.
+What happens to the pressure reading?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The pressure reading increases because fluid pressure increases with depth.
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Practice Drills</h2>
+
+<div class="activity">
+
+<p>
+<strong>Drill 1:</strong>
+A force of 500 N acts on an area of 0.10 m².
+Find the pressure.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+P = 500/0.10 = 5000 Pa
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 2:</strong>
+Water depth is 8 m.
+Find the fluid pressure.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+P = (1000)(9.8)(8)
+<br><br>
+P = 78,400 Pa
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 3:</strong>
+A hydraulic press has an input force of 100 N and an area ratio of 1:20.
+Find the output force.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Output Force = 2000 N
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Checkpoint Challenge</h2>
+
+<div class="activity">
+
+<p>
+Why do tank tracks exert less pressure on the ground than ordinary vehicle tires?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Tank tracks spread the vehicle's weight over a much larger area, reducing pressure.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Pisay-Style Question:</strong>
+
+A hydraulic lift has an output piston area 30 times larger than the input piston area.
+
+If a mechanic pushes with a force of 120 N, what output force can ideally be produced?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+F₂ = 30 × 120
+<br><br>
+F₂ = 3600 N
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Lesson Summary</h2>
+
+<ul>
+
+<li>Pressure is force per unit area.</li>
+
+<li>Pressure is calculated using P = F/A.</li>
+
+<li>Pressure increases when area decreases.</li>
+
+<li>Fluid pressure increases with depth.</li>
+
+<li>Fluid pressure is calculated using P = ρgh.</li>
+
+<li>Pascal's Principle states that pressure is transmitted equally throughout a confined fluid.</li>
+
+<li>Hydraulic systems use Pascal's Principle to multiply force.</li>
+
+<li>Pressure concepts explain many engineering and everyday applications.</li>
+
+</ul>
+
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+
+<button
+class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_07_01_Q">
+
+Take the Quiz →
+
+</button>
+
+</div>
+  <script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+</body>
+</html>
+  

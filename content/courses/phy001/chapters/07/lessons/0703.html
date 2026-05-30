@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Chapter 7 Summary — Fluid Mechanics</title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{background:#e8f7f5;}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+<body>
+
+  
+<h1>Chapter 7 Summary — Fluid Mechanics</h1>
+
+<div class="section">
+
+<h2>Chapter Overview</h2>
+
+<p>
+In this chapter, we explored how fluids exert pressure and how fluids can create forces that allow objects to float, sink, or move. We examined pressure in fluids, Pascal's Principle, Archimedes' Principle, and Bernoulli's Principle. Together, these concepts explain many technologies and natural phenomena, from hydraulic lifts and submarine design to airplane flight and ship buoyancy.
+</p>
+
+<div class="key-box">
+<strong>Big Idea:</strong>
+Fluids can exert pressure, transmit forces, create buoyant forces, and produce pressure differences that influence motion.
+</div>
+
+</div>
+
+<!-- PRESSURE -->
+
+<div class="section">
+
+<h2>1. Pressure</h2>
+
+<p>
+Pressure measures how concentrated a force is over a given area.
+</p>
+
+<div class="formula">
+P = F/A
+</div>
+
+Where:
+
+<ul>
+<li><strong>P</strong> = Pressure (Pa)</li>
+<li><strong>F</strong> = Force (N)</li>
+<li><strong>A</strong> = Area (m²)</li>
+</ul>
+
+<div class="key-box">
+For the same force, a smaller area produces greater pressure.
+</div>
+
+<table>
+
+<tr>
+<th>Situation</th>
+<th>Pressure</th>
+</tr>
+
+<tr>
+<td>Large Force, Small Area</td>
+<td>High Pressure</td>
+</tr>
+
+<tr>
+<td>Small Force, Large Area</td>
+<td>Low Pressure</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- PRESSURE APPLICATIONS -->
+
+<div class="section">
+
+<h2>2. Applications of Pressure</h2>
+
+<ul>
+
+<li>Knife blades</li>
+
+<li>Needles</li>
+
+<li>Nails</li>
+
+<li>Snowshoes</li>
+
+<li>Tank tracks</li>
+
+<li>Hydraulic machinery</li>
+
+</ul>
+
+<div class="key-box">
+Reducing contact area increases pressure, while increasing area decreases pressure.
+</div>
+
+</div>
+
+<!-- FLUID PRESSURE -->
+
+<div class="section">
+
+<h2>3. Pressure in Fluids</h2>
+
+<p>
+Fluids exert pressure in all directions.
+</p>
+
+<p>
+Fluid pressure increases with depth because more fluid exists above deeper points.
+</p>
+
+<div class="formula">
+P = ρgh
+</div>
+
+Where:
+
+<ul>
+<li><strong>ρ</strong> = Density of fluid</li>
+<li><strong>g</strong> = Gravitational acceleration</li>
+<li><strong>h</strong> = Depth</li>
+</ul>
+
+<div class="key-box">
+The deeper you go in a fluid, the greater the pressure.
+</div>
+
+</div>
+
+<!-- DEPTH -->
+
+<div class="section">
+
+<h2>4. Effects of Increasing Depth</h2>
+
+<table>
+
+<tr>
+<th>Depth</th>
+<th>Pressure</th>
+</tr>
+
+<tr>
+<td>Shallow</td>
+<td>Lower</td>
+</tr>
+
+<tr>
+<td>Deep</td>
+<td>Higher</td>
+</tr>
+
+</table>
+
+<p>
+This explains:
+</p>
+
+<ul>
+
+<li>Why divers feel greater pressure underwater.</li>
+
+<li>Why submarines require strong hulls.</li>
+
+<li>Why dams are thicker at the bottom.</li>
+
+</ul>
+
+</div>
+
+<!-- PASCAL -->
+
+<div class="section">
+
+<h2>5. Pascal's Principle</h2>
+
+<p>
+Pascal's Principle states that pressure applied to a confined fluid is transmitted equally throughout the fluid.
+</p>
+
+<div class="key-box">
+Pressure applied anywhere in a confined fluid is transmitted equally in all directions.
+</div>
+
+<div class="formula">
+P₁ = P₂
+</div>
+
+<div class="formula">
+F₁/A₁ = F₂/A₂
+</div>
+
+</div>
+
+<!-- HYDRAULICS -->
+
+<div class="section">
+
+<h2>6. Hydraulic Systems</h2>
+
+<p>
+Hydraulic systems use Pascal's Principle to multiply force.
+</p>
+
+Examples include:
+
+<ul>
+
+<li>Hydraulic lifts</li>
+
+<li>Hydraulic brakes</li>
+
+<li>Excavators</li>
+
+<li>Bulldozers</li>
+
+<li>Dentist chairs</li>
+
+</ul>
+
+<div class="key-box">
+A larger output piston can produce a much larger force than the input piston.
+</div>
+
+</div>
+
+<!-- BUOYANCY -->
+
+<div class="section">
+
+<h2>7. Buoyancy</h2>
+
+<p>
+Buoyancy is the upward force exerted by a fluid on an immersed object.
+</p>
+
+<p>
+This force exists because pressure at the bottom of an object is greater than pressure at the top.
+</p>
+
+<div class="key-box">
+Pressure differences within a fluid create an upward buoyant force.
+</div>
+
+</div>
+
+<!-- ARCHIMEDES -->
+
+<div class="section">
+
+<h2>8. Archimedes' Principle</h2>
+
+<p>
+Archimedes' Principle states that the buoyant force acting on an object equals the weight of the displaced fluid.
+</p>
+
+<div class="formula">
+F<sub>b</sub> = ρVg
+</div>
+
+Where:
+
+<ul>
+
+<li><strong>F<sub>b</sub></strong> = Buoyant Force</li>
+
+<li><strong>ρ</strong> = Fluid Density</li>
+
+<li><strong>V</strong> = Volume Displaced</li>
+
+<li><strong>g</strong> = Gravitational Acceleration</li>
+
+</ul>
+
+<div class="key-box">
+The greater the volume displaced, the greater the buoyant force.
+</div>
+
+</div>
+
+<!-- FLOATING -->
+
+<div class="section">
+
+<h2>9. Floating and Sinking</h2>
+
+<table>
+
+<tr>
+<th>Condition</th>
+<th>Result</th>
+</tr>
+
+<tr>
+<td>Buoyant Force > Weight</td>
+<td>Object Rises</td>
+</tr>
+
+<tr>
+<td>Buoyant Force = Weight</td>
+<td>Object Floats or Suspended</td>
+</tr>
+
+<tr>
+<td>Buoyant Force < Weight</td>
+<td>Object Sinks</td>
+</tr>
+
+</table>
+
+<div class="key-box">
+Objects float when their average density is less than the density of the fluid.
+</div>
+
+</div>
+
+<!-- DENSITY -->
+
+<div class="section">
+
+<h2>10. Density and Buoyancy</h2>
+
+<table>
+
+<tr>
+<th>Density Comparison</th>
+<th>Behavior</th>
+</tr>
+
+<tr>
+<td>Object less dense than fluid</td>
+<td>Floats</td>
+</tr>
+
+<tr>
+<td>Object equal density to fluid</td>
+<td>Suspended</td>
+</tr>
+
+<tr>
+<td>Object more dense than fluid</td>
+<td>Sinks</td>
+</tr>
+
+</table>
+
+<p>
+Examples:
+</p>
+
+<ul>
+
+<li>Wood floats in water.</li>
+
+<li>Ice floats in water.</li>
+
+<li>Steel nails sink.</li>
+
+<li>Ships float because their average density is lower than water.</li>
+
+</ul>
+
+</div>
+
+<!-- BERNOULLI -->
+
+<div class="section">
+
+<h2>11. Bernoulli's Principle</h2>
+
+<p>
+Bernoulli discovered that pressure and fluid speed are related.
+</p>
+
+<div class="key-box">
+As fluid speed increases, pressure decreases.
+</div>
+
+<p>
+This principle explains many fluid flow phenomena.
+</p>
+
+</div>
+
+<!-- BERNOULLI APPLICATIONS -->
+
+<div class="section">
+
+<h2>12. Applications of Bernoulli's Principle</h2>
+
+<ul>
+
+<li>Airplane wings</li>
+
+<li>Perfume atomizers</li>
+
+<li>Venturi meters</li>
+
+<li>Carburetors</li>
+
+<li>Fast-moving fluids in pipes</li>
+
+<li>Roofs lifted by strong winds</li>
+
+</ul>
+
+</div>
+
+<!-- AIRPLANE -->
+
+<div class="section">
+
+<h2>13. Airplane Wing Lift</h2>
+
+<p>
+Air moves faster over the curved top surface of a wing than beneath it.
+</p>
+
+<p>
+According to Bernoulli's Principle:
+</p>
+
+<ul>
+
+<li>Faster air → Lower pressure</li>
+
+<li>Slower air → Higher pressure</li>
+
+</ul>
+
+<p>
+The pressure difference produces lift.
+</p>
+
+<div class="key-box">
+Pressure differences created by moving fluids can generate upward forces.
+</div>
+
+</div>
+
+<!-- FORMULA SUMMARY -->
+
+<div class="section">
+
+<h2>Formula Summary</h2>
+
+<table>
+
+<tr>
+<th>Concept</th>
+<th>Formula</th>
+</tr>
+
+<tr>
+<td>Pressure</td>
+<td>P = F/A</td>
+</tr>
+
+<tr>
+<td>Fluid Pressure</td>
+<td>P = ρgh</td>
+</tr>
+
+<tr>
+<td>Pascal's Principle</td>
+<td>F₁/A₁ = F₂/A₂</td>
+</tr>
+
+<tr>
+<td>Buoyant Force</td>
+<td>F<sub>b</sub> = ρVg</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- REVIEW -->
+
+<div class="section">
+
+<h2>Chapter Review Checkpoint</h2>
+
+<div class="activity">
+
+<p>
+<strong>1.</strong> What happens to pressure when area decreases but force remains constant?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Pressure increases.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>2.</strong> Why does fluid pressure increase with depth?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Because more fluid above creates greater weight and pressure.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>3.</strong> What principle explains hydraulic lifts?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Pascal's Principle.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>4.</strong> What determines whether an object floats or sinks?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+The relationship between buoyant force, weight, and density.
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>5.</strong> According to Bernoulli's Principle, what happens to pressure when fluid speed increases?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+Pressure decreases.
+</div>
+
+</div>
+
+</div>
+
+<!-- FINAL SUMMARY -->
+
+<div class="section">
+
+<h2>Final Chapter Summary</h2>
+
+<ul>
+
+<li>Pressure is force per unit area.</li>
+
+<li>Pressure increases when force increases or area decreases.</li>
+
+<li>Fluid pressure increases with depth.</li>
+
+<li>Pascal's Principle explains hydraulic force multiplication.</li>
+
+<li>Buoyant force is caused by pressure differences in fluids.</li>
+
+<li>Archimedes' Principle relates buoyant force to displaced fluid.</li>
+
+<li>Density determines whether objects float, sink, or remain suspended.</li>
+
+<li>Bernoulli's Principle states that faster-moving fluids exert lower pressure.</li>
+
+<li>Pressure differences in moving fluids explain lift and many engineering applications.</li>
+
+<li>Fluid mechanics helps explain ships, submarines, airplanes, hydraulic systems, and countless real-world technologies.</li>
+
+</ul>
+
+</div>
+<script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+</body>
+</html>

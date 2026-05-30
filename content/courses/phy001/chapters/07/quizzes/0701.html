@@ -1,1 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title></title>
 
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 5 Assessment: Rotational Motion and Gravitation</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+const quizData = [
+
+{
+q:"Pressure is defined as:",
+c:[
+"Force multiplied by area",
+"Force divided by area",
+"Area divided by force",
+"Mass divided by volume"
+],
+a:1,
+e:"Pressure is the amount of force applied per unit area."
+},
+
+{
+q:"The equation for pressure is:",
+c:[
+"P = FA",
+"P = F/A",
+"P = A/F",
+"P = mg"
+],
+a:1,
+e:"Pressure is calculated using force divided by area."
+},
+
+{
+q:"The SI unit of pressure is:",
+c:[
+"Newton",
+"Joule",
+"Pascal",
+"Watt"
+],
+a:2,
+e:"The SI unit of pressure is the Pascal (Pa)."
+},
+
+{
+q:"One Pascal is equal to:",
+c:[
+"1 N·m",
+"1 N/m²",
+"1 kg/m³",
+"1 J/s"
+],
+a:1,
+e:"1 Pascal = 1 Newton per square meter."
+},
+
+{
+q:"For the same force, pressure increases when:",
+c:[
+"Area increases",
+"Area decreases",
+"Mass increases",
+"Density decreases"
+],
+a:1,
+e:"A smaller area produces greater pressure."
+},
+
+{
+q:"Why does a sharp knife cut more easily than a dull knife?",
+c:[
+"It is heavier",
+"It has greater area",
+"It produces greater pressure due to smaller area",
+"It has greater density"
+],
+a:2,
+e:"The smaller contact area creates greater pressure."
+},
+
+{
+q:"A force of 300 N acts on an area of 0.10 m². What pressure is produced?",
+c:[
+"300 Pa",
+"3000 Pa",
+"30,000 Pa",
+"300,000 Pa"
+],
+a:1,
+e:"P = F/A = 300/0.10 = 3000 Pa."
+},
+
+{
+q:"A pressure of 5000 Pa acts on an area of 0.04 m². Find the force.",
+c:[
+"125 N",
+"200 N",
+"250 N",
+"500 N"
+],
+a:1,
+e:"F = PA = (5000)(0.04) = 200 N."
+},
+
+{
+q:"Which of the following is a fluid?",
+c:[
+"Wood",
+"Steel",
+"Water",
+"Glass"
+],
+a:2,
+e:"Fluids can flow. Water is a fluid."
+},
+
+{
+q:"Fluid pressure acts:",
+c:[
+"Only downward",
+"Only upward",
+"Only sideways",
+"In all directions"
+],
+a:3,
+e:"Fluid pressure is transmitted in all directions."
+},
+
+{
+q:"Fluid pressure increases as:",
+c:[
+"Depth decreases",
+"Depth increases",
+"Density decreases",
+"Temperature decreases"
+],
+a:1,
+e:"Pressure increases with depth because more fluid is above."
+},
+
+{
+q:"The equation for fluid pressure is:",
+c:[
+"P = F/A",
+"P = mv",
+"P = ρgh",
+"P = ma"
+],
+a:2,
+e:"Fluid pressure depends on density, gravity, and depth."
+},
+
+{
+q:"A diver goes deeper underwater. What happens to the pressure?",
+c:[
+"It decreases",
+"It stays constant",
+"It increases",
+"It becomes zero"
+],
+a:2,
+e:"Pressure increases with depth."
+},
+
+{
+q:"Water has a density of 1000 kg/m³. What is the pressure at a depth of 2 m? (g = 9.8 m/s²)",
+c:[
+"980 Pa",
+"1,960 Pa",
+"19,600 Pa",
+"196,000 Pa"
+],
+a:2,
+e:"P = ρgh = (1000)(9.8)(2) = 19,600 Pa."
+},
+
+{
+q:"Why are dam walls thicker at the bottom?",
+c:[
+"They support more water volume",
+"The bottom experiences greater pressure",
+"The concrete is stronger there",
+"To reduce gravity"
+],
+a:1,
+e:"Pressure increases with depth."
+},
+
+{
+q:"Pascal's Principle states that pressure applied to a confined fluid is:",
+c:[
+"Destroyed",
+"Reduced",
+"Transmitted equally throughout the fluid",
+"Only transmitted upward"
+],
+a:2,
+e:"Pressure is transmitted equally in all directions within a confined fluid."
+},
+
+{
+q:"Which scientist is associated with Pascal's Principle?",
+c:[
+"Archimedes",
+"Bernoulli",
+"Pascal",
+"Newton"
+],
+a:2,
+e:"Blaise Pascal formulated Pascal's Principle."
+},
+
+{
+q:"Hydraulic lifts operate primarily because of:",
+c:[
+"Bernoulli's Principle",
+"Pascal's Principle",
+"Hooke's Law",
+"Kepler's Laws"
+],
+a:1,
+e:"Hydraulic systems use Pascal's Principle."
+},
+
+{
+q:"The equation used in hydraulic systems is:",
+c:[
+"F₁A₁ = F₂A₂",
+"F₁/A₁ = F₂/A₂",
+"P = ρgh",
+"F = ma"
+],
+a:1,
+e:"Pressure remains equal throughout a confined fluid."
+},
+
+{
+q:"A hydraulic system has an input force of 100 N on a piston with area 0.02 m². The output piston area is 0.40 m². What is the output force?",
+c:[
+"500 N",
+"1000 N",
+"1500 N",
+"2000 N"
+],
+a:3,
+e:"100/0.02 = F₂/0.40, therefore F₂ = 2000 N."
+},
+
+{
+q:"A hydraulic press multiplies force because:",
+c:[
+"It creates energy",
+"The output piston has larger area",
+"The fluid becomes heavier",
+"The pressure disappears"
+],
+a:1,
+e:"A larger output area produces a larger force."
+},
+
+{
+q:"Which of the following uses Pascal's Principle?",
+c:[
+"Airplane wing",
+"Hydraulic brake",
+"Pendulum",
+"Speaker"
+],
+a:1,
+e:"Hydraulic brakes use Pascal's Principle."
+},
+
+{
+q:"A force of 600 N acts on an area of 0.20 m². Find the pressure.",
+c:[
+"1200 Pa",
+"3000 Pa",
+"6000 Pa",
+"12,000 Pa"
+],
+a:1,
+e:"P = 600/0.20 = 3000 Pa."
+},
+
+{
+q:"At what depth is fluid pressure greatest?",
+c:[
+"1 m",
+"3 m",
+"5 m",
+"10 m"
+],
+a:3,
+e:"Greater depth produces greater pressure."
+},
+
+{
+q:"A pressure gauge is moved deeper into water. What will happen to the reading?",
+c:[
+"It decreases",
+"It remains constant",
+"It increases",
+"It becomes zero"
+],
+a:2,
+e:"Pressure increases with depth."
+},
+
+{
+q:"Pisay-Style: Two students stand on snow. Student A wears ordinary shoes while Student B wears snowshoes. Both have the same weight. Why does Student B sink less?",
+c:[
+"Snowshoes reduce weight",
+"Snowshoes reduce gravity",
+"Snowshoes increase area, reducing pressure",
+"Snowshoes increase force"
+],
+a:2,
+e:"A larger contact area reduces pressure."
+},
+
+{
+q:"Pisay-Style: A hydraulic lift has an output piston area 20 times larger than the input piston. If the input force is 150 N, what output force can ideally be produced?",
+c:[
+"750 N",
+"1500 N",
+"3000 N",
+"6000 N"
+],
+a:2,
+e:"F₂ = 20 × 150 = 3000 N."
+},
+
+{
+q:"Pisay-Style: A diver descends from 4 m to 8 m below the surface. Assuming water density remains constant, what happens to the fluid pressure?",
+c:[
+"It doubles",
+"It halves",
+"It remains the same",
+"It becomes zero"
+],
+a:0,
+e:"Pressure is directly proportional to depth. Doubling depth doubles pressure."
+},
+
+{
+q:"Pisay-Style: Why can a hydraulic car lift raise a vehicle weighing several thousand newtons while a mechanic applies only a relatively small force?",
+c:[
+"The fluid creates energy",
+"The large piston area multiplies force through Pascal's Principle",
+"The car becomes lighter",
+"Gravity decreases inside the system"
+],
+a:1,
+e:"Pascal's Principle allows force multiplication through differences in piston area."
+},
+
+{
+q:"Which statement best summarizes this lesson?",
+c:[
+"Pressure only exists in liquids",
+"Pressure decreases with depth",
+"Pressure, fluid pressure, and Pascal's Principle explain how forces behave in fluids and hydraulic systems",
+"Hydraulic systems violate conservation of energy"
+],
+a:2,
+e:"The lesson focused on pressure, fluid pressure, and force transmission in fluids."
+}
+
+];
+
+
+  let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

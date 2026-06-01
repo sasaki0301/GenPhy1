@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Temperature, Heat, and Thermal Expansion</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Temperature, Heat, and Thermal Expansion - Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+
+  const quizData = [
+
+{
+q:"Temperature is a measure of:",
+c:[
+"The total heat in an object",
+"The average kinetic energy of particles",
+"The mass of particles",
+"The volume of particles"
+],
+a:1,
+e:"Temperature measures the average kinetic energy of the particles in a substance."
+},
+
+{
+q:"As the temperature of a substance increases, its particles generally:",
+c:[
+"Move slower",
+"Stop moving",
+"Move faster",
+"Become lighter"
+],
+a:2,
+e:"Higher temperatures correspond to faster particle motion."
+},
+
+{
+q:"Heat is best defined as:",
+c:[
+"The amount of matter in an object",
+"The average kinetic energy of particles",
+"Energy transferred because of a temperature difference",
+"The temperature of an object"
+],
+a:2,
+e:"Heat is energy transferred from a hotter object to a colder object."
+},
+
+{
+q:"Which statement correctly distinguishes heat from temperature?",
+c:[
+"Heat and temperature are the same",
+"Temperature is energy transfer; heat is stored energy",
+"Heat is energy transfer, while temperature measures particle energy",
+"Temperature measures mass while heat measures volume"
+],
+a:2,
+e:"Temperature measures average particle energy, while heat is energy being transferred."
+},
+
+{
+q:"Thermal equilibrium occurs when:",
+c:[
+"Objects have equal masses",
+"Objects have equal volumes",
+"Objects reach the same temperature",
+"Objects stop moving"
+],
+a:2,
+e:"At thermal equilibrium, no net heat transfer occurs."
+},
+
+{
+q:"Which temperature scale begins at absolute zero?",
+c:[
+"Celsius",
+"Fahrenheit",
+"Kelvin",
+"Rankine"
+],
+a:2,
+e:"Kelvin starts at absolute zero."
+},
+
+{
+q:"Convert 25°C to Kelvin.",
+c:[
+"248.15 K",
+"273.15 K",
+"298.15 K",
+"325.15 K"
+],
+a:2,
+e:"K = °C + 273.15 = 25 + 273.15 = 298.15 K."
+},
+
+{
+q:"Convert 100°C to Kelvin.",
+c:[
+"173.15 K",
+"273.15 K",
+"373.15 K",
+"473.15 K"
+],
+a:2,
+e:"K = 100 + 273.15 = 373.15 K."
+},
+
+{
+q:"Convert 20°C to Fahrenheit.",
+c:[
+"52°F",
+"64°F",
+"68°F",
+"72°F"
+],
+a:2,
+e:"°F = (9/5)(20) + 32 = 68°F."
+},
+
+{
+q:"Convert 212°F to Celsius.",
+c:[
+"0°C",
+"50°C",
+"100°C",
+"180°C"
+],
+a:2,
+e:"212°F corresponds to the boiling point of water, 100°C."
+},
+
+{
+q:"Heat transfer through direct contact is called:",
+c:[
+"Convection",
+"Radiation",
+"Conduction",
+"Diffusion"
+],
+a:2,
+e:"Conduction occurs through direct particle-to-particle contact."
+},
+
+{
+q:"Which situation is an example of conduction?",
+c:[
+"Sunlight warming Earth",
+"Boiling water circulating",
+"A metal spoon becoming hot in soup",
+"Wind carrying warm air"
+],
+a:2,
+e:"Heat travels through the metal spoon by conduction."
+},
+
+{
+q:"Heat transfer by fluid motion is called:",
+c:[
+"Conduction",
+"Convection",
+"Radiation",
+"Reflection"
+],
+a:1,
+e:"Convection occurs when warmer fluids rise and cooler fluids sink."
+},
+
+{
+q:"Which example best demonstrates convection?",
+c:[
+"A frying pan heating up",
+"A spoon warming in tea",
+"Boiling water in a pot",
+"Sunlight warming skin"
+],
+a:2,
+e:"Boiling water creates convection currents."
+},
+
+{
+q:"Heat transfer through electromagnetic waves is called:",
+c:[
+"Conduction",
+"Convection",
+"Radiation",
+"Diffusion"
+],
+a:2,
+e:"Radiation does not require a medium."
+},
+
+{
+q:"Which heat transfer method does NOT require a medium?",
+c:[
+"Conduction",
+"Convection",
+"Radiation",
+"Evaporation"
+],
+a:2,
+e:"Radiation can travel through a vacuum."
+},
+
+{
+q:"How does energy from the Sun reach Earth?",
+c:[
+"Conduction",
+"Convection",
+"Radiation",
+"Compression"
+],
+a:2,
+e:"Space is a vacuum, so energy must travel via radiation."
+},
+
+{
+q:"Most materials expand when heated because:",
+c:[
+"Their mass increases",
+"Their particles move farther apart",
+"Their density increases",
+"Gravity decreases"
+],
+a:1,
+e:"Heating increases particle motion and spacing."
+},
+
+{
+q:"The equation for linear thermal expansion is:",
+c:[
+"Q = mcΔT",
+"ΔL = αL₀ΔT",
+"P = ρgh",
+"ΔU = Q − W"
+],
+a:1,
+e:"This equation calculates change in length due to temperature changes."
+},
+
+{
+q:"A metal rod expands when heated. Which quantity directly affects the amount of expansion?",
+c:[
+"Coefficient of expansion",
+"Color",
+"Shape",
+"Pressure only"
+],
+a:0,
+e:"The coefficient of expansion determines how much a material expands."
+},
+
+{
+q:"A steel rod 10 m long experiences a temperature increase of 50°C. If α = 1.2×10⁻⁵ /°C, what is the increase in length?",
+c:[
+"0.003 m",
+"0.006 m",
+"0.012 m",
+"0.060 m"
+],
+a:1,
+e:"ΔL = αL₀ΔT = (1.2×10⁻⁵)(10)(50)=0.006 m."
+},
+
+{
+q:"Why are expansion joints placed in bridges?",
+c:[
+"To make bridges lighter",
+"To reduce friction",
+"To allow thermal expansion",
+"To increase pressure"
+],
+a:2,
+e:"Expansion joints prevent structural damage due to temperature changes."
+},
+
+{
+q:"Railroad tracks contain gaps primarily because:",
+c:[
+"To save materials",
+"To reduce weight",
+"To allow expansion during hot weather",
+"To improve traction"
+],
+a:2,
+e:"The gaps prevent buckling caused by thermal expansion."
+},
+
+{
+q:"When a substance cools, its particles generally:",
+c:[
+"Move faster",
+"Move slower",
+"Become heavier",
+"Disappear"
+],
+a:1,
+e:"Cooling reduces particle kinetic energy."
+},
+
+{
+q:"Which material property determines how much a substance expands for a given temperature increase?",
+c:[
+"Density",
+"Specific heat",
+"Coefficient of expansion",
+"Volume"
+],
+a:2,
+e:"The coefficient of expansion measures sensitivity to temperature changes."
+},
+
+{
+q:"Pisay-Style: Two identical rods have the same length and experience the same temperature increase. Rod A has twice the coefficient of expansion of Rod B. Which expands more?",
+c:[
+"Rod A",
+"Rod B",
+"Both expand equally",
+"Cannot be determined"
+],
+a:0,
+e:"Expansion is directly proportional to the coefficient of expansion."
+},
+
+{
+q:"Pisay-Style: A steel bridge is constructed during winter. What potential problem may occur during summer if expansion joints are not included?",
+c:[
+"The bridge becomes lighter",
+"The bridge contracts",
+"The bridge may buckle due to expansion",
+"The bridge becomes colder"
+],
+a:2,
+e:"Higher temperatures cause expansion that can create large stresses."
+},
+
+{
+q:"Pisay-Style: A student touches a metal desk and a wooden desk in the same room. The metal feels colder. Why?",
+c:[
+"The metal actually has a lower temperature",
+"The metal conducts heat away from the hand faster",
+"The metal has less mass",
+"The wood generates heat"
+],
+a:1,
+e:"Metal is a better conductor and removes heat from your hand more rapidly."
+},
+
+{
+q:"Pisay-Style: On a hot day, overhead power lines sag more than usual. Which concept explains this?",
+c:[
+"Radiation",
+"Thermal equilibrium",
+"Thermal expansion",
+"Convection"
+],
+a:2,
+e:"Heating causes the metal wires to expand and sag."
+},
+
+{
+q:"Which statement best summarizes this lesson?",
+c:[
+"Temperature, heat transfer, and thermal expansion are all consequences of particle motion and energy transfer",
+"Heat and temperature are identical concepts",
+"Only solids expand when heated",
+"Radiation requires a medium"
+],
+a:0,
+e:"The lesson connects particle motion, temperature, heat transfer, and expansion."
+}
+
+];
+
+  let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>
+  

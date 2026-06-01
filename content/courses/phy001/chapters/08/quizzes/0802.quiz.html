@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Heat and Thermal Expansion Calculations</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Heat and Thermal Expansion Calculations - Quiz</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+
+  const quizData = [
+
+{
+q:"Specific heat capacity is defined as:",
+c:[
+"The amount of heat needed to melt 1 kg of a substance",
+"The heat required to raise 1 kg of a substance by 1°C",
+"The temperature change of a material",
+"The amount of heat stored in an object"
+],
+a:1,
+e:"Specific heat capacity is the amount of heat required to raise the temperature of 1 kilogram of a substance by 1°C."
+},
+
+{
+q:"The SI unit of specific heat capacity is:",
+c:[
+"J",
+"J/kg",
+"J/kg·°C",
+"N/kg"
+],
+a:2,
+e:"Specific heat capacity is measured in joules per kilogram per degree Celsius."
+},
+
+{
+q:"The equation used to calculate heat energy is:",
+c:[
+"Q = mv",
+"Q = mcΔT",
+"ΔU = Q − W",
+"P = F/A"
+],
+a:1,
+e:"Heat energy is calculated using Q = mcΔT."
+},
+
+{
+q:"In the equation Q = mcΔT, ΔT represents:",
+c:[
+"Initial temperature",
+"Final temperature",
+"Temperature change",
+"Absolute temperature"
+],
+a:2,
+e:"ΔT is the difference between final and initial temperatures."
+},
+
+{
+q:"Which substance generally requires the most energy to increase its temperature by 1°C?",
+c:[
+"Copper",
+"Iron",
+"Aluminum",
+"Water"
+],
+a:3,
+e:"Water has a very high specific heat capacity of about 4186 J/kg·°C."
+},
+
+{
+q:"A material with a high specific heat capacity:",
+c:[
+"Heats up quickly",
+"Requires more energy to change temperature",
+"Has low density",
+"Always expands more"
+],
+a:1,
+e:"High specific heat means more energy is needed for a temperature change."
+},
+
+{
+q:"How much heat is needed to raise the temperature of 2 kg of water by 10°C? (c = 4186 J/kg·°C)",
+c:[
+"41,860 J",
+"83,720 J",
+"20,930 J",
+"418,600 J"
+],
+a:1,
+e:"Q = mcΔT = (2)(4186)(10) = 83,720 J."
+},
+
+{
+q:"A 5 kg object with c = 500 J/kg·°C is heated by 20°C. How much heat is absorbed?",
+c:[
+"5,000 J",
+"10,000 J",
+"25,000 J",
+"50,000 J"
+],
+a:3,
+e:"Q = (5)(500)(20) = 50,000 J."
+},
+
+{
+q:"Heat naturally flows:",
+c:[
+"From cold objects to hot objects",
+"From hot objects to cold objects",
+"Only through solids",
+"Only through liquids"
+],
+a:1,
+e:"Heat always flows spontaneously from hotter regions to colder regions."
+},
+
+{
+q:"In an isolated system, heat lost by one object equals:",
+c:[
+"The object's mass",
+"The object's temperature",
+"The heat gained by another object",
+"The object's internal energy"
+],
+a:2,
+e:"This is a consequence of conservation of energy."
+},
+
+{
+q:"Calorimetry is the study of:",
+c:[
+"Motion",
+"Pressure",
+"Heat transfer",
+"Electricity"
+],
+a:2,
+e:"Calorimetry measures heat exchange between substances."
+},
+
+{
+q:"When a hot object is placed in contact with a cold object, they eventually reach:",
+c:[
+"Absolute zero",
+"Thermal expansion",
+"Thermal equilibrium",
+"Radiation balance"
+],
+a:2,
+e:"Thermal equilibrium occurs when temperatures become equal."
+},
+
+{
+q:"The equation commonly used in calorimetry is:",
+c:[
+"Heat Lost = Heat Gained",
+"Q = mv",
+"P = F/A",
+"ΔU = Q − W"
+],
+a:0,
+e:"Energy conservation requires heat lost to equal heat gained."
+},
+
+{
+q:"Most solids expand when heated because:",
+c:[
+"Their mass increases",
+"Their particles move farther apart",
+"Their density increases",
+"They gain new particles"
+],
+a:1,
+e:"Heating increases particle motion and separation."
+},
+
+{
+q:"The equation for linear thermal expansion is:",
+c:[
+"Q = mcΔT",
+"ΔL = αL₀ΔT",
+"P = ρgh",
+"ΔU = Q − W"
+],
+a:1,
+e:"This equation predicts changes in length caused by temperature changes."
+},
+
+{
+q:"In the equation ΔL = αL₀ΔT, α represents:",
+c:[
+"Density",
+"Specific heat capacity",
+"Coefficient of linear expansion",
+"Pressure"
+],
+a:2,
+e:"The coefficient of expansion determines how much a material expands."
+},
+
+{
+q:"A 20 m steel rail experiences a temperature increase of 30°C. If α = 1.2×10⁻⁵ /°C, what is the expansion?",
+c:[
+"0.0036 m",
+"0.0072 m",
+"0.012 m",
+"0.072 m"
+],
+a:1,
+e:"ΔL = (1.2×10⁻⁵)(20)(30) = 0.0072 m."
+},
+
+{
+q:"Which engineering structure requires expansion joints?",
+c:[
+"Bridge",
+"Book",
+"Glass cup",
+"Battery"
+],
+a:0,
+e:"Expansion joints accommodate thermal expansion."
+},
+
+{
+q:"A copper cable becomes longer during a hot afternoon because of:",
+c:[
+"Convection",
+"Radiation",
+"Thermal expansion",
+"Conduction"
+],
+a:2,
+e:"Heating causes most materials to expand."
+},
+
+{
+q:"If the temperature change doubles, thermal expansion will:",
+c:[
+"Be cut in half",
+"Remain unchanged",
+"Double",
+"Quadruple"
+],
+a:2,
+e:"Expansion is directly proportional to temperature change."
+},
+
+{
+q:"A 2 kg aluminum block absorbs 18,000 J of heat. If c = 900 J/kg·°C, what is its temperature increase?",
+c:[
+"5°C",
+"10°C",
+"20°C",
+"40°C"
+],
+a:1,
+e:"ΔT = Q/(mc) = 18,000/(2×900) = 10°C."
+},
+
+{
+q:"A material with a lower specific heat capacity will:",
+c:[
+"Heat up faster for the same energy input",
+"Heat up slower",
+"Never cool down",
+"Always expand more"
+],
+a:0,
+e:"Less energy is required to change its temperature."
+},
+
+{
+q:"If two objects receive the same amount of heat, which will have the greater temperature increase?",
+c:[
+"The one with higher specific heat",
+"The one with lower specific heat",
+"They increase equally",
+"Cannot be determined"
+],
+a:1,
+e:"Lower specific heat results in a larger temperature change."
+},
+
+{
+q:"Why does water help regulate Earth's climate?",
+c:[
+"It has low density",
+"It has low specific heat",
+"It has high specific heat",
+"It conducts electricity"
+],
+a:2,
+e:"Water can absorb large amounts of heat with relatively small temperature changes."
+},
+
+{
+q:"Pisay-Style: Two identical metal rods have the same length and experience the same temperature increase. Rod A has a coefficient of expansion three times that of Rod B. How do their expansions compare?",
+c:[
+"Rod A expands three times as much",
+"Rod B expands three times as much",
+"They expand equally",
+"Cannot be determined"
+],
+a:0,
+e:"Expansion is directly proportional to the coefficient of expansion."
+},
+
+{
+q:"Pisay-Style: A 4 kg aluminum block and a 4 kg iron block absorb the same amount of heat. Which experiences the greater temperature increase?",
+c:[
+"Aluminum",
+"Iron",
+"Both increase equally",
+"Cannot be determined"
+],
+a:1,
+e:"Iron has a lower specific heat capacity and therefore experiences a larger temperature increase."
+},
+
+{
+q:"Pisay-Style: A bridge is built with no expansion joints. During a heat wave, engineers observe that the bridge deck begins to deform. Which physical principle best explains this?",
+c:[
+"Convection",
+"Thermal equilibrium",
+"Thermal expansion",
+"Radiation"
+],
+a:2,
+e:"Thermal expansion causes structures to increase in size when heated."
+},
+
+{
+q:"Pisay-Style: A 10 kg water tank and a 10 kg copper block receive the same amount of heat energy. Which will experience the smaller temperature increase?",
+c:[
+"Water",
+"Copper",
+"Both experience the same increase",
+"Cannot be determined"
+],
+a:0,
+e:"Water's high specific heat capacity results in a smaller temperature increase."
+},
+
+{
+q:"Pisay-Style: A scientist wants to design a material that minimizes temperature changes when exposed to varying environmental conditions. Which property should be maximized?",
+c:[
+"Density",
+"Coefficient of expansion",
+"Specific heat capacity",
+"Mass"
+],
+a:2,
+e:"A high specific heat capacity resists temperature changes."
+},
+
+{
+q:"Which statement best summarizes this lesson?",
+c:[
+"Heat calculations and thermal expansion help explain how materials respond to energy transfer and temperature changes",
+"Heat and temperature are identical",
+"Only solids absorb heat",
+"Thermal expansion occurs only in metals"
+],
+a:0,
+e:"This lesson focused on heat energy calculations, calorimetry, and thermal expansion."
+}
+
+];
+
+  let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

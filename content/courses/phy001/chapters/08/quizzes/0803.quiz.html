@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 5 Assessment: Rotational Motion and Gravitation</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 5 Assessment: Rotational Motion and Gravitation</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+
+  const quizData = [
+
+{
+q:"Internal energy is best defined as:",
+c:[
+"The energy of an object's motion through space",
+"The total microscopic kinetic and potential energy of particles",
+"The heat energy leaving a system",
+"The work done by a system"
+],
+a:1,
+e:"Internal energy is the total microscopic kinetic and potential energy stored within a system."
+},
+
+{
+q:"Which of the following is NOT a way energy can enter or leave a thermodynamic system?",
+c:[
+"Heat",
+"Work",
+"Internal Energy",
+"Energy Transfer"
+],
+a:2,
+e:"Internal energy is stored within the system, while heat and work transfer energy."
+},
+
+{
+q:"Heat is defined as:",
+c:[
+"Stored energy inside a system",
+"Energy transferred because of a temperature difference",
+"The kinetic energy of a moving object",
+"The pressure of a gas"
+],
+a:1,
+e:"Heat is energy transferred due to a temperature difference."
+},
+
+{
+q:"Work in thermodynamics refers to:",
+c:[
+"Energy transferred by forces causing displacement",
+"Stored thermal energy",
+"Temperature change",
+"Particle collisions only"
+],
+a:0,
+e:"Work occurs when forces cause motion or displacement."
+},
+
+{
+q:"The First Law of Thermodynamics is a statement of:",
+c:[
+"Momentum conservation",
+"Charge conservation",
+"Energy conservation",
+"Mass conservation"
+],
+a:2,
+e:"The First Law is the law of conservation of energy applied to thermodynamic systems."
+},
+
+{
+q:"The equation for the First Law of Thermodynamics is:",
+c:[
+"Q = mcΔT",
+"ΔL = αL₀ΔT",
+"ΔU = Q − W",
+"P = F/A"
+],
+a:2,
+e:"The First Law relates internal energy, heat, and work."
+},
+
+{
+q:"In the equation ΔU = Q − W, ΔU represents:",
+c:[
+"Heat transferred",
+"Work done",
+"Change in internal energy",
+"Temperature change"
+],
+a:2,
+e:"ΔU is the change in internal energy."
+},
+
+{
+q:"In the equation ΔU = Q − W, Q represents:",
+c:[
+"Heat added to the system",
+"Heat lost by the system",
+"Work done on the system",
+"Temperature change"
+],
+a:0,
+e:"Q is positive when heat enters the system."
+},
+
+{
+q:"In the equation ΔU = Q − W, W represents:",
+c:[
+"Heat lost",
+"Work done by the system",
+"Mass of the system",
+"Internal energy"
+],
+a:1,
+e:"W is positive when the system does work on its surroundings."
+},
+
+{
+q:"A system absorbs 600 J of heat and performs 200 J of work. What is the change in internal energy?",
+c:[
+"200 J",
+"400 J",
+"600 J",
+"800 J"
+],
+a:1,
+e:"ΔU = 600 − 200 = 400 J."
+},
+
+{
+q:"A gas absorbs 1000 J of heat and performs 700 J of work. Find ΔU.",
+c:[
+"300 J",
+"700 J",
+"1000 J",
+"1700 J"
+],
+a:0,
+e:"ΔU = 1000 − 700 = 300 J."
+},
+
+{
+q:"A system absorbs 500 J of heat and performs 800 J of work. What happens to its internal energy?",
+c:[
+"It increases by 300 J",
+"It decreases by 300 J",
+"It remains constant",
+"It increases by 800 J"
+],
+a:1,
+e:"ΔU = 500 − 800 = -300 J."
+},
+
+{
+q:"When heat is added to a system while no work is done:",
+c:[
+"Internal energy decreases",
+"Internal energy increases by the amount of heat added",
+"Internal energy remains unchanged",
+"The system loses energy"
+],
+a:1,
+e:"If W = 0, then ΔU = Q."
+},
+
+{
+q:"When a system does work but receives no heat:",
+c:[
+"Its internal energy decreases",
+"Its internal energy increases",
+"Its temperature remains constant",
+"Energy is created"
+],
+a:0,
+e:"If Q = 0, then ΔU = -W."
+},
+
+{
+q:"If ΔU = 0, then:",
+c:[
+"Heat and work are balanced",
+"No heat exists",
+"No work exists",
+"The system disappears"
+],
+a:0,
+e:"A zero change in internal energy means heat added equals work done."
+},
+
+{
+q:"Which process typically causes a gas to do work?",
+c:[
+"Expansion",
+"Cooling only",
+"Compression",
+"Condensation"
+],
+a:0,
+e:"Expanding gases can push pistons and perform work."
+},
+
+{
+q:"When a gas expands against a piston, the gas is:",
+c:[
+"Receiving work",
+"Doing work",
+"Losing mass",
+"Creating energy"
+],
+a:1,
+e:"Expansion against a piston is an example of work done by the gas."
+},
+
+{
+q:"Which device converts thermal energy into useful mechanical work?",
+c:[
+"Refrigerator",
+"Heat engine",
+"Thermometer",
+"Calorimeter"
+],
+a:1,
+e:"Heat engines convert thermal energy into mechanical work."
+},
+
+{
+q:"Which of the following is a heat engine?",
+c:[
+"Air conditioner",
+"Freezer",
+"Car engine",
+"Refrigerator"
+],
+a:2,
+e:"Car engines convert heat from fuel into useful work."
+},
+
+{
+q:"A refrigerator differs from a heat engine because it:",
+c:[
+"Produces energy",
+"Uses work to move heat from cold to hot regions",
+"Creates heat from nothing",
+"Does not obey energy conservation"
+],
+a:1,
+e:"Refrigerators require work input to transfer heat."
+},
+
+{
+q:"An air conditioner works primarily by:",
+c:[
+"Creating cold energy",
+"Destroying heat",
+"Moving heat from indoors to outdoors",
+"Reducing gravity"
+],
+a:2,
+e:"Air conditioners transfer heat from a cooler region to a warmer one."
+},
+
+{
+q:"Which statement about energy is correct?",
+c:[
+"Energy can be created",
+"Energy can be destroyed",
+"Energy can be transferred and transformed",
+"Energy disappears when work is done"
+],
+a:2,
+e:"The First Law states that energy is conserved."
+},
+
+{
+q:"The human body can be considered a thermodynamic system because it:",
+c:[
+"Transfers and transforms energy",
+"Violates conservation of energy",
+"Does not exchange heat",
+"Has no internal energy"
+],
+a:0,
+e:"The body converts chemical energy into work, heat, and stored energy."
+},
+
+{
+q:"A gas absorbs 900 J of heat and its internal energy increases by 300 J. How much work did the gas perform?",
+c:[
+"300 J",
+"600 J",
+"900 J",
+"1200 J"
+],
+a:1,
+e:"300 = 900 − W, therefore W = 600 J."
+},
+
+{
+q:"A system experiences a change in internal energy of 500 J after absorbing 1200 J of heat. Find the work done.",
+c:[
+"500 J",
+"700 J",
+"1200 J",
+"1700 J"
+],
+a:1,
+e:"500 = 1200 − W, therefore W = 700 J."
+},
+
+{
+q:"Pisay-Style: Two identical gases absorb the same amount of heat. Gas A performs 400 J of work while Gas B performs 200 J of work. Which gas experiences the larger increase in internal energy?",
+c:[
+"Gas A",
+"Gas B",
+"Both experience the same increase",
+"Cannot be determined"
+],
+a:1,
+e:"The gas doing less work retains more energy as internal energy."
+},
+
+{
+q:"Pisay-Style: A gas absorbs 1500 J of heat. Half of this energy is used to perform work. What is the change in internal energy?",
+c:[
+"0 J",
+"375 J",
+"750 J",
+"1500 J"
+],
+a:2,
+e:"ΔU = 1500 − 750 = 750 J."
+},
+
+{
+q:"Pisay-Style: A gas loses 500 J of heat while simultaneously having 200 J of work done on it. What is the change in internal energy?",
+c:[
+"-700 J",
+"-500 J",
+"-300 J",
+"300 J"
+],
+a:2,
+e:"Q = -500 J and W = -200 J. ΔU = (-500) - (-200) = -300 J."
+},
+
+{
+q:"Pisay-Style: A student claims that a heat engine converts all absorbed heat into useful work. Why is this incorrect?",
+c:[
+"Energy conservation prevents heat absorption",
+"Some energy remains as internal energy or is released as waste heat",
+"Heat cannot produce work",
+"Work and heat are identical"
+],
+a:1,
+e:"No real engine converts all thermal energy into useful work."
+},
+
+{
+q:"Pisay-Style: A system undergoes a process where ΔU = 0. The system absorbs 800 J of heat. What must be true?",
+c:[
+"The system performs 800 J of work",
+"The system performs no work",
+"The system loses 800 J of heat",
+"The system's temperature becomes zero"
+],
+a:0,
+e:"If ΔU = 0, then Q = W."
+},
+
+{
+q:"Which statement best summarizes this lesson?",
+c:[
+"The First Law of Thermodynamics explains how heat, work, and internal energy are related through energy conservation",
+"Heat and work are forms of matter",
+"Internal energy is always constant",
+"Energy can be created if enough heat is added"
+],
+a:0,
+e:"The lesson focused on the conservation of energy in thermodynamic systems."
+}
+
+];
+
+  let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

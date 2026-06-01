@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title></title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{background:#e8f7f5;}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+<body>
+
+  <h1>Temperature, Heat, and Thermal Expansion</h1>
+
+<div class="section">
+
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Differentiate temperature from heat.</li>
+<li>Explain thermal equilibrium.</li>
+<li>Convert between Celsius, Fahrenheit, and Kelvin scales.</li>
+<li>Describe the three methods of heat transfer.</li>
+<li>Explain thermal expansion using particle theory.</li>
+<li>Calculate thermal expansion in solids.</li>
+<li>Apply thermal concepts to engineering and everyday situations.</li>
+</ul>
+
+</div>
+
+<!-- INTRODUCTION -->
+
+<div class="section">
+
+<h2>1. Why Do Railroad Tracks Have Gaps?</h2>
+
+<p>
+Have you ever noticed small gaps between sections of railroad tracks or bridges?
+</p>
+
+<p>
+Engineers intentionally leave these spaces because metals expand when heated and contract when cooled.
+</p>
+
+<p>
+Without these gaps, the rails could bend, buckle, or even break during hot weather.
+</p>
+
+<div class="key-box">
+Heat causes most materials to expand, while cooling causes them to contract.
+</div>
+
+<div class="visual-box">
+
+<img src="YOUR_RAILROAD_EXPANSION_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Expansion gaps prevent railroad tracks from buckling during hot weather.
+</p>
+
+</div>
+
+</div>
+
+<!-- TEMPERATURE -->
+
+<div class="section">
+
+<h2>2. What is Temperature?</h2>
+
+<p>
+Temperature measures the average kinetic energy of the particles in a substance.
+</p>
+
+<p>
+The faster the particles move, the higher the temperature.
+</p>
+
+<p>
+The slower the particles move, the lower the temperature.
+</p>
+
+<div class="key-box">
+Temperature tells us how energetic the particles of a substance are.
+</div>
+
+<h3>Particle View</h3>
+
+<ul>
+
+<li>Hot object → particles move faster.</li>
+
+<li>Cold object → particles move slower.</li>
+
+</ul>
+
+<div class="visual-box">
+
+<img src="YOUR_PARTICLE_TEMPERATURE_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Higher temperature corresponds to faster particle motion.
+</p>
+
+</div>
+
+</div>
+
+<!-- HEAT VS TEMPERATURE -->
+
+<div class="section">
+
+<h2>3. Heat vs Temperature</h2>
+
+<p>
+Students often confuse heat and temperature, but they are not the same thing.
+</p>
+
+<table>
+
+<tr>
+<th>Temperature</th>
+<th>Heat</th>
+</tr>
+
+<tr>
+<td>Measures average particle energy</td>
+<td>Energy transferred because of temperature difference</td>
+</tr>
+
+<tr>
+<td>Measured in °C, °F, K</td>
+<td>Measured in Joules (J)</td>
+</tr>
+
+<tr>
+<td>Property of a substance</td>
+<td>Energy in transit</td>
+</tr>
+
+</table>
+
+<div class="key-box">
+Temperature measures how hot something is. Heat is energy flowing from hot objects to cold objects.
+</div>
+
+</div>
+
+<!-- THERMAL EQUILIBRIUM -->
+
+<div class="section">
+
+<h2>4. Thermal Equilibrium</h2>
+
+<p>
+Suppose you place a cold spoon inside a cup of hot coffee.
+</p>
+
+<p>
+Heat flows from the coffee into the spoon.
+</p>
+
+<p>
+Eventually both reach the same temperature.
+</p>
+
+<p>
+At this point, thermal equilibrium has been achieved.
+</p>
+
+<div class="key-box">
+Thermal equilibrium occurs when two objects reach the same temperature and no net heat transfer occurs.
+</div>
+
+</div>
+
+<!-- TEMPERATURE SCALES -->
+
+<div class="section">
+
+<h2>5. Temperature Scales</h2>
+
+<table>
+
+<tr>
+<th>Scale</th>
+<th>Freezing Point of Water</th>
+<th>Boiling Point of Water</th>
+</tr>
+
+<tr>
+<td>Celsius</td>
+<td>0°C</td>
+<td>100°C</td>
+</tr>
+
+<tr>
+<td>Fahrenheit</td>
+<td>32°F</td>
+<td>212°F</td>
+</tr>
+
+<tr>
+<td>Kelvin</td>
+<td>273.15 K</td>
+<td>373.15 K</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- CONVERSIONS -->
+
+<div class="section">
+
+<h2>6. Temperature Conversion</h2>
+
+<h3>Celsius to Kelvin</h3>
+
+<div class="formula">
+K = °C + 273.15
+</div>
+
+<h3>Kelvin to Celsius</h3>
+
+<div class="formula">
+°C = K - 273.15
+</div>
+
+<h3>Celsius to Fahrenheit</h3>
+
+<div class="formula">
+°F = (9/5)(°C) + 32
+</div>
+
+<h3>Fahrenheit to Celsius</h3>
+
+<div class="formula">
+°C = (5/9)(°F - 32)
+</div>
+
+</div>
+
+<!-- SAMPLE -->
+
+<div class="section">
+
+<h2>7. Example: Temperature Conversion</h2>
+
+<div class="example-box">
+
+<h3>Example 1</h3>
+
+<p>
+Convert 25°C to Kelvin.
+</p>
+
+<p>
+K = 25 + 273.15
+</p>
+
+<p>
+K = 298.15 K
+</p>
+
+<div class="key-box">
+Answer: 298.15 K
+</div>
+
+</div>
+
+<div class="example-box">
+
+<h3>Example 2</h3>
+
+<p>
+Convert 80°C to Fahrenheit.
+</p>
+
+<p>
+°F = (9/5)(80) + 32
+</p>
+
+<p>
+°F = 176°F
+</p>
+
+<div class="key-box">
+Answer: 176°F
+</div>
+
+</div>
+
+</div>
+
+<!-- HEAT TRANSFER -->
+
+<div class="section">
+
+<h2>8. Methods of Heat Transfer</h2>
+
+<p>
+Heat always flows from a warmer object to a cooler object.
+</p>
+
+<p>
+There are three ways heat can be transferred.
+</p>
+
+</div>
+
+<!-- CONDUCTION -->
+
+<div class="section">
+
+<h2>9. Conduction</h2>
+
+<p>
+Conduction is the transfer of heat through direct contact.
+</p>
+
+<p>
+Particles collide and transfer energy to neighboring particles.
+</p>
+
+Examples:
+
+<ul>
+
+<li>Metal spoon in hot soup</li>
+
+<li>Touching a hot pan</li>
+
+<li>Ironing clothes</li>
+
+</ul>
+
+<div class="visual-box">
+
+<img src="YOUR_CONDUCTION_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Heat travels through direct contact during conduction.
+</p>
+
+</div>
+
+</div>
+
+<!-- CONVECTION -->
+
+<div class="section">
+
+<h2>10. Convection</h2>
+
+<p>
+Convection occurs in fluids (liquids and gases).
+</p>
+
+<p>
+Warm fluid becomes less dense and rises while cooler fluid sinks.
+</p>
+
+Examples:
+
+<ul>
+
+<li>Boiling water</li>
+
+<li>Ocean currents</li>
+
+<li>Atmospheric circulation</li>
+
+</ul>
+
+<div class="visual-box">
+
+<img src="YOUR_CONVECTION_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+Convection currents transfer heat in fluids.
+</p>
+
+</div>
+
+</div>
+
+<!-- RADIATION -->
+
+<div class="section">
+
+<h2>11. Radiation</h2>
+
+<p>
+Radiation transfers heat through electromagnetic waves.
+</p>
+
+<p>
+Unlike conduction and convection, radiation does not require a medium.
+</p>
+
+Examples:
+
+<ul>
+
+<li>Heat from the Sun</li>
+
+<li>Campfire warmth</li>
+
+<li>Infrared heaters</li>
+
+</ul>
+
+<div class="visual-box">
+
+<img src="YOUR_RADIATION_IMAGE_URL" class="lesson-img">
+
+<p class="caption">
+The Sun transfers energy to Earth through radiation.
+</p>
+
+</div>
+
+</div>
+
+<!-- THERMAL EXPANSION -->
+
+<div class="section">
+
+<h2>12. Thermal Expansion</h2>
+
+<p>
+When materials are heated, their particles move faster and spread farther apart.
+</p>
+
+<p>
+As a result, the material expands.
+</p>
+
+<div class="key-box">
+Most solids, liquids, and gases expand when heated and contract when cooled.
+</div>
+
+</div>
+
+<!-- EQUATION -->
+
+<div class="section">
+
+<h2>13. Linear Expansion Equation</h2>
+
+<div class="formula">
+ΔL = αL₀ΔT
+</div>
+
+Where:
+
+<ul>
+
+<li><strong>ΔL</strong> = Change in length</li>
+
+<li><strong>α</strong> = Coefficient of linear expansion</li>
+
+<li><strong>L₀</strong> = Original length</li>
+
+<li><strong>ΔT</strong> = Temperature change</li>
+
+</ul>
+
+</div>
+
+<!-- SAMPLE -->
+
+<div class="section">
+
+<h2>14. Example: Thermal Expansion</h2>
+
+<div class="example-box">
+
+<h3>Example 3</h3>
+
+<p>
+A steel rail 25 m long experiences a temperature increase of 40°C.
+</p>
+
+<p>
+The coefficient of linear expansion is:
+</p>
+
+<p>
+α = 1.2 × 10⁻⁵ /°C
+</p>
+
+<p>
+Find the increase in length.
+</p>
+
+<p>
+ΔL = αL₀ΔT
+</p>
+
+<p>
+ΔL = (1.2 × 10⁻⁵)(25)(40)
+</p>
+
+<p>
+ΔL = 0.012 m
+</p>
+
+<p>
+ΔL = 1.2 cm
+</p>
+
+<div class="key-box">
+Answer: 1.2 cm increase
+</div>
+
+</div>
+
+</div>
+
+<!-- CHALLENGING PROBLEMS -->
+
+<div class="section">
+
+<h2>15. Engineering Applications and Advanced Examples</h2>
+
+<div class="example-box">
+
+<h3>Challenge Problem 1</h3>
+
+<p>
+A steel bridge span is 120 m long at 15°C.
+</p>
+
+<p>
+If the temperature reaches 45°C, determine the increase in length.
+</p>
+
+<p>
+Use:
+</p>
+
+<p>
+α = 1.2 × 10⁻⁵ /°C
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+ΔT = 30°C
+
+<br><br>
+
+ΔL = αL₀ΔT
+
+<br><br>
+
+ΔL = (1.2×10⁻⁵)(120)(30)
+
+<br><br>
+
+ΔL = 0.0432 m
+
+<br><br>
+
+ΔL = 4.32 cm
+
+</div>
+
+</div>
+
+<div class="example-box">
+
+<h3>Challenge Problem 2 (Pisay Style)</h3>
+
+<p>
+An aluminum rod and a steel rod have the same original length.
+</p>
+
+<p>
+Both are heated by 80°C.
+</p>
+
+<p>
+The coefficient of expansion of aluminum is larger than that of steel.
+</p>
+
+<p>
+Which rod expands more and why?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+The aluminum rod expands more because its coefficient of expansion is larger.
+
+According to:
+
+ΔL = αL₀ΔT
+
+A larger α produces a larger change in length.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SIMULATION -->
+
+<div class="section">
+
+<h2>Interactive Simulation: States of Matter and Temperature</h2>
+
+<div class="visual-box">
+
+<iframe
+src="https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;">
+</iframe>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Simulation Task:</strong>
+
+Observe particle motion as temperature increases.
+
+What happens to particle speed and spacing?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+Particles move faster and generally become farther apart as temperature increases.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+
+<div class="section">
+
+<h2>Practice Drills</h2>
+
+<div class="activity">
+
+<p>
+<strong>Drill 1:</strong>
+
+Convert 35°C to Kelvin.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+K = 35 + 273.15
+
+<br><br>
+
+K = 308.15 K
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 2:</strong>
+
+Identify the heat transfer method responsible for warming your hands near a campfire.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+Radiation
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 3:</strong>
+
+A copper wire 15 m long expands by 0.009 m after heating.
+
+Find the expansion in centimeters.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+0.009 m = 0.9 cm
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="section">
+
+<h2>Lesson Summary</h2>
+
+<ul>
+
+<li>Temperature measures average particle kinetic energy.</li>
+
+<li>Heat is energy transferred because of temperature differences.</li>
+
+<li>Thermal equilibrium occurs when temperatures become equal.</li>
+
+<li>Heat transfers through conduction, convection, and radiation.</li>
+
+<li>Most materials expand when heated and contract when cooled.</li>
+
+<li>Thermal expansion is described by ΔL = αL₀ΔT.</li>
+
+<li>Engineers account for thermal expansion when designing bridges, railroads, and buildings.</li>
+
+</ul>
+
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+
+<button
+class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_08_01_Q">
+
+Take the Quiz →
+
+</button>
+
+</div>
+
+  <script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+</body>
+</html>

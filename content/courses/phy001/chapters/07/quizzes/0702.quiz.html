@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 5 Assessment: Rotational Motion and Gravitation</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 5 Assessment: Rotational Motion and Gravitation</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+  const quizData = [
+
+{
+q:"Buoyant force is best defined as:",
+c:[
+"The downward force of gravity",
+"The upward force exerted by a fluid on an object",
+"The friction force of water",
+"The pressure at the bottom of a container"
+],
+a:1,
+e:"Buoyant force is the upward force exerted by a fluid on an immersed object."
+},
+
+{
+q:"Buoyant force exists because:",
+c:[
+"Gravity disappears underwater",
+"The pressure above an object is greater than below it",
+"The pressure below an object is greater than above it",
+"Objects lose mass in fluids"
+],
+a:2,
+e:"Pressure increases with depth, producing a greater force on the bottom surface."
+},
+
+{
+q:"Who discovered the principle relating buoyant force to displaced fluid?",
+c:[
+"Pascal",
+"Newton",
+"Bernoulli",
+"Archimedes"
+],
+a:3,
+e:"Archimedes discovered the relationship between buoyancy and displaced fluid."
+},
+
+{
+q:"Archimedes' Principle states that buoyant force equals:",
+c:[
+"The object's weight",
+"The weight of the displaced fluid",
+"The fluid's pressure",
+"The object's density"
+],
+a:1,
+e:"The buoyant force equals the weight of the displaced fluid."
+},
+
+{
+q:"The equation for buoyant force is:",
+c:[
+"Fb = mg",
+"Fb = ρVg",
+"P = F/A",
+"F = ma"
+],
+a:1,
+e:"Buoyant force depends on fluid density, displaced volume, and gravity."
+},
+
+{
+q:"A submerged object displaces more fluid. What happens to the buoyant force?",
+c:[
+"It decreases",
+"It remains constant",
+"It increases",
+"It becomes zero"
+],
+a:2,
+e:"Greater displaced volume produces greater buoyant force."
+},
+
+{
+q:"An object will float if:",
+c:[
+"Its density is greater than the fluid",
+"Its density is less than the fluid",
+"It has more mass than the fluid",
+"It is completely submerged"
+],
+a:1,
+e:"Objects less dense than the fluid float."
+},
+
+{
+q:"An object sinks when:",
+c:[
+"Buoyant force exceeds weight",
+"Buoyant force equals weight",
+"Weight exceeds buoyant force",
+"Density equals the fluid density"
+],
+a:2,
+e:"An object sinks when its weight is greater than the buoyant force."
+},
+
+{
+q:"An object is suspended in a fluid when:",
+c:[
+"Buoyant force equals weight",
+"Buoyant force is zero",
+"Weight is zero",
+"Density is infinite"
+],
+a:0,
+e:"Balanced forces produce neutral buoyancy."
+},
+
+{
+q:"Why does a steel ship float even though steel is denser than water?",
+c:[
+"Ships contain air and have lower average density",
+"Steel becomes lighter in water",
+"Water loses density around ships",
+"Gravity is weaker at sea"
+],
+a:0,
+e:"The overall average density of the ship is less than water."
+},
+
+{
+q:"An object displaces 0.01 m³ of water. Find the buoyant force. (ρ = 1000 kg/m³, g = 9.8 m/s²)",
+c:[
+"9.8 N",
+"49 N",
+"98 N",
+"980 N"
+],
+a:2,
+e:"Fb = (1000)(0.01)(9.8) = 98 N."
+},
+
+{
+q:"A submerged object experiences a buoyant force of 196 N. How much water weight has been displaced?",
+c:[
+"98 N",
+"196 N",
+"392 N",
+"784 N"
+],
+a:1,
+e:"Archimedes' Principle states that buoyant force equals displaced fluid weight."
+},
+
+{
+q:"Which of the following is NOT primarily explained by Archimedes' Principle?",
+c:[
+"Floating ships",
+"Submarines",
+"Hot-air balloons",
+"Hydraulic lifts"
+],
+a:3,
+e:"Hydraulic lifts are explained by Pascal's Principle."
+},
+
+{
+q:"Bernoulli's Principle states that:",
+c:[
+"Pressure increases with depth",
+"Faster-moving fluids have lower pressure",
+"Buoyant force equals displaced fluid weight",
+"Pressure is transmitted equally in all directions"
+],
+a:1,
+e:"Bernoulli discovered the inverse relationship between fluid speed and pressure."
+},
+
+{
+q:"According to Bernoulli's Principle, when fluid speed increases:",
+c:[
+"Pressure increases",
+"Pressure decreases",
+"Density becomes zero",
+"Gravity increases"
+],
+a:1,
+e:"Higher fluid speed corresponds to lower pressure."
+},
+
+{
+q:"Water flows through a pipe that narrows. What happens inside the narrow section?",
+c:[
+"Speed decreases and pressure increases",
+"Speed increases and pressure decreases",
+"Speed and pressure both increase",
+"Nothing changes"
+],
+a:1,
+e:"Narrow sections force fluids to move faster, reducing pressure."
+},
+
+{
+q:"Which scientist is associated with Bernoulli's Principle?",
+c:[
+"Newton",
+"Pascal",
+"Bernoulli",
+"Archimedes"
+],
+a:2,
+e:"Daniel Bernoulli developed the principle relating fluid speed and pressure."
+},
+
+{
+q:"Airplane wings generate lift primarily because:",
+c:[
+"Gravity decreases above the wing",
+"Air pressure is higher above the wing",
+"Air pressure is lower above the wing than below",
+"The wing creates additional mass"
+],
+a:2,
+e:"Faster airflow above the wing creates lower pressure."
+},
+
+{
+q:"The pressure beneath an airplane wing is usually:",
+c:[
+"Lower than above the wing",
+"Equal to above the wing",
+"Higher than above the wing",
+"Zero"
+],
+a:2,
+e:"Higher pressure beneath the wing contributes to lift."
+},
+
+{
+q:"Which device uses Bernoulli's Principle?",
+c:[
+"Hydraulic lift",
+"Perfume atomizer",
+"Spring balance",
+"Pendulum"
+],
+a:1,
+e:"Perfume atomizers rely on pressure differences created by fast-moving air."
+},
+
+{
+q:"Strong winds blowing across a roof may lift it because:",
+c:[
+"Wind increases pressure above the roof",
+"Wind decreases pressure above the roof",
+"Gravity decreases",
+"The roof becomes lighter"
+],
+a:1,
+e:"Fast-moving air lowers pressure above the roof."
+},
+
+{
+q:"A submarine rises toward the surface when:",
+c:[
+"Its average density decreases",
+"Its average density increases",
+"Its buoyant force becomes zero",
+"Its weight increases"
+],
+a:0,
+e:"Reducing density increases buoyancy relative to weight."
+},
+
+{
+q:"Which statement about buoyancy is correct?",
+c:[
+"Only liquids produce buoyant force",
+"Gases can also produce buoyant force",
+"Buoyancy only affects floating objects",
+"Buoyant force acts downward"
+],
+a:1,
+e:"Air also exerts buoyant force, as seen in hot-air balloons."
+},
+
+{
+q:"A hot-air balloon rises because:",
+c:[
+"The air inside becomes denser",
+"The air inside becomes less dense",
+"Gravity stops acting",
+"Air pressure disappears"
+],
+a:1,
+e:"Heating air lowers its density, increasing buoyancy."
+},
+
+{
+q:"A block weighs 150 N and experiences a buoyant force of 180 N. What will happen?",
+c:[
+"It sinks",
+"It remains suspended",
+"It rises upward",
+"It becomes weightless"
+],
+a:2,
+e:"The buoyant force is greater than the object's weight."
+},
+
+{
+q:"Pisay-Style: Two identical blocks are submerged in water. Block A displaces twice as much water as Block B. Which experiences the greater buoyant force?",
+c:[
+"Block A",
+"Block B",
+"Both experience equal buoyant force",
+"Cannot be determined"
+],
+a:0,
+e:"Buoyant force is proportional to displaced volume."
+},
+
+{
+q:"Pisay-Style: A ship moves from freshwater into seawater. Seawater is denser than freshwater. What happens to the ship?",
+c:[
+"It sinks deeper",
+"It floats higher",
+"It sinks immediately",
+"It remains exactly unchanged"
+],
+a:1,
+e:"Denser seawater provides greater buoyant force."
+},
+
+{
+q:"Pisay-Style: A ball is held underwater and released. Initially it accelerates upward. Which statement must be true?",
+c:[
+"Its weight exceeds buoyant force",
+"Its buoyant force exceeds weight",
+"Its density equals the water density",
+"The water pressure is zero"
+],
+a:1,
+e:"Net upward force means buoyant force is greater than weight."
+},
+
+{
+q:"Pisay-Style: Air moves over the top of an airplane wing at 220 m/s and below the wing at 160 m/s. According to Bernoulli's Principle, where is the pressure lower?",
+c:[
+"Below the wing",
+"Above the wing",
+"Equal on both sides",
+"Cannot be determined"
+],
+a:1,
+e:"Higher speed above the wing means lower pressure."
+},
+
+{
+q:"Which statement best summarizes this lesson?",
+c:[
+"Buoyancy and fluid flow are unrelated concepts",
+"Archimedes' Principle explains floating, while Bernoulli's Principle explains pressure differences in moving fluids",
+"Bernoulli's Principle explains buoyancy completely",
+"All fluid phenomena are explained by pressure alone"
+],
+a:1,
+e:"Archimedes explains buoyancy; Bernoulli explains fluid-speed and pressure relationships."
+}
+
+];
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

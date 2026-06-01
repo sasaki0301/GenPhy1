@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Heat and Thermal Expansion</title>
+
+<style>
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#fafafa;
+  color:#222;
+  padding:24px;
+  line-height:1.8;
+  font-size:20px;
+}
+
+h1{color:#136f63;}
+h2{color:#136f63;margin-top:1.4em;}
+h3{color:#174ea6;}
+
+.section{margin-bottom:30px;}
+
+.key-box{
+  background:#e8f7f5;
+  border-left:6px solid #136f63;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.example-box{
+  background:#fff;
+  border-left:5px solid #2b7de9;
+  padding:14px;
+  border-radius:8px;
+  margin:16px 0;
+}
+
+.visual-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:16px 0;
+  border:1px solid #ddd;
+}
+
+.lesson-img{
+  width:100%;
+  max-width:720px;
+  display:block;
+  margin:0 auto;
+  border-radius:12px;
+}
+
+.caption{
+  text-align:center;
+  font-size:0.9em;
+  color:#555;
+}
+
+.activity{
+  background:#fff;
+  padding:14px;
+  border-radius:10px;
+  margin:14px 0;
+}
+
+.toggle-btn{
+  background:#136f63;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.answer{
+  display:none;
+  margin-top:10px;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:6px;
+}
+
+.formula{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.quiz-button{
+  background:#136f63;
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+}
+
+th{background:#e8f7f5;}
+
+iframe{
+  width:100%;
+  max-width:100%;
+}
+</style>
+</head>
+<body>
+
+  
+<h1>Heat and Thermal Expansion Calculations</h1>
+
+<div class="section">
+
+<h2>Learning Objectives</h2>
+
+<ul>
+<li>Calculate heat energy using specific heat capacity.</li>
+<li>Explain how different materials respond to heating.</li>
+<li>Solve problems involving heat gain and heat loss.</li>
+<li>Apply calorimetry concepts.</li>
+<li>Perform advanced thermal expansion calculations.</li>
+<li>Analyze real-world engineering situations involving temperature changes.</li>
+</ul>
+
+</div>
+
+<!-- INTRODUCTION -->
+
+<div class="section">
+
+<h2>1. Why Does Water Take Longer to Heat Than Metal?</h2>
+
+<p>
+Suppose you place a metal spoon and a cup of water inside a hot oven for the same amount of time.
+</p>
+
+<p>
+The spoon quickly becomes hot, while the water takes much longer to increase in temperature.
+</p>
+
+<p>
+Why?
+</p>
+
+<p>
+Different materials require different amounts of energy to change temperature.
+</p>
+
+<div class="key-box">
+The amount of heat needed to change temperature depends on the material's specific heat capacity.
+</div>
+
+</div>
+
+<!-- SPECIFIC HEAT -->
+
+<div class="section">
+
+<h2>2. Specific Heat Capacity</h2>
+
+<p>
+Specific heat capacity tells us how much heat energy is required to raise the temperature of 1 kilogram of a substance by 1°C.
+</p>
+
+<div class="key-box">
+Materials with high specific heat require more energy to heat up.
+</div>
+
+<table>
+
+<tr>
+<th>Material</th>
+<th>Specific Heat (J/kg·°C)</th>
+</tr>
+
+<tr>
+<td>Water</td>
+<td>4186</td>
+</tr>
+
+<tr>
+<td>Aluminum</td>
+<td>900</td>
+</tr>
+
+<tr>
+<td>Iron</td>
+<td>450</td>
+</tr>
+
+<tr>
+<td>Copper</td>
+<td>385</td>
+</tr>
+
+</table>
+
+<p>
+Notice that water has a much larger specific heat capacity than most metals.
+</p>
+
+</div>
+
+<!-- HEAT EQUATION -->
+
+<div class="section">
+
+<h2>3. Heat Energy Equation</h2>
+
+<div class="formula">
+Q = mcΔT
+</div>
+
+Where:
+
+<ul>
+
+<li><strong>Q</strong> = Heat Energy (J)</li>
+
+<li><strong>m</strong> = Mass (kg)</li>
+
+<li><strong>c</strong> = Specific Heat Capacity (J/kg·°C)</li>
+
+<li><strong>ΔT</strong> = Temperature Change (°C)</li>
+
+</ul>
+
+<div class="key-box">
+This equation is one of the most important formulas in thermal physics.
+</div>
+
+</div>
+
+<!-- EXAMPLE -->
+
+<div class="section">
+
+<h2>4. Example: Heating Water</h2>
+
+<div class="example-box">
+
+<h3>Example 1</h3>
+
+<p>
+How much heat is needed to raise the temperature of 2 kg of water from 20°C to 50°C?
+</p>
+
+<p>
+Given:
+</p>
+
+<p>
+m = 2 kg
+</p>
+
+<p>
+c = 4186 J/kg·°C
+</p>
+
+<p>
+ΔT = 30°C
+</p>
+
+<p>
+Q = mcΔT
+</p>
+
+<p>
+Q = (2)(4186)(30)
+</p>
+
+<p>
+Q = 251,160 J
+</p>
+
+<div class="key-box">
+Answer: 251,160 J
+</div>
+
+</div>
+
+</div>
+
+<!-- COOLING -->
+
+<div class="section">
+
+<h2>5. Heat Gain and Heat Loss</h2>
+
+<p>
+Heat naturally flows from hotter objects to colder objects.
+</p>
+
+<p>
+In an isolated system:
+</p>
+
+<div class="formula">
+Heat Lost = Heat Gained
+</div>
+
+<div class="key-box">
+Energy is conserved during heat transfer.
+</div>
+
+</div>
+
+<!-- CALORIMETRY -->
+
+<div class="section">
+
+<h2>6. Introduction to Calorimetry</h2>
+
+<p>
+Calorimetry is the measurement of heat transfer.
+</p>
+
+<p>
+Scientists use calorimeters to determine heat exchange between substances.
+</p>
+
+<div class="formula">
+m₁c₁ΔT₁ = m₂c₂ΔT₂
+</div>
+
+<p>
+This equation is often used when two objects reach thermal equilibrium.
+</p>
+
+</div>
+
+<!-- CALORIMETRY EXAMPLE -->
+
+<div class="section">
+
+<h2>7. Example: Thermal Equilibrium</h2>
+
+<div class="example-box">
+
+<h3>Example 2</h3>
+
+<p>
+A hot metal transfers 5000 J of heat to water.
+</p>
+
+<p>
+How much heat does the water gain?
+</p>
+
+</div>
+
+<div class="key-box">
+Water gains exactly 5000 J because energy is conserved.
+</div>
+
+</div>
+
+<!-- THERMAL EXPANSION REVIEW -->
+
+<div class="section">
+
+<h2>8. Review of Thermal Expansion</h2>
+
+<p>
+Most solids expand when heated because their particles move farther apart.
+</p>
+
+<div class="formula">
+ΔL = αL₀ΔT
+</div>
+
+Where:
+
+<ul>
+
+<li>ΔL = Change in Length</li>
+
+<li>α = Coefficient of Expansion</li>
+
+<li>L₀ = Original Length</li>
+
+<li>ΔT = Temperature Change</li>
+
+</ul>
+
+</div>
+
+<!-- EXPANSION PROBLEM -->
+
+<div class="section">
+
+<h2>9. Example: Expansion of a Metal Rod</h2>
+
+<div class="example-box">
+
+<h3>Example 3</h3>
+
+<p>
+A steel rod is 40 m long at 10°C.
+</p>
+
+<p>
+The temperature rises to 50°C.
+</p>
+
+<p>
+Given:
+</p>
+
+<p>
+α = 1.2 × 10⁻⁵ /°C
+</p>
+
+<p>
+Find the increase in length.
+</p>
+
+<p>
+ΔT = 40°C
+</p>
+
+<p>
+ΔL = αL₀ΔT
+</p>
+
+<p>
+ΔL = (1.2×10⁻⁵)(40)(40)
+</p>
+
+<p>
+ΔL = 0.0192 m
+</p>
+
+<p>
+ΔL = 1.92 cm
+</p>
+
+<div class="key-box">
+Answer: 1.92 cm
+</div>
+
+</div>
+
+</div>
+
+<!-- ADVANCED PROBLEMS -->
+
+<div class="section">
+
+<h2>10. Multi-Step Engineering Problems</h2>
+
+<div class="example-box">
+
+<h3>Challenge Problem 1</h3>
+
+<p>
+A 5 kg aluminum block initially at 25°C absorbs 67,500 J of heat.
+</p>
+
+<p>
+Given:
+</p>
+
+<p>
+c = 900 J/kg·°C
+</p>
+
+<p>
+Find its final temperature.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+Q = mcΔT
+
+<br><br>
+
+67,500 = (5)(900)(ΔT)
+
+<br><br>
+
+67,500 = 4500ΔT
+
+<br><br>
+
+ΔT = 15°C
+
+<br><br>
+
+Final Temperature
+
+<br><br>
+
+T = 25 + 15
+
+<br><br>
+
+T = 40°C
+
+</div>
+
+</div>
+
+<div class="example-box">
+
+<h3>Challenge Problem 2</h3>
+
+<p>
+A copper bridge cable 80 m long experiences a temperature increase from 15°C to 55°C.
+</p>
+
+<p>
+Given:
+</p>
+
+<p>
+α = 1.7 × 10⁻⁵ /°C
+</p>
+
+<p>
+Find the expansion.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+ΔT = 40°C
+
+<br><br>
+
+ΔL = αL₀ΔT
+
+<br><br>
+
+ΔL = (1.7×10⁻⁵)(80)(40)
+
+<br><br>
+
+ΔL = 0.0544 m
+
+<br><br>
+
+ΔL = 5.44 cm
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PISAY STYLE -->
+
+<div class="section">
+
+<h2>11. Pisay-Style Application Problems</h2>
+
+<div class="example-box">
+
+<h3>Challenge Problem 3</h3>
+
+<p>
+Two metal rods have equal lengths.
+</p>
+
+<p>
+Rod A has twice the coefficient of expansion of Rod B.
+</p>
+
+<p>
+Both experience the same temperature increase.
+</p>
+
+<p>
+Compare their expansions.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+Since
+
+ΔL = αL₀ΔT
+
+and αA = 2αB,
+
+Rod A expands twice as much as Rod B.
+
+</div>
+
+</div>
+
+<div class="example-box">
+
+<h3>Challenge Problem 4</h3>
+
+<p>
+A 2 kg sample of water and a 2 kg sample of iron receive the same amount of heat energy.
+</p>
+
+<p>
+Which undergoes the greater temperature increase?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Solution
+</button>
+
+<div class="answer">
+
+Iron.
+
+Because iron has a much smaller specific heat capacity, its temperature rises more for the same heat input.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SIMULATION -->
+
+<div class="section">
+
+<h2>Interactive Simulation: Energy Forms and Changes</h2>
+
+<div class="visual-box">
+
+<iframe
+src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html"
+width="100%"
+height="620"
+scrolling="no"
+allowfullscreen
+style="border:0;border-radius:12px;">
+</iframe>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Simulation Task:</strong>
+
+Compare how different materials heat up when supplied with the same amount of energy.
+
+Which material shows the largest temperature increase?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+The material with the smallest specific heat capacity experiences the largest temperature increase.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRACTICE -->
+
+<div class="section">
+
+<h2>Practice Drills</h2>
+
+<div class="activity">
+
+<p>
+<strong>Drill 1:</strong>
+
+How much heat is needed to raise 1 kg of water by 10°C?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+Q = mcΔT
+
+<br><br>
+
+Q = (1)(4186)(10)
+
+<br><br>
+
+Q = 41,860 J
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 2:</strong>
+
+Which heats faster: aluminum or water?
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+Aluminum, because it has a lower specific heat capacity.
+
+</div>
+
+</div>
+
+<div class="activity">
+
+<p>
+<strong>Drill 3:</strong>
+
+A rod expands by 0.02 m. Express this in centimeters.
+</p>
+
+<button class="toggle-btn" onclick="toggleAnswer(this)">
+Show Answer
+</button>
+
+<div class="answer">
+
+0.02 m = 2 cm
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="section">
+
+<h2>Lesson Summary</h2>
+
+<ul>
+
+<li>Specific heat capacity determines how much energy is needed to change temperature.</li>
+
+<li>Heat calculations use Q = mcΔT.</li>
+
+<li>Materials with larger specific heat capacities require more energy to heat up.</li>
+
+<li>Heat flows from hotter objects to colder objects.</li>
+
+<li>In isolated systems, heat lost equals heat gained.</li>
+
+<li>Thermal expansion is described by ΔL = αL₀ΔT.</li>
+
+<li>Engineers must account for thermal expansion in bridges, cables, railways, and buildings.</li>
+
+<li>Thermal calculations are essential in engineering, climate science, manufacturing, and energy systems.</li>
+
+</ul>
+
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+
+<button
+class="quiz-button"
+id="takeQuizBtn"
+data-quiz="GP1_08_02_Q">
+
+Take the Quiz →
+
+</button>
+
+</div>
+
+
+  <script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("takeQuizBtn").addEventListener("click",(e)=>{
+  const quizId = e.target.dataset.quiz;
+  window.parent.postMessage({
+    type:"openQuiz",
+    quiz:quizId
+  },"*");
+});
+</script>
+</body>
+</html>

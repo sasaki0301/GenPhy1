@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 7 Assessment: Fluid Mechanics</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 6 Assessment: Fluid Mechanics</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"Pressure is defined as:",
+c:[
+"Force multiplied by area",
+"Force per unit area",
+"Area divided by force",
+"Mass per unit volume"
+],
+a:1,
+e:"Pressure is the amount of force applied per unit area."
+},
+
+{
+q:"The SI unit of pressure is:",
+c:["Newton","Pascal","Joule","Watt"],
+a:1,
+e:"Pressure is measured in Pascals (Pa)."
+},
+
+{
+q:"A force of 400 N acts on an area of 0.20 m². Find the pressure.",
+c:["800 Pa","2000 Pa","4000 Pa","8000 Pa"],
+a:1,
+e:"P = F/A = 400/0.20 = 2000 Pa."
+},
+
+{
+q:"For a constant force, pressure increases when:",
+c:[
+"Area increases",
+"Area decreases",
+"Density increases",
+"Volume increases"
+],
+a:1,
+e:"Smaller contact area produces greater pressure."
+},
+
+{
+q:"Which object exerts the greatest pressure on the ground?",
+c:[
+"A person wearing snowshoes",
+"A tank with wide tracks",
+"A person standing on one stiletto heel",
+"A car with wide tires"
+],
+a:2,
+e:"The smallest area produces the greatest pressure."
+},
+
+{
+q:"Fluid pressure increases with:",
+c:[
+"Temperature",
+"Area",
+"Depth",
+"Volume"
+],
+a:2,
+e:"Pressure increases because more fluid exists above deeper points."
+},
+
+{
+q:"The equation for pressure due to depth is:",
+c:[
+"P = F/A",
+"P = mv",
+"P = ρgh",
+"P = ma"
+],
+a:2,
+e:"Fluid pressure depends on density, gravity, and depth."
+},
+
+{
+q:"A diver moves from 2 m to 6 m below the surface. The pressure due to water becomes:",
+c:[
+"Twice as large",
+"Three times as large",
+"Half as large",
+"Unchanged"
+],
+a:1,
+e:"Pressure is directly proportional to depth."
+},
+
+{
+q:"Water has density 1000 kg/m³. Find the pressure at 3 m depth. (g = 9.8 m/s²)",
+c:[
+"2,940 Pa",
+"9,800 Pa",
+"29,400 Pa",
+"294,000 Pa"
+],
+a:2,
+e:"P = (1000)(9.8)(3) = 29,400 Pa."
+},
+
+{
+q:"Why are dam walls thicker at the bottom?",
+c:[
+"They support more water volume",
+"The lower sections experience greater pressure",
+"The concrete is heavier",
+"The bottom receives more sunlight"
+],
+a:1,
+e:"Fluid pressure increases with depth."
+},
+
+{
+q:"Pascal's Principle states that pressure applied to a confined fluid is:",
+c:[
+"Lost as heat",
+"Transmitted equally throughout the fluid",
+"Only transmitted upward",
+"Only transmitted downward"
+],
+a:1,
+e:"Pressure is transmitted equally in all directions."
+},
+
+{
+q:"Which device operates using Pascal's Principle?",
+c:[
+"Airplane wing",
+"Hydraulic lift",
+"Pendulum",
+"Speaker"
+],
+a:1,
+e:"Hydraulic systems rely on Pascal's Principle."
+},
+
+{
+q:"A hydraulic lift has an output piston area 10 times larger than the input piston area. An input force of 200 N is applied. Find the output force.",
+c:[
+"200 N",
+"1000 N",
+"2000 N",
+"20,000 N"
+],
+a:2,
+e:"Output force = 10 × 200 = 2000 N."
+},
+
+{
+q:"Hydraulic systems are able to multiply force because:",
+c:[
+"They create energy",
+"They use larger output piston areas",
+"Gravity increases",
+"Fluids become heavier"
+],
+a:1,
+e:"Force multiplication occurs through differences in piston area."
+},
+
+{
+q:"Buoyant force is:",
+c:[
+"A downward force due to gravity",
+"An upward force exerted by a fluid",
+"The pressure inside a fluid",
+"The force that causes waves"
+],
+a:1,
+e:"Buoyant force acts upward on immersed objects."
+},
+
+{
+q:"Who formulated the principle relating buoyant force to displaced fluid?",
+c:[
+"Pascal",
+"Newton",
+"Archimedes",
+"Bernoulli"
+],
+a:2,
+e:"Archimedes discovered the buoyancy principle."
+},
+
+{
+q:"Archimedes' Principle states that buoyant force equals:",
+c:[
+"The object's mass",
+"The weight of the displaced fluid",
+"The density of the fluid",
+"The pressure at the object's bottom"
+],
+a:1,
+e:"The buoyant force equals the weight of displaced fluid."
+},
+
+{
+q:"The buoyant force equation is:",
+c:[
+"Fb = mg",
+"Fb = ρVg",
+"P = ρgh",
+"F = ma"
+],
+a:1,
+e:"Buoyant force depends on fluid density and displaced volume."
+},
+
+{
+q:"An object will float if:",
+c:[
+"Its density is greater than the fluid",
+"Its density is less than the fluid",
+"Its weight is zero",
+"It is hollow"
+],
+a:1,
+e:"Objects less dense than the fluid float."
+},
+
+{
+q:"A submerged object displaces 0.03 m³ of water. Find the buoyant force.",
+c:[
+"98 N",
+"196 N",
+"294 N",
+"588 N"
+],
+a:2,
+e:"Fb = (1000)(0.03)(9.8) = 294 N."
+},
+
+{
+q:"A block weighs 250 N and experiences a buoyant force of 180 N. What happens?",
+c:[
+"It rises",
+"It floats",
+"It sinks",
+"It becomes suspended"
+],
+a:2,
+e:"Weight exceeds buoyant force."
+},
+
+{
+q:"Why does a steel ship float while a steel nail sinks?",
+c:[
+"The ship is lighter",
+"The ship has lower average density",
+"The nail has more pressure",
+"Steel becomes less dense at sea"
+],
+a:1,
+e:"The ship's average density is less than water because of its large volume."
+},
+
+{
+q:"Bernoulli's Principle states that:",
+c:[
+"Pressure increases with speed",
+"Pressure decreases as fluid speed increases",
+"Pressure equals density",
+"Buoyant force equals weight"
+],
+a:1,
+e:"Faster fluid motion corresponds to lower pressure."
+},
+
+{
+q:"When fluid flows through a narrower pipe section, the fluid speed generally:",
+c:[
+"Decreases",
+"Increases",
+"Becomes zero",
+"Remains constant"
+],
+a:1,
+e:"The fluid must move faster through the narrower section."
+},
+
+{
+q:"According to Bernoulli's Principle, higher fluid speed results in:",
+c:[
+"Higher pressure",
+"Lower pressure",
+"Greater density",
+"Zero pressure"
+],
+a:1,
+e:"Fluid speed and pressure are inversely related."
+},
+
+{
+q:"Why does an airplane wing generate lift?",
+c:[
+"Air above the wing moves slower",
+"Air below the wing moves faster",
+"Pressure above the wing is lower than below",
+"The wing eliminates gravity"
+],
+a:2,
+e:"Faster airflow above the wing creates lower pressure."
+},
+
+{
+q:"Which device uses Bernoulli's Principle?",
+c:[
+"Hydraulic brake",
+"Hydraulic lift",
+"Perfume atomizer",
+"Spring balance"
+],
+a:2,
+e:"Atomizers rely on pressure differences created by moving fluids."
+},
+
+{
+q:"Strong winds can sometimes lift a roof because:",
+c:[
+"The roof becomes lighter",
+"Pressure above the roof decreases",
+"Pressure above the roof increases",
+"Gravity weakens"
+],
+a:1,
+e:"Fast-moving air creates lower pressure above the roof."
+},
+
+{
+q:"Pisay-Style: Two identical metal blocks are submerged in water. Block A displaces twice as much water as Block B. Which block experiences the larger buoyant force?",
+c:[
+"Block A",
+"Block B",
+"Both experience equal buoyant force",
+"Cannot be determined"
+],
+a:0,
+e:"Buoyant force is proportional to displaced volume."
+},
+
+{
+q:"Pisay-Style: A submarine wants to dive deeper. What must it do?",
+c:[
+"Decrease its average density",
+"Increase its average density",
+"Reduce its volume to zero",
+"Eliminate buoyant force"
+],
+a:1,
+e:"Submarines dive by increasing their average density."
+},
+
+{
+q:"Pisay-Style: A ship moves from freshwater into seawater. What happens to the ship?",
+c:[
+"It sinks deeper",
+"It floats higher",
+"It sinks completely",
+"It experiences no change"
+],
+a:1,
+e:"Seawater is denser and provides greater buoyant force."
+},
+
+{
+q:"Pisay-Style: Air flows at 250 m/s over the top of an airplane wing and 180 m/s underneath. Where is the pressure lower?",
+c:[
+"Below the wing",
+"Above the wing",
+"Equal on both sides",
+"Cannot be determined"
+],
+a:1,
+e:"Higher speed above the wing means lower pressure."
+},
+
+{
+q:"Pisay-Style: A hydraulic lift has an output piston area 25 times greater than the input piston area. If a mechanic applies 160 N, what output force is produced?",
+c:[
+"640 N",
+"1600 N",
+"3200 N",
+"4000 N"
+],
+a:3,
+e:"Output force = 25 × 160 = 4000 N."
+},
+
+{
+q:"Pisay-Style: A diver descends from 5 m to 15 m depth. Assuming constant water density, how does the pressure change?",
+c:[
+"Doubles",
+"Triples",
+"Quadruples",
+"Remains constant"
+],
+a:1,
+e:"Pressure is directly proportional to depth. 15 m is three times deeper than 5 m."
+},
+
+{
+q:"Which statement best summarizes Chapter 7?",
+c:[
+"Pressure, buoyancy, and fluid flow explain how fluids exert forces and influence motion",
+"Only liquids exert pressure",
+"Buoyancy and Bernoulli's Principle are unrelated",
+"Fluid pressure does not depend on depth"
+],
+a:0,
+e:"Chapter 7 integrates pressure, Pascal's Principle, buoyancy, Archimedes' Principle, and Bernoulli's Principle."
+}
+
+];
+
+let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>

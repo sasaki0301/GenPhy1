@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 5 Assessment: Thermal Physics and Thermodynamics</title>
+
+<style>
+/* SAME STYLE AS TEMPLATE */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f9f1, #f7faff);
+  margin: 0;
+  padding: 40px 20px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.quiz-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  width: 95%;
+  max-width: 850px;
+  text-align: center;
+}
+h2 { color: #136f63; margin-bottom: 25px; }
+.progress-wrapper { background:#e9f5ef; border-radius:8px; height:14px; width:100%; margin-bottom:25px; overflow:hidden;}
+.progress-bar { height:100%; background:linear-gradient(to right,#136f63,#2b7de9); width:0%; transition:width 0.4s;}
+.progress-text { text-align:right; font-size:0.95em; color:#174ea6; margin-bottom:10px; font-weight:600;}
+.question { font-size:1.3em; font-weight:600; color:#174ea6; margin-bottom:20px;}
+.choices { display:flex; flex-direction:column; gap:12px; margin-bottom:20px;}
+.choice { background:#e8ecf8; border:none; border-radius:10px; padding:14px; cursor:pointer; text-align:left;}
+.choice:hover { background:#d3dbf8; transform:translateY(-2px);}
+.choice.correct {background: #2b7de9;color: #fff;}
+.choice.incorrect {background: #e57373;color: #fff;}
+.explanation { background:#eef3ff; border-radius:10px; padding:14px; text-align:left; margin-bottom:20px; display:none;}
+.next-btn { background:#136f63; color:#fff; border:none; padding:12px 26px; border-radius:10px; cursor:pointer;}
+.result { font-size:1.4em; font-weight:bold; color:#174ea6;}
+.stars { font-size:2.5em; margin-top:10px;}
+.quiz-nav { margin-top:25px; display:flex; justify-content:center; gap:10px;}
+.quiz-btn { background:#e8ecf8; border:none; border-radius:8px; padding:10px 20px; cursor:pointer;}
+.quiz-btn.primary { background:#136f63; color:#fff;}
+@media (max-width: 600px) {
+    .quiz-container { padding: 25px; }
+    .question { font-size: 1.1em; }
+    .stars { font-size: 2em; }
+  }
+
+.diagram-box {margin: 12px 0 20px; background: #f7fbff; border: 1px dashed #d8e9ff; padding: 10px; border-radius: 8px; }
+
+svg {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+<h2>Chapter 5 Assessment: Thermal Physics and Thermodynamics</h2>
+
+<div class="progress-text" id="progressText"></div>
+<div class="progress-wrapper">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<button id="nextBtn" class="next-btn" style="display:none;">Next</button>
+
+</div>
+
+<script>
+
+  const quizData = [
+
+{
+q:"Temperature is a measure of:",
+c:[
+"The total heat contained in an object",
+"The average kinetic energy of particles",
+"The mass of particles",
+"The volume of a substance"
+],
+a:1,
+e:"Temperature measures the average kinetic energy of particles."
+},
+
+{
+q:"Heat is best defined as:",
+c:[
+"Stored energy",
+"Energy transferred because of a temperature difference",
+"Internal energy",
+"Potential energy"
+],
+a:1,
+e:"Heat is energy transferred from a hotter object to a colder object."
+},
+
+{
+q:"Thermal equilibrium occurs when:",
+c:[
+"Two objects have equal mass",
+"Two objects have equal volume",
+"Two objects reach the same temperature",
+"Heat transfer increases"
+],
+a:2,
+e:"Thermal equilibrium occurs when no net heat transfer exists between objects."
+},
+
+{
+q:"Convert 50°C to Kelvin.",
+c:[
+"223.15 K",
+"273.15 K",
+"323.15 K",
+"373.15 K"
+],
+a:2,
+e:"K = 50 + 273.15 = 323.15 K."
+},
+
+{
+q:"Convert 68°F to Celsius.",
+c:[
+"10°C",
+"20°C",
+"30°C",
+"40°C"
+],
+a:1,
+e:"68°F corresponds to 20°C."
+},
+
+{
+q:"Which heat transfer mechanism requires direct contact?",
+c:[
+"Radiation",
+"Convection",
+"Conduction",
+"Evaporation"
+],
+a:2,
+e:"Conduction transfers heat through direct contact."
+},
+
+{
+q:"Heat transfer through fluid motion is called:",
+c:[
+"Conduction",
+"Radiation",
+"Convection",
+"Reflection"
+],
+a:2,
+e:"Convection occurs through the movement of fluids."
+},
+
+{
+q:"Which method allows the Sun to transfer energy to Earth?",
+c:[
+"Conduction",
+"Convection",
+"Radiation",
+"Diffusion"
+],
+a:2,
+e:"Radiation can travel through the vacuum of space."
+},
+
+{
+q:"Which statement about thermal expansion is correct?",
+c:[
+"Most materials contract when heated",
+"Most materials expand when heated",
+"Heating has no effect on size",
+"Only gases expand when heated"
+],
+a:1,
+e:"Most substances expand when heated."
+},
+
+{
+q:"The equation for linear expansion is:",
+c:[
+"Q = mcΔT",
+"ΔU = Q − W",
+"ΔL = αL₀ΔT",
+"P = ρgh"
+],
+a:2,
+e:"This equation describes thermal expansion."
+},
+
+{
+q:"A 15 m steel rod is heated by 40°C. If α = 1.2×10⁻⁵ /°C, what is its expansion?",
+c:[
+"0.0036 m",
+"0.0072 m",
+"0.0090 m",
+"0.0120 m"
+],
+a:1,
+e:"ΔL=(1.2×10⁻⁵)(15)(40)=0.0072 m."
+},
+
+{
+q:"Why are expansion joints used in bridges?",
+c:[
+"To reduce weight",
+"To improve appearance",
+"To accommodate thermal expansion",
+"To increase strength"
+],
+a:2,
+e:"Expansion joints prevent structural damage caused by temperature changes."
+},
+
+{
+q:"The amount of heat required to raise 1 kg of a substance by 1°C is called:",
+c:[
+"Internal energy",
+"Specific heat capacity",
+"Thermal conductivity",
+"Expansion coefficient"
+],
+a:1,
+e:"This is the definition of specific heat capacity."
+},
+
+{
+q:"The equation used to calculate heat energy is:",
+c:[
+"Q = mcΔT",
+"ΔL = αL₀ΔT",
+"ΔU = Q − W",
+"F = ma"
+],
+a:0,
+e:"Q = mcΔT calculates heat energy."
+},
+
+{
+q:"How much heat is required to raise 3 kg of water by 5°C? (c = 4186 J/kg·°C)",
+c:[
+"31,395 J",
+"62,790 J",
+"41,860 J",
+"125,580 J"
+],
+a:1,
+e:"Q=(3)(4186)(5)=62,790 J."
+},
+
+{
+q:"A 2 kg aluminum block (c=900 J/kg·°C) absorbs 18,000 J. What is the temperature increase?",
+c:[
+"5°C",
+"10°C",
+"15°C",
+"20°C"
+],
+a:1,
+e:"ΔT=Q/(mc)=18000/(2×900)=10°C."
+},
+
+{
+q:"In an isolated system:",
+c:[
+"Heat lost equals heat gained",
+"Heat lost is greater than heat gained",
+"Heat gained is greater than heat lost",
+"Heat is destroyed"
+],
+a:0,
+e:"Energy conservation requires heat lost to equal heat gained."
+},
+
+{
+q:"Which material generally heats up fastest when receiving the same amount of heat?",
+c:[
+"Water",
+"A material with low specific heat capacity",
+"A material with high specific heat capacity",
+"All materials equally"
+],
+a:1,
+e:"Lower specific heat means larger temperature changes."
+},
+
+{
+q:"Internal energy refers to:",
+c:[
+"Only kinetic energy",
+"Only potential energy",
+"The microscopic kinetic and potential energy of particles",
+"The heat entering a system"
+],
+a:2,
+e:"Internal energy includes microscopic kinetic and potential energy."
+},
+
+{
+q:"The First Law of Thermodynamics is:",
+c:[
+"Q = mcΔT",
+"ΔL = αL₀ΔT",
+"ΔU = Q − W",
+"P = F/A"
+],
+a:2,
+e:"The First Law relates internal energy, heat, and work."
+},
+
+{
+q:"A system absorbs 800 J of heat and performs 300 J of work. Find ΔU.",
+c:[
+"300 J",
+"500 J",
+"800 J",
+"1100 J"
+],
+a:1,
+e:"ΔU = 800 − 300 = 500 J."
+},
+
+{
+q:"A gas absorbs 1200 J of heat and performs 1500 J of work. What happens to its internal energy?",
+c:[
+"Increases by 300 J",
+"Decreases by 300 J",
+"Remains constant",
+"Increases by 1500 J"
+],
+a:1,
+e:"ΔU = 1200 − 1500 = -300 J."
+},
+
+{
+q:"If a system does no work, the First Law becomes:",
+c:[
+"ΔU = Q",
+"ΔU = -Q",
+"ΔU = W",
+"Q = W"
+],
+a:0,
+e:"When W=0, all added heat changes internal energy."
+},
+
+{
+q:"A refrigerator works by:",
+c:[
+"Destroying heat",
+"Creating cold energy",
+"Using work to move heat from colder regions to warmer regions",
+"Violating energy conservation"
+],
+a:2,
+e:"Refrigerators require work to transfer heat."
+},
+
+{
+q:"Which device converts thermal energy into useful mechanical work?",
+c:[
+"Refrigerator",
+"Heat engine",
+"Thermometer",
+"Calorimeter"
+],
+a:1,
+e:"Heat engines convert heat into work."
+},
+
+{
+q:"Which statement is true regarding energy?",
+c:[
+"Energy can be created",
+"Energy can be destroyed",
+"Energy can only be transferred or transformed",
+"Energy disappears when work is done"
+],
+a:2,
+e:"Energy is conserved."
+},
+
+{
+q:"Pisay-Style: Two identical metal blocks absorb the same amount of heat. Block A has twice the specific heat capacity of Block B. Which block experiences the larger temperature increase?",
+c:[
+"Block A",
+"Block B",
+"Both experience the same increase",
+"Cannot be determined"
+],
+a:1,
+e:"A lower specific heat capacity produces a larger temperature increase."
+},
+
+{
+q:"Pisay-Style: An engineer installs railroad tracks without expansion gaps. During summer, the tracks begin to bend. Which concept explains this behavior?",
+c:[
+"Convection",
+"Thermal equilibrium",
+"Thermal expansion",
+"Specific heat"
+],
+a:2,
+e:"Heating causes the rails to expand."
+},
+
+{
+q:"Pisay-Style: A gas absorbs 2000 J of heat. Its internal energy increases by only 500 J. How much work did the gas perform?",
+c:[
+"500 J",
+"1000 J",
+"1500 J",
+"2500 J"
+],
+a:2,
+e:"500 = 2000 − W, therefore W = 1500 J."
+},
+
+{
+q:"Pisay-Style: A hot iron block and a cooler water sample are placed in contact inside an insulated container. Eventually both reach the same temperature. Which principle explains the final state?",
+c:[
+"First Law of Thermodynamics",
+"Thermal Equilibrium",
+"Thermal Expansion",
+"Radiation"
+],
+a:1,
+e:"Heat flows until both reach the same temperature."
+},
+
+{
+q:"Pisay-Style: A 100 m steel bridge is designed for temperatures between 10°C and 50°C. Why must engineers account for thermal expansion?",
+c:[
+"The bridge gains mass",
+"The bridge loses energy",
+"The bridge changes length significantly with temperature",
+"The bridge becomes denser"
+],
+a:2,
+e:"Large structures can expand by several centimeters."
+},
+
+{
+q:"Pisay-Style: A scientist wants to minimize temperature fluctuations in a thermal storage system. Which property should the material have?",
+c:[
+"Large coefficient of expansion",
+"Low density",
+"High specific heat capacity",
+"Low mass"
+],
+a:2,
+e:"High specific heat materials resist temperature changes."
+},
+
+{
+q:"Pisay-Style: Two gases absorb the same amount of heat. Gas A performs 600 J of work while Gas B performs 200 J of work. Which gas experiences the larger increase in internal energy?",
+c:[
+"Gas A",
+"Gas B",
+"Both increase equally",
+"Cannot be determined"
+],
+a:1,
+e:"The gas doing less work retains more energy as internal energy."
+},
+
+{
+q:"Pisay-Style: An insulated piston-cylinder system receives no heat from its surroundings. The gas expands and performs work. What happens to its internal energy?",
+c:[
+"It increases",
+"It decreases",
+"It remains constant",
+"It becomes zero"
+],
+a:1,
+e:"If Q=0 and W>0, then ΔU is negative."
+},
+
+{
+q:"Which statement best summarizes Chapter 8?",
+c:[
+"Thermal physics explains how temperature, heat, energy transfer, thermal expansion, and thermodynamic processes are interconnected through conservation of energy",
+"Heat and temperature are identical concepts",
+"Only solids are affected by temperature changes",
+"Thermodynamics applies only to engines"
+],
+a:0,
+e:"Chapter 8 unified temperature, heat, expansion, calorimetry, and thermodynamics under energy conservation."
+}
+
+];
+
+  let current = 0, score = 0, selected = null, showingExplanation = false;
+const quizBox = document.getElementById("quizBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function showQuestion() {
+  const q = quizData[current];
+  updateProgress();
+  quizBox.innerHTML = `
+    <div class='question'>${q.q}</div>
+	${q.svg || ""}
+    <div class='choices'></div>
+    <div class='explanation' id='explanationBox'></div>
+  `;
+  const choicesContainer = quizBox.querySelector(".choices");
+  q.c.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = choice;
+    btn.addEventListener("click", () => selectChoice(i));
+    choicesContainer.appendChild(btn);
+  });
+  nextBtn.style.display = "none";
+  selected = null;
+  showingExplanation = false;
+}
+
+function selectChoice(i) {
+  if (showingExplanation) return;
+
+  const q = quizData[current];
+  const buttons = document.querySelectorAll(".choice");
+  const expBox = document.getElementById("explanationBox");
+  const correct = i === q.a;
+
+  if (correct) score++;
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+
+    if (idx === q.a) {
+      btn.classList.add("correct");
+    }
+
+    if (idx === i && idx !== q.a) {
+      btn.classList.add("incorrect");
+    }
+  });
+
+  expBox.innerHTML = `<strong>${correct ? "✅ Correct!" : "❌ Incorrect."}</strong><br>${q.e}`;
+  expBox.style.display = "block";
+  nextBtn.style.display = "inline-block";
+  showingExplanation = true;
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) showQuestion();
+  else showResult();
+});
+
+function updateProgress() {
+  const percent = (current / quizData.length) * 100;
+  progressBar.style.width = percent + "%";
+  progressText.textContent = `Question ${current + 1} of ${quizData.length}`;
+}
+
+function getStarRating(percent) {
+  if (percent === 100) return "⭐️⭐️⭐️";
+  else if (percent >= 90) return "⭐️⭐️☆";
+  else if (percent >= 80) return "⭐️☆☆";
+  else return "☆☆☆";
+}
+
+let resultSent = false;
+
+function showResult() {
+  progressBar.style.width = "100%";
+  progressText.textContent = "Quiz Completed";
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const passed = percent >= 80;
+
+  quizBox.innerHTML = `
+    <div class='stars'>${getStarRating(percent)}</div>
+    <div class='result'>You scored ${score}/${quizData.length} (${percent}%)</div>
+    <p id="saveStatus" style="color:#174ea6;font-weight:600;margin-top:10px;">Saving progress...</p>
+    <div class='quiz-nav'>
+      <button class='quiz-btn' id='backBtn' disabled>⬅ Back</button>
+      <button class='quiz-btn' id='retryBtn' disabled>🔁 Retry</button>
+      <button class='quiz-btn primary' id='nextLessonBtn' disabled>➡ Next Lesson</button>
+    </div>
+  `;
+
+  nextBtn.style.display = "none";
+
+  if (!resultSent) {
+    resultSent = true;
+    window.parent.postMessage({ type: "quizResult", score: percent, passed }, "*");
+  }
+
+  setTimeout(() => {
+    const status = document.getElementById("saveStatus");
+    const backBtn = document.getElementById("backBtn");
+    const retryBtn = document.getElementById("retryBtn");
+    const nextLessonBtn = document.getElementById("nextLessonBtn");
+
+    if (status) status.textContent = passed
+      ? "Progress sent. You may proceed after it is saved."
+      : "Attempt recorded. Retake the quiz to unlock the next lesson.";
+
+    if (backBtn) backBtn.disabled = false;
+    if (retryBtn) retryBtn.disabled = false;
+    if (nextLessonBtn) nextLessonBtn.disabled = !passed;
+
+    if (retryBtn) retryBtn.addEventListener("click", retryQuiz);
+    if (backBtn) backBtn.addEventListener("click", () =>
+      window.parent.postMessage({ type: "quizBack" }, "*")
+    );
+    if (nextLessonBtn) nextLessonBtn.addEventListener("click", () => {
+      if (passed) window.parent.postMessage({ type: "quizNextLesson" }, "*");
+    });
+  }, 1200);
+}
+
+function retryQuiz() {
+  resultSent = false;
+  current = 0;
+  score = 0;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+</body>
+</html>
